@@ -1,44 +1,106 @@
+" シンタックスハイライトを有効化
 syntax on
-set background=dark
-set autoindent
-"set expandtab
-set tabstop=4
-set shiftwidth=4
-set cursorline
-set number
+
+" タイトル表示
 set title
+
+" 行番号表示
+set number
+
+" ステータスラインを常に表示
+set laststatus=2
+
+" タブ幅
+set tabstop=4
+
+" タブを半角スペースで埋め込む
+" set expandtab
+
+" タブ幅
+set shiftwidth=4
+
+" インデント機能の有効化
+set autoindent
+" set smartindent
+
+" カーソルの位置を表示
 set ruler
+
+" カーソル位置に下線を引く
+set cursorline
+"hi cursorline ctermfg=lightblue
+hi lineNr ctermfg=lightgreen
+
+" カーソルの回り込み
+set whichwrap=b,s,h,l,<,>,[,]
+
+" 対応する括弧を強調
 set showmatch
 
+" インクリメンタルサーチ
+" set incsearch
+
+" 大文字・小文字を無視しない
+set smartcase
+
+" 検索結果をハイライト
 set hlsearch
 
+" 背景色の設定
+set background=dark
+
+" 外部エディタからの変更を読み直す
+set autoread
+
+" コマンドラインモード時の補完機能有効化
+set wildmenu wildmode=list:longest,full
+
+" 上書き時にバックアップの作成を無効化
+set nobackup
+
+" 不可視文字の表示
 set list
-set listchars=tab:»-
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
-hi LineNr ctermfg=lightgreen
-
-
-set laststatus=2
+" 256色の対応(lightline用)
 set t_Co=256
 
-" config NeoBundle
+" Viの互換無効化
 set nocompatible
+
+" lightline用設定
+scriptencoding utf-8
+set encoding=utf-8
+set guifont=Ricty_for_Powerline:h10
+" set guifontwide=Ricty:h10
+
+" config NeoBundle
 filetype plugin indent off
 
 set runtimepath+=~/.vim/bundle/neobundle.vim
 call neobundle#begin(expand('~/.vim/bundle'))
 
+" NeoBundleでのスクリプト管理
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neosnippet.vim'
+
+" Vimでシェルを使う
 NeoBundle 'Shougo/vimshell.vim'
 NeoBundle 'Shougo/vimproc'
 
+" インデントの可視化
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
+" コメントアウトを楽に行う
 NeoBundle "tyru/caw.vim.git"
 
+" ステータスラインをいい感じに変更する
 NeoBundle 'itchyny/lightline.vim'
+
+" gitのブランチを取得する
+NeoBundle 'tpope/vim-fugitive'
+
 NeoBundle 'scrooloose/nerdtree'
 
 NeoBundleCheck
@@ -47,9 +109,11 @@ call neobundle#end()
 filetype plugin indent on
 
 " config vimshell
+" ctrl + lを2回入力でshellを起動
 nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
 
 " config tryu
+" ctrl + /で選択行のコメントアウト
 nmap <C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_> <Plug>(caw:hatpos:toggle)
 
@@ -68,10 +132,11 @@ let g:lightline = {
         \   'fileformat': 'LightlineFileformat',
         \   'filetype': 'LightlineFiletype',
         \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode'
+        \   'mode': 'LightlineMode',
+        \ },
+        \ 'separator' : {'left' : "\u2b80", 'right' : "\u2b82" },
+        \ 'subseparator' : {'left' : "\u2b81", 'right' : "\u2b83" }
         \ }
-        \ }
-
 function! LightlineModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -91,7 +156,7 @@ endfunction
 
 function! LightlineFugitive()
   if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    return fugitive#head()
+    return "\u2b60 " . fugitive#head()
   else
     return ''
   endif
