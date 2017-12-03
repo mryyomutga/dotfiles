@@ -4,7 +4,7 @@
 
 - .vimrc
 
-![](.img/myvimrc.png)
+![](https://github.com/mryyomutga/dotfiles/blob/master/img/myvimrc.png)
 
 
 - myTheme.zsh-theme
