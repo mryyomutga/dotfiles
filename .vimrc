@@ -10,6 +10,9 @@ set number
 " ステータスラインを常に表示
 set laststatus=2
 
+" タブページを常に表示
+set showtabline=2
+
 " タブ幅
 set tabstop=4
 
@@ -69,10 +72,10 @@ set t_Co=256
 set nocompatible
 
 " lightline用設定
-scriptencoding utf-8
-set encoding=utf-8
-set guifont=Ricty_for_Powerline:h10
-" set guifontwide=Ricty:h10
+" scriptencoding utf-8
+" set encoding=utf-8
+" set guifont=Ricty_for_Powerline=5
+" set guifontwide=Ricty=5
 
 " config NeoBundle
 filetype plugin indent off
@@ -111,18 +114,28 @@ filetype plugin indent on
 " config vimshell
 " ctrl + lを2回入力でshellを起動
 nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
+let g:vimshell_prompt='>> '
+let g:vimshell_user_prompt='getcwd()'
+let g:vimshell_secondary_prompt="〉 "
+
 
 " config tryu
 " ctrl + /で選択行のコメントアウト
 nmap <C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_> <Plug>(caw:hatpos:toggle)
 
+" config NERDTree
+" ctrl + eでNERDTreeを起動
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
 " config lightline
 let g:lightline = {
-        \ 'colorscheme': 'wombat',
+        \ 'colorscheme': 'solarized',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \   'left': [ [ 'mode', 'paste' ], ['filetype' ,'fileencoding'] ],
+        \   'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
+        \
         \ },
         \ 'component_function': {
         \   'modified': 'LightlineModified',
@@ -135,8 +148,17 @@ let g:lightline = {
         \   'mode': 'LightlineMode',
         \ },
         \ 'separator' : {'left' : "\u2b80", 'right' : "\u2b82" },
-        \ 'subseparator' : {'left' : "\u2b81", 'right' : "\u2b83" }
+        \ 'subseparator' : {'left' : "\u2b81", 'right' : "\u2b83" },
         \ }
+
+let g:lightline.tabline={
+        \ 'filename': 'tabs'
+        \ }
+let g:lightline.tab={
+        \ 'active': ['tabnum', 'filename', 'modified'],
+        \ 'inactive': ['tabnum', 'filename', 'modified']
+        \ }
+
 function! LightlineModified()
   return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -155,12 +177,19 @@ function! LightlineFilename()
 endfunction
 
 function! LightlineFugitive()
-  if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    return "\u2b60 " . fugitive#head()
-  else
-    return ''
+  if exists('*fugitive#head')
+    let branch = fugitive#head()
+    return branch != '' ? "\u2b60 ".branch : ''
   endif
 endfunction
+
+" function! LightlineFugitive()
+"   if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+"     return "\u2b60 ".fugitive#head()
+" else
+"     return '-'
+"   endif
+" endfunction
 
 function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
@@ -177,3 +206,4 @@ endfunction
 function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
