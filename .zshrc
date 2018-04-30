@@ -11,7 +11,7 @@ source /home/ryoga/.dotfiles/zsh-syntax-highlighting.zsh
 # setopt hist_ignore_dups
 # setopt share_history
 
-
+# zshの色設定を引っ張る
 autoload -U promptinit && promptinit
 autoload -U colors && colors
 
@@ -28,6 +28,8 @@ COLOR_046="%{[38;5;046m%}"   # Light Green(user)
 COLOR_050="%{[38;5;050m%}"
 COLOR_075="%{[38;5;075m%}"
 COLOR_096="%{[38;5;096m%}"
+COLOR_153="%{[38;5;153m%}"
+COLOR_154="%{[38;5;154m%}"
 COLOR_197="%{[38;5;197m%}"   # Magenta
 COLOR_226="%{[38;5;226m%}"   # Yellow
 COLOR_227="%{[38;5;227m%}"   # Yellow
@@ -40,9 +42,10 @@ setopt prompt_subst
 # format
 zstyle ':vcs_info:git:*' enable git
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
-zstyle ':vcs_info:*' formats "${COLOR_075}%s:(%c ${COLOR_197}%b${COLOR_075})${COLOR_WHITE}"
-zstyle ':vcs_info:*' actionformats "${COLOR_075}%s:(${COLOR_197}%b${COLOR_WHITE}/${COLOR_096}%a${COLOR_075})${COLOR_WHITE}"
+zstyle ':vcs_info:git:*' stagedstr "%F{226}!%f"
+zstyle ':vcs_info:git:*' unstagedstr "%F{009}+"
+zstyle ':vcs_info:*' formats "${COLOR_153}<%s>${COLOR_075}(%c%u${COLOR_154}%b${COLOR_075})${COLOR_WHITE}"
+zstyle ':vcs_info:*' actionformats "${COLOR_153}<%s>${COLOR_075}(${COLOR_154}%b${COLOR_WHITE}/${COLOR_096}%a${COLOR_075})${COLOR_WHITE}"
 
 # 補完を効かせた時にコマンドが被るのを回避
 # たぶんLANG=en_US.UTF-8を指定してないからだと思われる
@@ -57,17 +60,20 @@ precmd(){
 }
 
 # プロンプトの表示設定
-ROOTPROMPT1='%B%F{001}%n%f%F{WHITE}@%f%F{050}[%W %*]%f %F{003}%~%f ${VCSPROMPT}
+## Root Prompt
+ROOTPROMPT1='%B%F{001}%n%f%F{red}@%f%F{165}[%f%F{083}%W%f %F{116}%*%f%{165}] %f%F{003}%~%f ${VCSPROMPT}
 %F{226}>%f%F{227}>%f%F{228}>%f%b${reset_color} '
 ROOTPROMPT2='%B%F{226}>>>%f%b${reset_color} '
 
-USERPROMPT1='%B%F{046}%n%f%F{WHITE}@%f%F{050}[%W %*] %f%F{003}%~%f ${VCSPROMPT}
+## User Prompt
+USERPROMPT1='%B%F{046}%n%f%F{red}@%f%F{165}[%f%F{083}%W%f %F{116}%*%f%F{165}] %f%F{003}%~%f ${VCSPROMPT}
 %F{043}>%f%F{044}>%f%F{045}>%f%b%F{reset_color} %f'
 USERPROMPT2='%B%F{045}>>>%b%f%F{reset_color} %f'
 
-case ${USER} in
-	'root')
-		PS1=$ROOTPROMPT1
+# ユーザー毎に切り替える
+case ${USERNAME} in
+	"root")
+		PROMPT1=$ROOTPROMPT1
 		PROMPT2=$ROOTPROMPT2
 		;;
 	*)
@@ -109,7 +115,7 @@ setopt list_types
 zstyle ':completion:*:default' menu select=1
 
 # 補完候補を大文字小文字の区別無効
-# zstyle 'completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # =以降の補完を有効化
 setopt magic_equal_subst
@@ -152,4 +158,7 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 
+
+# 外部ファイルの設定
 source /opt/ros/kinetic/setup.zsh
+

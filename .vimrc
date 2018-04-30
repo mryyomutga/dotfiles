@@ -1,89 +1,4 @@
-" シンタックスハイライトを有効化
-syntax on
-
-" タイトル表示
-set title
-
-" 行番号表示
-set number
-hi LineNr ctermfg=white
-
-" ステータスラインを常に表示
-set laststatus=2
-
-" タブページを常に表示
-set showtabline=2
-
-" タブ幅
-set tabstop=4
-
-" タブを半角スペースで埋め込む
-" set expandtab
-
-" タブ幅
-set shiftwidth=4
-
-" インデント機能の有効化
-set autoindent
-" set smartindent
-
-" カーソルの位置を表示
-set ruler
-
-" カーソル位置に下線を引く
-set cursorline
-hi CursorLine term=reverse cterm=none ctermbg=0
-hi CursorLineNr ctermfg=199
-" hi lineNr ctermfg=lightgreen
-
-" カーソルの回り込み
-set whichwrap=b,s,h,l,<,>,[,]
-
-" 対応する括弧を強調
-set showmatch
-
-" インクリメンタルサーチ
-" set incsearch
-
-" 大文字・小文字を無視しない
-set smartcase
-
-" 検索結果をハイライト
-set hlsearch
-
-" 背景色の設定
-set background=dark
-
-" 外部エディタからの変更を読み直す
-set autoread
-
-" コマンドラインモード時の補完機能有効化
-set wildmenu wildmode=list:longest,full
-
-" 上書き時にバックアップの作成を無効化
-set nobackup
-
-" 不可視文字の表示
-set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-
-" 256色の対応(lightline用)
-set t_Co=256
-
-" clipboardの有効化
-" " + y でクリップボードにコピー
-set clipboard=unnamed,autoselect
-
-" Viの互換無効化
-" set nocompatible
-
-" lightline用設定
-" scriptencoding utf-8
-" set encoding=utf-8
-" set guifont=Ricty_for_Powerline=5
-" set guifontwide=Ricty=5
-
-" config NeoBundle
+" <---------- NeoBundle ---------->
 set nocompatible
 filetype plugin indent off
 
@@ -149,12 +64,132 @@ NeoBundle 'ervandew/supertab'
 " NeoBundle 'hachibeeDI/python_hl_lvar.vim'
 
 call neobundle#end()
-filetype plugin indent on
 
 NeoBundleCheck
 
-" config vimshell
-" ctrl + lを2回入力でshellを起動
+" <---------- End ---------->
+
+filetype plugin indent on
+
+" <---------- Setting ---------->
+
+" 文字コードをUTF-8に設定
+set fenc=utf-8
+
+" バックアップファイルとスワップファイルを作成しない
+set nobackup
+set noswapfile
+
+" 編集中にファイルに変更があれば自動更新
+set autoread
+
+" 入力中のコマンドをステータス表示
+set showcmd
+
+" カーソルの回り込み
+set whichwrap=b,s,h,l,<,>,[,]
+
+" <---------- Visual Setting ---------->
+
+" タイトル表示
+set title
+
+" 行番号表示
+set number
+hi LineNr ctermfg=white
+
+" カーソル位置に下線を引く
+set cursorline
+hi CursorLine term=reverse cterm=none ctermbg=0
+hi CursorLineNr ctermfg=199
+" hi lineNr ctermfg=lightgreen
+
+" カーソルの位置を表示
+set ruler
+
+" インデント機能の有効化
+set autoindent
+
+" スマートインデントの設定
+" set smartindent
+
+" 対応する括弧を強調
+set showmatch
+
+" ステータスラインを常に表示
+set laststatus=2
+
+" コマンドラインモード時の補完機能有効化
+set wildmenu wildmode=list:longest,full
+
+" 不可視文字の表示
+set list
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+
+" 256色の対応(lightline用)
+set t_Co=256
+
+" カーソルの表示をモードで変更する
+" let &t_SI = "\<Esc>[6 q"
+" let &t_SR = "\<Esc>[4 q"
+" let &t_EI = "\<Esc>[2 q"
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" clipboardの有効化
+" " + y でクリップボードにコピー
+set clipboard=unnamed,autoselect
+
+" シンタックスのカラー
+set term=xterm-256color
+
+" 背景色の設定
+set background=dark
+
+" シンタックスハイライトを有効化
+syntax on
+
+" lightline用設定
+" scriptencoding utf-8
+" set encoding=utf-8
+" set guifont=Ricty_for_Powerline=5
+" set guifontwide=Ricty=5
+
+" <---------- Tab ---------->
+
+" タブページを常に表示
+set showtabline=2
+
+" タブ幅
+set tabstop=4
+
+" タブを半角スペースで埋め込む
+" set expandtab
+
+" タブ幅
+set shiftwidth=4
+
+" <---------- search ---------->
+
+" 検索文字列が小文字の場合、大文字小文字を区別する
+set noignorecase
+
+" 大文字が含まれている場合は区別する
+set smartcase
+
+" インクリメンタルサーチ(順次対象文字列をヒット)
+set incsearch
+
+" 検索結果をハイライト
+set hlsearch
+
+" ESC2回入力でハイライトの解除
+nnoremap <Esc><Esc> :nohlsearch<CR><CR>
+
+" <---------- key map ---------->
+
+" ctrl + lを2回入力でVimShellを起動
 nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
 let g:vimshell_prompt='>> '
 let g:vimshell_user_prompt='getcwd()'
@@ -170,12 +205,15 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 " ctrl + eでNERDTreeを起動
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
+
+" <---------- Plugin Setting ---------->
+
 " DocStringを非表示にする
 autocmd FileType python setlocal completeopt-=preview
 let g:SuperTabContextDefalutCompletionType="context"
 let g:SuperTabDefaultCompletionType="<c-n>"
 
-" set config neocomplete
+" NeoCompleteの設定
 let g:neocomplete#enable_at_startup=1
 if !exists('g:neocomplete#force_omni_input_patterns')
 	let g:neocomplete#force_omni_input_patterns={}
@@ -184,7 +222,7 @@ let g:neocomplete#force_overwrite_completefunc=1
 let g:neocomplete#force_omni_input_patterns.c='[^.[:digit:] *\t]\%(\.\|->\)'
 let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-" set config vim-clang
+" vim-clangの設定
 
 " disable auto completion for vim-clanG
 let g:clang_auto = 0
@@ -219,7 +257,7 @@ endif
 let g:clang_c_options = '-std=c11'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
-" set config lightline
+" lightlineの設定
 let g:lightline = {
         \ 'colorscheme': 'solarized',
         \ 'mode_map': {'c': 'NORMAL'},
@@ -297,4 +335,6 @@ endfunction
 function! LightlineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+" <---------- End ---------->
 
