@@ -4,13 +4,6 @@ export LANG=ja_JP.UTF-8
 # コマンドのシンタックスハイライト
 source /home/ryoga/.dotfiles/zsh-syntax-highlighting.zsh
 
-# 履歴の設定
-# HISTFILE=~/.zsh_history
-# HISTSIZE=10000
-# SAVEHIST=10000
-# setopt hist_ignore_dups
-# setopt share_history
-
 # zshの色設定を引っ張る
 autoload -U promptinit && promptinit
 autoload -U colors && colors
@@ -50,13 +43,16 @@ zstyle ':vcs_info:*' actionformats "${COLOR_153}<%s>${COLOR_075}(${COLOR_154}%b$
 # 補完を効かせた時にコマンドが被るのを回避
 # たぶんLANG=en_US.UTF-8を指定してないからだと思われる
 function vcs_echo {
-	LANG=en_US.UTF-8 vcs_info
+	# LANG=en_US.UTF-8 vcs_info
 	# set VCS_PROMPT
-	VCSPROMPT="$vcs_info_msg_0_"
+	# VCSPROMPT="$vcs_info_msg_0_"
 }
 
 precmd(){
-	vcs_echo
+	LANG=en_US.UTF-8 vcs_info
+	# set VCS_PROMPT
+	VCSPROMPT="$vcs_info_msg_0_"
+	# vcs_echo
 }
 
 # プロンプトの表示設定
@@ -86,6 +82,8 @@ esac
 # $USERPROMPT1_2'
 # PROMPT2=$ROOTPROMPT2
 
+# <---------- Setting Completion ---------->
+
 # 補完機能の有効化
 autoload -Uz compinit && compinit 
 
@@ -99,17 +97,15 @@ setopt auto_list
 
 # メニュー補完
 setopt auto_menu
-# menuのセパレータの設定
-zstyle ':completion:*' list-separator '-->'
-zstyle ':completion:*:manuals' separate-sections true
 
-# 補完候補一覧をカラー表示する
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
-
-# 補完候補一覧でファイルの種類をマーク
+# 補完候補一覧でファイルの種類をマーク表示
 setopt list_types
+
+# ディレクトリ名の補完で自動的に末尾に/を追加
+setopt auto_param_slash
+
+# ファイル名の展開でディレクトリにマッチした時に末尾に/を追加
+setopt mark_dirs
 
 # 補完候補のカーソル選択の有効化
 zstyle ':completion:*:default' menu select=1
@@ -120,17 +116,56 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # =以降の補完を有効化
 setopt magic_equal_subst
 
-# 直前と同じコマンドをヒストリに追加しない
-setopt hist_ignore_dups
+# 入力キーワードに対してカーソル位置で補完
+setopt complete_in_word
 
-# 重複するヒストリを無視
-setopt hist_save_no_dups
+# 括弧の対応などを自動的に補完
+setopt auto_param_keys
 
-#　*でドットファイルをマッチさせる
+# *でドットファイルをマッチさせる
 unsetopt globdots
 
 # aliasを展開して補完
 unsetopt complete_aliases
+
+# menuのセパレータの設定
+zstyle ':completion:*' list-separator '-->'
+zstyle ':completion:*:manuals' separate-sections true
+
+# 補完候補一覧をカラー表示する
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
+
+# <---------- Setting history ---------->
+
+# よくわからないエラー
+# zsh: rewriting /home/ryoga/.zsh_history would change its ownership -- skipped
+# たぶん.zsh_historyが悪さをしているため使わないようにする
+
+# HISTFILE=~/.zsh_history
+# HISTSIZE=10000
+# SAVEHIST=10000
+
+# 同時に起動したzsh間でヒストリを共有する
+setopt share_history
+
+# 直前と同じコマンドをヒストリに追加しない
+setopt hist_ignore_dups
+
+# 同じコマンドをヒストリに追加しない
+setopt hist_ignore_all_dups
+
+# スペースから始まるコマンドをヒストリに追加しない
+setopt hist_ignore_space
+
+# 余分なスペースを削除してヒストリに追加
+setopt hist_reduce_blanks
+
+# 重複するヒストリを無視
+setopt hist_save_no_dups
+
+# <---------- Otherwise ---------->
 
 # apt,dpkgをキャッシュ
 zstyle ':completion:*' use-cache true
