@@ -187,7 +187,13 @@ set hlsearch
 " ESC2回入力でハイライトの解除
 nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
-" <---------- key map ---------->
+" <---------- keymap ---------->
+
+" <<--------- normal --------->>
+
+nnoremap s <Nop>
+
+" <<--------- Plugin --------->>
 
 " ctrl + lを2回入力でVimShellを起動
 nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
@@ -205,6 +211,7 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 " ctrl + eでNERDTreeを起動
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
+" <---------- End ---------->
 
 " <---------- Plugin Setting ---------->
 

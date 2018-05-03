@@ -42,45 +42,35 @@ zstyle ':vcs_info:*' actionformats "${COLOR_153}<%s>${COLOR_075}(${COLOR_154}%b$
 
 # 補完を効かせた時にコマンドが被るのを回避
 # たぶんLANG=en_US.UTF-8を指定してないからだと思われる
-function vcs_echo {
-	# LANG=en_US.UTF-8 vcs_info
-	# set VCS_PROMPT
-	# VCSPROMPT="$vcs_info_msg_0_"
-}
-
 precmd(){
 	LANG=en_US.UTF-8 vcs_info
 	# set VCS_PROMPT
 	VCSPROMPT="$vcs_info_msg_0_"
-	# vcs_echo
 }
 
 # プロンプトの表示設定
 ## Root Prompt
-ROOTPROMPT1='%B%F{001}%n%f%F{red}@%f%F{165}[%f%F{083}%W%f %F{116}%*%f%{165}] %f%F{003}%~%f ${VCSPROMPT}
-%F{226}>%f%F{227}>%f%F{228}>%f%b${reset_color} '
+ROOTPROMPT1='%B%F{001}%n%f%b%F{009}@%f%F{244}[%f%F{044}%W%f %F{116}%*%f%F{244}] %f%F{003}%~%f ${VCSPROMPT}
+%(?.%F{226}>%f%F{227}>%f%F{228}>.%F{196}>>>)%f%F${reset_color} %f'
 ROOTPROMPT2='%B%F{226}>>>%f%b${reset_color} '
 
 ## User Prompt
-USERPROMPT1='%B%F{046}%n%f%F{red}@%f%F{165}[%f%F{083}%W%f %F{116}%*%f%F{165}] %f%F{003}%~%f ${VCSPROMPT}
-%F{043}>%f%F{044}>%f%F{045}>%f%b%F{reset_color} %f'
+USERPROMPT1='%B%F{046}%n%f%b%F{009}@%f%F{244}[%f%F{044}%W%f %F{116}%*%f%F{244}] %f%F{003}%~%f ${VCSPROMPT}%b
+%B%(?.%F{043}>%F{044}>%F{045}>.%F{196}>>>)%f%F{reset_color} %f%b'
 USERPROMPT2='%B%F{045}>>>%b%f%F{reset_color} %f'
 
 # ユーザー毎に切り替える
-case ${USERNAME} in
-	"root")
+case ${UID} in
+	0)
 		PROMPT1=$ROOTPROMPT1
 		PROMPT2=$ROOTPROMPT2
+		PS1 = $ROOTPROMPT1
 		;;
 	*)
 		PROMPT=$USERPROMPT1
 		PROMPT2=$USERPROMPT2
 		;;
 esac
-
-# PROMPT='$USERPROMPT1 %B${vcs_info_msg_0_}%b
-# $USERPROMPT1_2'
-# PROMPT2=$ROOTPROMPT2
 
 # <---------- Setting Completion ---------->
 
