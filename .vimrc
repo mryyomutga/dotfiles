@@ -15,7 +15,10 @@ NeoBundle 'Shougo/Unite.vim'
 " NeoBundle 'Shougo/unite-outline.vim'
 
 " スニペットプラグイン
-NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle  'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 
 " IDE的な機能を設定する
 " NeoBundle 'kana/vim-smartinput.vim'
@@ -63,6 +66,11 @@ NeoBundle 'ervandew/supertab'
 
 " NeoBundle 'hachibeeDI/python_hl_lvar.vim'
 
+" カラースキーム
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'w0ng/vim-hybrid'
+
 call neobundle#end()
 
 NeoBundleCheck
@@ -76,6 +84,9 @@ filetype plugin indent on
 " 文字コードをUTF-8に設定
 set fenc=utf-8
 
+" 保存時の文字コードをUTF-8に設定
+set fileencoding=utf-8
+
 " バックアップファイルとスワップファイルを作成しない
 set nobackup
 set noswapfile
@@ -88,6 +99,9 @@ set showcmd
 
 " カーソルの回り込み
 set whichwrap=b,s,h,l,<,>,[,]
+
+" マルチバイト文字列の描画設定
+set ambiwidth=double
 
 " <---------- Visual Setting ---------->
 
@@ -150,6 +164,12 @@ set background=dark
 " シンタックスハイライトを有効化
 syntax on
 
+" カラースキームの設定
+" if neobundle#is_installed('molokai')
+" 	colorscheme molokai
+" endif
+" colorscheme hybrid
+
 " lightline用設定
 " scriptencoding utf-8
 " set encoding=utf-8
@@ -165,10 +185,13 @@ set showtabline=2
 set tabstop=4
 
 " タブを半角スペースで埋め込む
-" set expandtab
+set expandtab
 
 " タブ幅
 set shiftwidth=4
+
+" スマートインデント
+set smartindent
 
 " <---------- search ---------->
 
@@ -214,6 +237,27 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " <---------- End ---------->
 
 " <---------- Plugin Setting ---------->
+
+" スニペットの設定
+let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets/'
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <expr><TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \   "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \   "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
+
 
 " DocStringを非表示にする
 autocmd FileType python setlocal completeopt-=preview
