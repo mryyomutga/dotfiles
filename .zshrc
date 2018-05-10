@@ -1,5 +1,6 @@
 # 環境変数の設定
 export LANG=ja_JP.UTF-8
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # コマンドのシンタックスハイライト
 source /home/ryoga/.dotfiles/zsh-syntax-highlighting.zsh

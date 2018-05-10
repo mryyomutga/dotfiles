@@ -1,82 +1,112 @@
-" <---------- NeoBundle ---------->
-set nocompatible
-filetype plugin indent off
-
-if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim
-	call neobundle#begin(expand('~/.vim/bundle'))
+" <---------- dein ---------->
+if &compatible
+    set nocompatible
 endif
 
-" NeoBundleでのスクリプト管理
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/Unite.vim'
+filetype plugin indent off
 
-" クラス・関数名を一覧表示する
-" NeoBundle 'Shougo/unite-outline.vim'
+" Required:
+set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
 
-" スニペットプラグイン
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle  'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
+" Required:
+" Pythonの設定
+let g:python_host_prog='/usr/bin/python2'
+let g:python3_host_prog=expand('$HOME/bin/python')
 
-" IDE的な機能を設定する
-" NeoBundle 'kana/vim-smartinput.vim'
-" NeoBundle 'kana/vim-operator.vim'
-" NeoBundle 'kana/vim-textobj-user.vim'
-" NeoBundle 'kana/vim-operator-replace.vim'
+" Required:
+if dein#load_state('~/.vim/plugins')
+    call dein#begin('~/.vim/plugins')
 
-" NeoBundle 'rhysd/vim-operator-surround.vim'
+    " Plugin Manager
+    " Required:
+    call dein#add('~/.vim/plugins/repos/github.com/Shougo/dein.vim')
 
-" Vimでシェルを使う
-NeoBundle 'Shougo/vimshell.vim'
-NeoBundle 'Shougo/vimproc.vim'
+    " ファイル操作を簡単にする
+    call dein#add('Shougo/denite.nvim')
 
-" インデントの可視化
-NeoBundle 'nathanaelkane/vim-indent-guides'
+    " 最近使用したファイルを表示する
+    call dein#add('Shougo/neomru.vim')
 
-" コメントアウトを楽に行う
-NeoBundle "tyru/caw.vim.git"
+    " クラス・関数名を一覧表示する
+    " call dein#add('Shougo/unite-outline.vim')
 
-" ステータスラインをいい感じに変更する
-NeoBundle 'itchyny/lightline.vim'
+    " 入力補完
+    call dein#add('Shougo/neocomplete.vim')
+    call dein#add('Shougo/neco-vim')
+    call dein#add('Shougo/neco-syntax')
 
-" gitのブランチを取得する
-NeoBundle 'tpope/vim-fugitive'
+    " スニペット
+    call dein#add('Shougo/neosnippet')
+    call dein#add('Shougo/neosnippet-snippets')
 
-NeoBundle 'scrooloose/nerdtree'
+    " IDE的な機能を設定する
+    " call dein#add('kana/vim-smartinput.vim')
+    " call dein#add('kana/vim-operator.vim')
+    " call dein#add('kana/vim-textobj-user.vim')
+    " call dein#add('kana/vim-operator-replace.vim')
 
-" C++コード補完
-NeoBundle 'justmao945/vim-clang'
-NeoBundle 'Shougo/neoinclude.vim'
+    " call dein#add('rhysd/vim-operator-surround.vim')
 
-" Pythonの補完
-NeoBundle 'davidhalter/jedi-vim'
+    " Vimでシェルを使う
+    call dein#add('Shougo/vimshell.vim')
+    call dein#add('Shougo/vimproc.vim', {'build':'make'})
 
-" Tabキーで補完するプラグイン
-" NeoBundle 'cohama/lexima.vim'
-NeoBundle 'itmmaoth/doorboy.vim'
-NeoBundle 'ervandew/supertab'
+    " インデントの可視化
+    call dein#add('nathanaelkane/vim-indent-guides')
 
-" flake8のコード検査
-" NeoBundle 'andviro/flake8-vim.vim'
+    " コメントアウトを楽に行う
+    call dein#add('tyru/caw.vim.git')
 
-" pep8のインデントに対応
-" NeoBundle 'hynek/vim-python-pep8-indent.vim'
+    " ステータスラインのカスタマイズ
+    call dein#add('itchyny/lightline.vim')
 
-" NeoBundle 'hachibeeDI/python_hl_lvar.vim'
+    " git操作を可能にする
+    call dein#add('tpope/vim-fugitive')
 
-" カラースキーム
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'w0ng/vim-hybrid'
+    call dein#add('scrooloose/nerdtree')
 
-call neobundle#end()
+    " C++コード補完
+    call dein#add('justmao945/vim-clang')
+    call dein#add('Shougo/neoinclude.vim')
 
-NeoBundleCheck
+    " Pythonの補完
+    " call dein#add('davidhalter/jedi-vim')
+
+    " Tabキーで補完するプラグイン
+    " call dein#add('cohama/lexima.vim')
+    "call dein#add('itmmaoth/doorboy.vim')
+    call dein#add('ervandew/supertab')
+
+    " flake8のコード検査
+    "call dein#add('andviro/flake8-vim.vim')
+
+    " pep8のインデントに対応
+    " call dein#add('hynek/vim-python-pep8-indent.vim')
+
+    " call dein#add('hachibeeDI/python_hl_lvar.vim')
+
+    " カラースキーム
+    call dein#add('ujihisa/unite-colorscheme')
+    call dein#add('tomasr/molokai')
+    call dein#add('w0ng/vim-hybrid')
+
+    " Required:
+    call dein#end()
+
+endif
+
+" Required:
+call dein#save_state()
+
+" If there are the plugins that has not been installed on startup,
+" dein is checking and installing.
+if dein#check_install()
+    call dein#install()
+endif
 
 " <---------- End ---------->
 
+" Required:
 filetype plugin indent on
 
 " <---------- Setting ---------->
@@ -103,7 +133,7 @@ set whichwrap=b,s,h,l,<,>,[,]
 " マルチバイト文字列の描画設定
 set ambiwidth=double
 
-" <---------- Visual Setting ---------->
+" <---------- Visual ---------->
 
 " タイトル表示
 set title
@@ -123,6 +153,9 @@ set ruler
 
 " インデント機能の有効化
 set autoindent
+
+" バックスペースで行頭を削除
+set backspace=indent,eol,start
 
 " スマートインデントの設定
 " set smartindent
@@ -147,9 +180,9 @@ set t_Co=256
 " let &t_SI = "\<Esc>[6 q"
 " let &t_SR = "\<Esc>[4 q"
 " let &t_EI = "\<Esc>[2 q"
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 " let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " clipboardの有効化
 " " + y でクリップボードにコピー
@@ -238,28 +271,83 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 " <---------- Plugin Setting ---------->
 
-" スニペットの設定
-let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/neosnippets/'
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+" neocomplete, neosnippetsの設定
+if dein#check_install('neocomplete.vim')
+    "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    " set auto delimiter
+    let g:neocomplete#enable_auto_delimiter=1
+    " Set auto completion start length
+    let g:neocomplete#auto_completion_start_length=1
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <expr><TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ neosnippet#expandable_or_jumpable() ?
-    \   "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \   "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" For conceal markers.
-if has('conceal')
-    set conceallevel=2 concealcursor=niv
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+    " Recommended key-mappings.
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+      return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+      " For no inserting <CR> key.
+      "return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
+    " <TAB>: completion.
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " <C-h>, <BS>: close popup and delete backword char.
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+    " Close popup by <Space>.
+    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+    " AutoComplPop like behavior.
+    "let g:neocomplete#enable_auto_select = 1
+
+    " Shell like behavior(not recommended).
+    "set completeopt+=longest
+    "let g:neocomplete#enable_auto_select = 1
+    "let g:neocomplete#disable_auto_complete = 1
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+    " Enable heavy omni completion.
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+    " For perlomni.vim setting.
+    " https://github.com/c9s/perlomni.vim
+    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 endif
-
-
-" DocStringを非表示にする
+    " DocStringを非表示にする
 autocmd FileType python setlocal completeopt-=preview
 let g:SuperTabContextDefalutCompletionType="context"
 let g:SuperTabDefaultCompletionType="<c-n>"
