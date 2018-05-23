@@ -186,5 +186,5 @@ alias l='ls --color=auto'
 
 
 # 外部ファイルの設定
-source /opt/ros/kinetic/setup.zsh
+# source /opt/ros/kinetic/setup.zsh
 
