@@ -3,7 +3,7 @@ export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # コマンドのシンタックスハイライト
-source /home/ryoga/.dotfiles/zsh-syntax-highlighting.zsh
+source ~/.dotfiles/zsh-syntax-highlighting.zsh
 
 # zshの色設定を引っ張る
 autoload -U promptinit && promptinit
