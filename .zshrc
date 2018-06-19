@@ -183,7 +183,8 @@ setopt print_eight_bit
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
-
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
 
 # 外部ファイルの設定
 # source /opt/ros/kinetic/setup.zsh
