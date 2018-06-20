@@ -3,13 +3,15 @@ export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # コマンドのシンタックスハイライト
-if [ ! -e ~/.dotfiles ]; then
-    mkdir ~/.dotfiles
+DOTFILES=~/.dotfiles
+ZSHSYNTAX=$DOTFILES/zsh-syntax-highlighting.zsh
+if [ ! -e "$DOTFILES" ]; then
+    mkdir $DOTFILES
 fi
-if [ ! -e ~/.dotfiles/zsh-syntaxhighlighting.zsh ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.dotfiles
+if [ ! -e "$ZSHSYNTAX" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $DOTFILES
 fi
-source ~/.dotfiles/zsh-syntax-highlighting.zsh
+source $ZSHSYNTAX
 
 # zshの色設定を引っ張る
 autoload -U promptinit && promptinit
