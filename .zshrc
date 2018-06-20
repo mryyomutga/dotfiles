@@ -3,6 +3,12 @@ export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # コマンドのシンタックスハイライト
+if [ ! -e ~/.dotfiles ]; then
+    mkdir ~/.dotfiles
+fi
+if [ ! -e ~/.dotfiles/zsh-syntaxhighlighting.zsh ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.dotfiles
+fi
 source ~/.dotfiles/zsh-syntax-highlighting.zsh
 
 # zshの色設定を引っ張る
