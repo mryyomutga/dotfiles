@@ -2,6 +2,16 @@
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# pyenv
+if [ -d "~/.pyenv" ]; then
+    export PYENV_ROOT=$HOME/.pyenv
+    export PATH=$PYENV_ROOT/bin:$PATH
+    eval "$(pyenv init -)"
+
+    # pyenv-virtualenv
+    eval "$(pyenv virtualenv-init -)"
+fi
+
 # コマンドのシンタックスハイライト
 DOTFILES=~/.dotfiles
 ZSHSYNTAX=$DOTFILES/zsh-syntax-highlighting.zsh
@@ -187,6 +197,11 @@ setopt print_eight_bit
 # コマンドエラーの修正
 # setopt nonomatch
 
+# bindkeys
+# Deleteキーの有効化
+bindkey "^[[3~" delete-char
+bindkey "\E[1;2D" beginning-of-line
+bindkey "\E[1;2C" end-of-line
 # alias
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
