@@ -14,12 +14,12 @@ let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog=expand('$HOME/bin/python')
 
 " Required:
-if dein#load_state('~/.vim/plugins')
-    call dein#begin('~/.vim/plugins')
+if dein#load_state('~/.dotfiles/.vim/plugins')
+    call dein#begin('~/.dotfiles/.vim/plugins')
 
     " Plugin Manager
     " Required:
-    call dein#add('~/.vim/plugins/repos/github.com/Shougo/dein.vim')
+    call dein#add('~/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim')
 
     " ファイル操作を簡単にする
     call dein#add('Shougo/denite.nvim')

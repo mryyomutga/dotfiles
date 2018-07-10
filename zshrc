@@ -13,15 +13,7 @@ if [ -d "~/.pyenv" ]; then
 fi
 
 # コマンドのシンタックスハイライト
-DOTFILES=~/.dotfiles
-ZSHSYNTAX=$DOTFILES/zsh-syntax-highlighting.zsh
-if [ ! -e "$DOTFILES" ]; then
-    mkdir $DOTFILES
-fi
-if [ ! -e "$ZSHSYNTAX" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $DOTFILES
-fi
-source $ZSHSYNTAX
+source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 
 # zshの色設定を引っ張る
 autoload -U promptinit && promptinit
@@ -94,7 +86,7 @@ esac
 # <---------- Setting Completion ---------->
 
 # 補完機能の有効化
-autoload -Uz compinit && compinit 
+autoload -Uz compinit && compinit
 
 # コマンドの途中からでも補完を効かせる
 autoload history-search-end
@@ -211,4 +203,3 @@ alias pbpaste='xsel --clipboard --output'
 
 # 外部ファイルの設定
 # source /opt/ros/kinetic/setup.zsh
-
