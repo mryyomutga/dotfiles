@@ -38,6 +38,9 @@ fi
 if [ ! -e ${HOME}/.vimrc ]; then
 	ln -s ${HOME}/.dotfiles/vimrc ${HOME}/.vimrc
 fi
+if [ ! -e ${HOME}/.tmux.conf ]; then
+    ln -s ${HOME}/.dotfiles/tmux.conf ${HOME}/.tmux.conf
+fi
 if [ ! -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
 	ln -s ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 fi
