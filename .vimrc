@@ -6,7 +6,7 @@ endif
 filetype plugin indent off
 
 " Required:
-set runtimepath+=~/.vim/plugins/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
 
 " Required:
 " Pythonの設定
@@ -63,6 +63,7 @@ if dein#load_state('~/.vim/plugins')
     " git操作を可能にする
     call dein#add('tpope/vim-fugitive')
 
+    " ファイルツリー操作
     call dein#add('scrooloose/nerdtree')
 
     " C++コード補完
@@ -70,12 +71,15 @@ if dein#load_state('~/.vim/plugins')
     call dein#add('Shougo/neoinclude.vim')
 
     " Pythonの補完
-    " call dein#add('davidhalter/jedi-vim')
+    call dein#add('davidhalter/jedi-vim')
 
     " Tabキーで補完するプラグイン
     " call dein#add('cohama/lexima.vim')
     "call dein#add('itmmaoth/doorboy.vim')
     call dein#add('ervandew/supertab')
+
+    " 括弧などの補完
+    call dein#add('cohama/lexima.vim')
 
     " flake8のコード検査
     "call dein#add('andviro/flake8-vim.vim')
@@ -144,8 +148,9 @@ hi LineNr ctermfg=white
 
 " カーソル位置に下線を引く
 set cursorline
-hi CursorLine term=reverse cterm=none ctermbg=0
-hi CursorLineNr ctermfg=199
+" hi CursorLine term=reverse cterm=none ctermbg=0
+hi CursorLine term=reverse cterm=none ctermbg=none
+" hi CursorLineNr ctermfg=199
 " hi lineNr ctermfg=lightgreen
 
 " カーソルの位置を表示
