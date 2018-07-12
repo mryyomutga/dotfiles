@@ -20,6 +20,7 @@ autoload -U promptinit && promptinit
 autoload -U colors && colors
 
 # 色に関する文字コード一覧
+# xtermの値から手動で取得
 COLOR_WHITE="%{[38;5;255m%}" # White
 COLOR_001="%{[38;5;001m%}"
 COLOR_003="%{[38;5;003m%}"
@@ -192,12 +193,18 @@ setopt print_eight_bit
 # bindkeys
 # Deleteキーの有効化
 bindkey "^[[3~" delete-char
+
+# Shift+←で行頭にカーソルを移動
 bindkey "\E[1;2D" beginning-of-line
+
+# Shift+→で末尾にカーソルを移動
 bindkey "\E[1;2C" end-of-line
+
 # alias
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
+# Macのpbpaste,pbcopyをxselを呼び出して行う
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 

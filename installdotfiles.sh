@@ -1,14 +1,17 @@
 #!/bin/sh
 # command check
+UGIT=0
+UXSEL=0
 if ! type git > /dev/null 2>&1; then
 	echo "git command is not installed."
-	echo "Please install git"
-	exit 1
+    UGIT=1
 fi
-if ! type curl > /dev/null 2>&1; then
-	echo "curl command is not installed."
-	echo "Please install curl"
-	exit 1
+if ! type xsel > /dev/null 2>&1; then
+    echo "xsel command is not installed."
+    UXSEL=1
+fi
+if [ $UGIT -eq 1 ] || [ $UXSEL -eq 1 ]; then
+    exit 1
 fi
 
 # clone dotfiles
