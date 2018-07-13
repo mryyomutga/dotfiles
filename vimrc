@@ -93,6 +93,8 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     call dein#add('ujihisa/unite-colorscheme')
     call dein#add('tomasr/molokai')
     call dein#add('w0ng/vim-hybrid')
+    call dein#add('phanviet/vim-monokai-pro')
+    call dein#add('reedes/vim-colors-pencil')
 
     " Required:
     call dein#end()
@@ -147,9 +149,9 @@ set number
 hi LineNr ctermfg=white
 
 " カーソル位置に下線を引く
-set cursorline
+" set cursorline
 " hi CursorLine term=reverse cterm=none ctermbg=0
-hi CursorLine term=reverse cterm=none ctermbg=none
+" hi CursorLine term=reverse cterm=none ctermbg=none
 " hi CursorLineNr ctermfg=199
 " hi lineNr ctermfg=lightgreen
 
@@ -203,10 +205,22 @@ set background=dark
 syntax on
 
 " カラースキームの設定
-" if neobundle#is_installed('molokai')
-" 	colorscheme molokai
-" endif
+colorscheme molokai
 " colorscheme hybrid
+" set termguicolors
+" colorschem monokai_pro
+" colorschem pencil
+" let g:pencil_higher_contrast_ui=0
+" let g:pencil_neutral_code_bg=1
+" let g:pencil_gutter_color=1
+" let g:pencil_spell_undercurl=1
+
+" カラースキームを当てたときの背景透過処理
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
 
 " lightline用設定
 " scriptencoding utf-8
