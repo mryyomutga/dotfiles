@@ -1,0 +1,12 @@
+# ignore all directories
+*/
+
+# not ignore .git/
+!.git/*
+
+# ignore the file name is .*
+.*
+
+# not ignore .conf and .gitignore
+!.conf
+!.gitignore
