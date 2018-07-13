@@ -23,7 +23,7 @@ $ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/setup.sh | s
 この設定が不要になり一括削除したい場合は以下のコマンドでリセットできます
 
 ```bash
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/reset.sh
+$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/reset.sh | sh
 ```
 ## ファイル一覧
 
