@@ -16,7 +16,7 @@ fi
 
 # clone dotfiles
 if [ ! -e ${HOME}/.dotfiles ]; then
-	echo "Beginning to clone my dotfiles from github."
+	echo "Beginning to clone dotfiles from github."
 	git clone https://github.com/mryyomutga/dotfiles.git ${HOME}/.dotfiles
 fi
 
