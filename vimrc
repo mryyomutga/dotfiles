@@ -146,14 +146,17 @@ set title
 
 " 行番号表示
 set number
-hi LineNr ctermfg=white
+hi LineNr cterm=bold ctermfg=white ctermbg=none
+hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
 
 " カーソル位置に下線を引く
-" set cursorline
+set cursorline
+hi clear CursorLine
 " hi CursorLine term=reverse cterm=none ctermbg=0
 " hi CursorLine term=reverse cterm=none ctermbg=none
-" hi CursorLineNr ctermfg=199
-" hi lineNr ctermfg=lightgreen
+" hi CursorLineNr ctermfg=199 ctermbg=none
+" hi CursorLineNr term=bold cterm=none ctermfg=lightgreen ctermbg=none
+" hi CursorLine ctermbg=none
 
 " カーソルの位置を表示
 set ruler
@@ -225,7 +228,7 @@ highlight EndOfBuffer ctermbg=none
 " lightline用設定
 " scriptencoding utf-8
 " set encoding=utf-8
-" set guifont=Ricty_for_Powerline=5
+set guifont=Ricty\ Bold:h10
 " set guifontwide=Ricty=5
 
 " <---------- Tab ---------->

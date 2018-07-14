@@ -16,22 +16,22 @@ fi
 
 # clone dotfiles
 if [ ! -e ${HOME}/.dotfiles ]; then
-	echo "Beginning to clone dotfiles from github."
 	git clone https://github.com/mryyomutga/dotfiles.git ${HOME}/.dotfiles
+    echo ""
 fi
 
 # install zsh-syntax-highlighting
 if [ ! -e ${HOME}/.dotfiles/zsh-syntax-highlighting ]; then
 	echo "\"${HOME}/.dotfiles/zsh-syntax-highlighting\" is not found."
-	echo "Beginning to install zsh-syntax-highlighting."
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.dotfiles/zsh-syntax-highlighting
+    echo ""
 fi
 
 # install vim plugins
 if [ ! -e ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim ]; then
-	echo "Beginning to install dein.vim"
 	mkdir -p ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
 	git clone https://github.com/Shougo/dein.vim.git ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
+    echo ""
 fi
 
 # make synbolic link
