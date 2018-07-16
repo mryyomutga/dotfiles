@@ -271,6 +271,22 @@ nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
 nnoremap s <Nop>
 
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Right> <Nop>
+noremap <Left> <Nop>
+
+" <<--------- insert --------->>
+
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Right> <Nop>
+inoremap <Left> <Nop>
+
 " <<--------- Plugin --------->>
 
 " ctrl + lを2回入力でVimShellを起動
