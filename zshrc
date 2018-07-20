@@ -3,7 +3,7 @@ export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # pyenv
-if [ -d "~/.pyenv" ]; then
+if [ -d "${HOME}/.pyenv" ]; then
     export PYENV_ROOT=$HOME/.pyenv
     export PATH=$PYENV_ROOT/bin:$PATH
     eval "$(pyenv init -)"
