@@ -24,7 +24,7 @@ $ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/setup.sh | s
 $ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/reset.sh | sh
 ```
 
-setup.shを実行すると、~/に`.filename`形式で設定ファイルのシンボリックリンクが作成されます。（要は~/.dotfilesの設定ファイルを読みに行っている）
+setup.shを実行すると、\~/に`.filename`形式で設定ファイルのシンボリックリンクが作成されます。（要は\~/.dotfilesの設定ファイルを読みに行っている）
 
 そのため、自分で設定を変えたい場合、`~/.dotfiles`の設定ファイルを変更してください。
 

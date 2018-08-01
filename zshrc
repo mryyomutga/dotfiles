@@ -204,6 +204,7 @@ bindkey "\E[1;2C" end-of-line
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
+alias vi='vim'
 # Macのpbpaste,pbcopyをxselを呼び出して行う
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
