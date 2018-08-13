@@ -79,7 +79,7 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     call dein#add('ervandew/supertab')
 
     " 括弧などの補完
-    call dein#add('cohama/lexima.vim')
+    " call dein#add('cohama/lexima.vim')
 
     " flake8のコード検査
     "call dein#add('andviro/flake8-vim.vim')
@@ -134,7 +134,7 @@ set autoread
 set showcmd
 
 " カーソルの回り込み
-set whichwrap=b,s,h,l,<,>,[,]
+" set whichwrap=b,s,h,l,<,>,[,]
 
 " マルチバイト文字列の描画設定
 set ambiwidth=double
@@ -144,19 +144,19 @@ set ambiwidth=double
 " タイトル表示
 set title
 
-" 行番号表示
-set number
-hi LineNr cterm=bold ctermfg=white ctermbg=none
-hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
-
 " カーソル位置に下線を引く
 set cursorline
-hi clear CursorLine
-" hi CursorLine term=reverse cterm=none ctermbg=0
+" hi clear CursorLine
+hi CursorLine cterm=underline ctermfg=none ctermbg=none
 " hi CursorLine term=reverse cterm=none ctermbg=none
 " hi CursorLineNr ctermfg=199 ctermbg=none
 " hi CursorLineNr term=bold cterm=none ctermfg=lightgreen ctermbg=none
 " hi CursorLine ctermbg=none
+
+" 行番号表示
+set number
+hi LineNr cterm=bold ctermfg=white ctermbg=none
+hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
 
 " カーソルの位置を表示
 set ruler
@@ -181,18 +181,22 @@ set wildmenu wildmode=list:longest,full
 
 " 不可視文字の表示
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+" set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 " 256色の対応(lightline用)
 set t_Co=256
 
 " カーソルの表示をモードで変更する
-" let &t_SI = "\<Esc>[6 q"
-" let &t_SR = "\<Esc>[4 q"
-" let &t_EI = "\<Esc>[2 q"
-" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let &t_SI.="\<Esc>[6 q"
+let &t_SR.="\<Esc>[4 q"
+let &t_EI.="\<Esc>[2 q"
+" let &t_SI.="\e[6 q"
+" let &t_EI.="\e[2 q"
+" let &t_SR.="\e[4 q"
+" let &t_SI.="\<Esc>]50;CursorShape=1\x7"
+" let &t_SR.="\<Esc>]50;CursorShape=2\x7"
+" let &t_EI.="\<Esc>]50;CursorShape=0\x7"
 
 " clipboardの有効化
 " " + y でクリップボードにコピー
@@ -208,11 +212,11 @@ set background=dark
 syntax on
 
 " カラースキームの設定
-colorscheme molokai
+" colorscheme molokai
 " colorscheme hybrid
 " set termguicolors
-" colorschem monokai_pro
-" colorschem pencil
+" colorscheme monokai_pro
+colorscheme pencil
 " let g:pencil_higher_contrast_ui=0
 " let g:pencil_neutral_code_bg=1
 " let g:pencil_gutter_color=1
@@ -271,10 +275,10 @@ nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
 nnoremap s <Nop>
 
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
-" noremap <Right> <Nop>
-" noremap <Left> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Right> <Nop>
+noremap <Left> <Nop>
 
 " <<--------- insert --------->>
 
@@ -282,10 +286,16 @@ nnoremap s <Nop>
 " inoremap <C-j> <Down>
 " inoremap <C-h> <Left>
 " inoremap <C-l> <Right>
-" inoremap <Up> <Nop>
-" inoremap <Down> <Nop>
-" inoremap <Right> <Nop>
-" inoremap <Left> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Right> <Nop>
+inoremap <Left> <Nop>
+
+" <<--------- Visual --------->>
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Left> <Nop>
 
 " <<--------- Plugin --------->>
 

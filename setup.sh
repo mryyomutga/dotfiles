@@ -36,14 +36,24 @@ fi
 
 # make synbolic link
 if [ ! -e ${HOME}/.zshrc ]; then
+    echo "link ${HOME}/.dotfiles/zshrc -> ${HOME}/.zshrc"
 	ln -s ${HOME}/.dotfiles/zshrc ${HOME}/.zshrc
 fi
 if [ ! -e ${HOME}/.vimrc ]; then
+    echo "link ${HOME}/.dotfiles/vimrc -> ${HOME}/.vimrc"
 	ln -s ${HOME}/.dotfiles/vimrc ${HOME}/.vimrc
 fi
+if [ ! -e ${HOME}/.config/nvim ] || [ ! -e ${HOME}/.config/nvim/init.vim ]; then
+    echo "mkdir -p ${HOME}/.config/nvim"
+    mkdir -p ${HOME}/.config/nvim
+    echo "link ${HOME}/.dotfiles/vimrc -> ${HOME}/.config/nvim/init.vim"
+    ln -s ${HOME}/.dotfiles/vimrc ${HOME}/.config/nvim/init.vim
+fi
 if [ ! -e ${HOME}/.tmux.conf ]; then
+    echo "link ${HOME}/.dotfiles/tmux.conf -> ${HOME}/.tmux.conf"
     ln -s ${HOME}/.dotfiles/tmux.conf ${HOME}/.tmux.conf
 fi
 if [ ! -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
+	echo "link ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh -> ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh"
 	ln -s ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 fi
