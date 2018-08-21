@@ -78,6 +78,10 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     "call dein#add('itmmaoth/doorboy.vim')
     call dein#add('ervandew/supertab')
 
+    " Goの補完やコマンドなど
+    call dein#add('fatih/vim-go')
+    call dein#add('nsf/gocode', {'rtp':'vim/'})
+
     " 括弧などの補完
     " call dein#add('cohama/lexima.vim')
 
@@ -144,6 +148,12 @@ set ambiwidth=double
 " タイトル表示
 set title
 
+" 前回のカーソル位置で開く
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \   execute "normal! g'\"" |
+            \ endif
+
 " カーソル位置に下線を引く
 set cursorline
 " hi clear CursorLine
@@ -188,12 +198,12 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 set t_Co=256
 
 " カーソルの表示をモードで変更する
-let &t_SI.="\<Esc>[6 q"
-let &t_SR.="\<Esc>[4 q"
-let &t_EI.="\<Esc>[2 q"
-" let &t_SI.="\e[6 q"
-" let &t_EI.="\e[2 q"
-" let &t_SR.="\e[4 q"
+" let &t_SI.="\<Esc>[6 q"
+" let &t_SR.="\<Esc>[4 q"
+" let &t_EI.="\<Esc>[2 q"
+let &t_SI.="\e[6 q"
+let &t_EI.="\e[2 q"
+let &t_SR.="\e[4 q"
 " let &t_SI.="\<Esc>]50;CursorShape=1\x7"
 " let &t_SR.="\<Esc>]50;CursorShape=2\x7"
 " let &t_EI.="\<Esc>]50;CursorShape=0\x7"
@@ -319,6 +329,13 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 " <---------- Plugin Setting ---------->
 
+" vim-goの設定
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+autocmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd FileType go :match goErr /\<err\>/
+
 " neocomplete, neosnippetsの設定
 if dein#check_install('neocomplete.vim')
     "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
@@ -394,6 +411,7 @@ if dein#check_install('neocomplete.vim')
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
     let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
 endif
     " DocStringを非表示にする
 autocmd FileType python setlocal completeopt-=preview

@@ -1,5 +1,5 @@
 # 環境変数の設定
-export LANG=ja_JP.UTF-8
+export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # pyenv
@@ -13,7 +13,9 @@ if [ -d "${HOME}/.pyenv" ]; then
 fi
 
 # コマンドのシンタックスハイライト
-source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
+if [ -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
+    source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
+fi
 
 # zshの色設定を引っ張る
 autoload -U promptinit && promptinit
@@ -62,21 +64,21 @@ precmd(){
 
 # プロンプトの表示設定
 ## Root Prompt
-ROOTPROMPT1='%B%F{001}%n%f%b%F{009}@%f%F{244}[%f%F{044}%W%f %F{116}%*%f%F{244}] %f%F{003}%~%f ${VCSPROMPT}
-%(?.%F{226}>%f%F{227}>%f%F{228}>.%F{196}>>>)%f%F${reset_color} %f'
-ROOTPROMPT2='%B%F{226}>>>%f%b${reset_color} '
+ROOTPROMPT1='%F{047}%n%f%F{153}#%f%U%F{197}%M%f%u %F{003}%~%f ${VCSPROMPT}
+%(?.%F{047}>%f%F{048}>%f%F{049}>.%F{196}>>>)%f '
+ROOTPROMPT2='%%F{047}>%f%F{048}>%f%F{049}>%f '
 
 ## User Prompt
-USERPROMPT1='%B%F{046}%n%f%b%F{009}@%f%F{244}[%f%F{044}%W%f %F{116}%*%f%F{244}] %f%F{003}%~%f ${VCSPROMPT}%b
-%B%(?.%F{043}>%F{044}>%F{045}>.%F{196}>>>)%f%F{reset_color} %f%b'
-USERPROMPT2='%B%F{045}>>>%b%f%F{reset_color} %f'
+USERPROMPT1='%F{044}%n%F{226}$%U%F{197}%m%f%u %f%F{003}%~%f ${VCSPROMPT}%b
+%B%(?.%F{043}>%F{044}>%F{045}>.%F{196}>>>)%f%b '
+USERPROMPT2='%F{043}>%F{044}>%F{045}>%f '
 
 # ユーザー毎に切り替える
 case ${UID} in
 	0)
-		PROMPT1=$ROOTPROMPT1
+		PROMPT=$ROOTPROMPT1
 		PROMPT2=$ROOTPROMPT2
-		PS1 = $ROOTPROMPT1
+		# PS1 = $ROOTPROMPT1
 		;;
 	*)
 		PROMPT=$USERPROMPT1
@@ -208,6 +210,8 @@ alias vi='vim'
 # Macのpbpaste,pbcopyをxselを呼び出して行う
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
+# Terminalの使用できる色の確認
+alias termcolor='for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo'
 
 # 外部ファイルの設定
 # source /opt/ros/kinetic/setup.zsh
