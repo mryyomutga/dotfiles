@@ -15,13 +15,13 @@ $ sudo pacman -S git xsel curl          # Arch Linux
 必要なソフトのインストールが終了したら、以下のコマンドで設定できます
 
 ```bash
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/setup.sh | sh
+$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/install.sh | sh
 ```
 
 この設定が不要になり一括削除したい場合は以下のコマンドでリセットできます
 
 ```bash
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/reset.sh | sh
+$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/uninstall.sh | sh
 ```
 
 setup.shを実行すると、\~/に`.filename`形式で設定ファイルのシンボリックリンクが作成されます。（要は\~/.dotfilesの設定ファイルを読みに行っている）

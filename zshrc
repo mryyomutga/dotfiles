@@ -71,7 +71,7 @@ ROOTPROMPT2='%%F{047}>%f%F{048}>%f%F{049}>%f '
 ## User Prompt
 USERPROMPT1='%F{044}%n%F{226}$%U%F{197}%m%f%u %f%F{003}%~%f ${VCSPROMPT}%b
 %B%(?.%F{043}>%F{044}>%F{045}>.%F{196}>>>)%f%b '
-USERPROMPT2='%F{043}>%F{044}>%F{045}>%f '
+USERPROMPT2='%B%F{049}>%F{050}>%F{051}>%f%b '
 
 # ユーザー毎に切り替える
 case ${UID} in
