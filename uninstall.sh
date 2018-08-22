@@ -3,6 +3,7 @@ password(){
     if ! ${password+:} false; then
         printf "password : "
         read -s password
+        echo
     fi
 }
 rm -rf ${HOME}/.dotfiles

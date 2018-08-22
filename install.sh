@@ -6,10 +6,11 @@ password(){
     if ! ${password+:} false; then
         printf "password : "
         read -s password
+        echo
     fi
 }
 
-packages=" "
+packages=""
 if ! type git > /dev/null 2>&1; then
     echo "git is not installed."
     packages="${packages}git "
@@ -31,9 +32,9 @@ if ! type vim > /dev/null 2>&1; then
     packages="${packages}vim "
 fi
 # check "not installed packages" and install
-if [ "$packages" != " " ]; then
+if [ "$packages" != "" ]; then
     password
-    echo "$password" | sudo -S pacman -Sy $packages
+    echo "$password" | sudo -S pacman -Sy --noconfirm $packages
 fi
 # clone dotfiles
 if [ ! -e ${HOME}/.dotfiles ]; then
