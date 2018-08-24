@@ -12,4 +12,5 @@ echo "$password" | sudo -S rm -rf /root/.zshrc
 rm -rf ${HOME}/.vimrc
 rm -rf ${HOME}/.config/nvim/init.vim
 rm -rf ${HOME}/.tmux.conf
+rm -rf ${HOME}/.zsh_history
 
