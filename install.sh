@@ -2,7 +2,7 @@
 # command check
 set -e
 
-password(){
+password_read(){
     if ! ${password+:} false; then
         printf "password : "
         read -s password
@@ -33,7 +33,7 @@ if ! type vim > /dev/null 2>&1; then
 fi
 # check "not installed packages" and install
 if [ "$packages" != "" ]; then
-    password
+    password_read
     echo "$password" | sudo -S pacman -Sy --noconfirm $packages
 fi
 # clone dotfiles
@@ -60,11 +60,6 @@ fi
 if [ ! -e ${HOME}/.zshrc ]; then
     echo "link ${HOME}/.dotfiles/zshrc -> ${HOME}/.zshrc"
     ln -s ${HOME}/.dotfiles/zshrc ${HOME}/.zshrc
-fi
-if [ ! -e /root/.zshrc ]; then
-    echo "link /root/.dotfiles/zshrc -> /root/.zshrc"
-    password
-    echo "$password" | sudo -S ln -s ${HOME}/.dotfiles/zshrc /root/.zshrc
 fi
 if [ ! -e ${HOME}/.vimrc ]; then
     echo "link ${HOME}/.dotfiles/vimrc -> ${HOME}/.vimrc"
