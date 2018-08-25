@@ -30,6 +30,17 @@ source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 
 を削除、コメントアウトすることで無効化できます
 
+`peco`をインストールしている場合、`C-r`でzshの履歴をpecoで検索することができます。
+
+|keybind|description|
+|:---|:---|
+|C-r|pecoでzshの履歴を検索する|
+|C-j|カーソルを下に移動|
+|C-k|カーソルを上に移動|
+|C-f|下へスクロールする|
+|C-b|上へスクロールする|
+|C-q|pecoから抜ける|
+
 ## ファイル一覧
 
 |filename|description|
@@ -39,3 +50,4 @@ source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 |vimrc|vimの設定ファイル|
 |zshrc|zshの設定ファイル|
 |tmux.conf|tmuxの設定ファイル|
+|peco.conf.json|pecoの設定ファイル|

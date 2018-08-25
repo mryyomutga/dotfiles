@@ -85,6 +85,8 @@ if [ ! -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
 fi
 if [ ! -e ${HOME}/.config/peco/config.json ]; then
     echo "Not found ${HOME}/.config/peco/config.json"
+    echo "mkdir -p ${HOME}/.config/peco"
     mkdir -p ${HOME}/.config/peco
+    echo "link ${HOME}/.dotfiles/peco.conf.json -> ${HOME}/.config/peco/config.json"
     ln -s ${HOME}/.dotfiles/peco.conf.json ${HOME}/.config/peco/config.json
 fi
