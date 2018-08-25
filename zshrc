@@ -143,13 +143,18 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
 
 # <---------- Setting history ---------->
 
-# よくわからないエラー
-# zsh: rewriting /home/ryoga/.zsh_history would change its ownership -- skipped
-# たぶん.zsh_historyが悪さをしているため使わないようにする
+function peco-history-selection() {
+    BUFFER=`\\history -n 1 | tac | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
 
-# HISTFILE=~/.zsh_history
-# HISTSIZE=10000
-# SAVEHIST=10000
+HISTFILE=${HOME}/.zsh_history
+HISTSIZE=1000
+SAVEHIST=100000
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
 # 同時に起動したzsh間でヒストリを共有する
 setopt share_history

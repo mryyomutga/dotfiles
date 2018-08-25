@@ -42,7 +42,7 @@ if [ ! -e ${HOME}/.dotfiles ]; then
     echo ""
 fi
 
-# install zsh-syntax-highlighting
+#  install zsh-syntax-highlighting
 if [ ! -e ${HOME}/.dotfiles/zsh-syntax-highlighting ]; then
     echo "\"${HOME}/.dotfiles/zsh-syntax-highlighting\" is not found."
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.dotfiles/zsh-syntax-highlighting
@@ -55,6 +55,10 @@ if [ ! -e ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim ]; the
     git clone https://github.com/Shougo/dein.vim.git ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
     echo ""
 fi
+
+# make zsh history file
+echo "make zsh history"
+touch ${HOME}/.zsh_history
 
 # make synbolic link
 if [ ! -e ${HOME}/.zshrc ]; then
@@ -79,6 +83,8 @@ if [ ! -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
     echo "link ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh -> ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh"
     ln -s ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 fi
-
-ln -s ./zsh_history ${HOME}/.zsh_history
-
+if [ ! -e ${HOME}/.config/peco/config.json ]; then
+    echo "Not found ${HOME}/.config/peco/config.json"
+    mkdir -p ${HOME}/.config/peco
+    ln -s ${HOME}/.dotfiles/peco.conf.json ${HOME}/.config/peco/config.json
+fi
