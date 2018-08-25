@@ -136,6 +136,9 @@ unsetopt complete_aliases
 zstyle ':completion:*' list-separator '-->'
 zstyle ':completion:*:manuals' separate-sections true
 
+# カーソル位置を保持してファイル名一覧を補完
+# setopt always_last_prompt
+
 # 補完候補一覧をカラー表示する
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
@@ -144,7 +147,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
 # <---------- Setting history ---------->
 
 function peco-history-selection() {
-    BUFFER=`\\history -n 1 | tac | awk '!a[$0]++' | peco`
+    BUFFER=`history -n 1 | tac | awk '!a[$0]++' | peco --query "$LBUFFER"`
     CURSOR=$#BUFFER
     zle reset-prompt
 }
@@ -176,6 +179,7 @@ setopt hist_save_no_dups
 
 # <---------- Otherwise ---------->
 
+
 # apt,dpkgをキャッシュ
 zstyle ':completion:*' use-cache true
 
@@ -195,7 +199,7 @@ unsetopt no_promptcr
 setopt print_eight_bit
 
 # コマンドエラーの修正
-# setopt nonomatch
+setopt nonomatch
 
 # bindkeys
 # Deleteキーの有効化
