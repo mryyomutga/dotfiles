@@ -147,7 +147,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
 # <---------- Setting history ---------->
 
 function peco-history-selection() {
-    BUFFER=`history -n 1 | tac | awk '!a[$0]++' | peco --query "$LBUFFER"`
+    BUFFER=`history -n -r 1 | awk '!a[$0]++' | peco --query "$LBUFFER"`
     CURSOR=$#BUFFER
     zle reset-prompt
 }
@@ -178,7 +178,6 @@ setopt hist_reduce_blanks
 setopt hist_save_no_dups
 
 # <---------- Otherwise ---------->
-
 
 # apt,dpkgをキャッシュ
 zstyle ':completion:*' use-cache true

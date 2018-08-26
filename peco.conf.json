@@ -1,17 +1,19 @@
 {
+    "Prompt":"Query>",
     "Style":{
         "Basic":["on_default", "green"],
         "SavedSelection":["bold", "on_green", "white"],
         "Selected":["underline", "on_default", "cyan"],
-        "Query":["yellow", "bold"],
-        "Matched":["bold", "magenta"]
+        "Query":["bold", "yellow"],
+        "Matched":["bold", "underline", "magenta"]
     },
     "keymap":{
         "C-j":"peco.SelectDown",
         "C-k":"peco.SelectUp",
         "C-f":"peco.ScrollPageDown",
         "C-b":"peco.ScrollPageUp",
-        "C-q":"peco.Cancel"
+        "C-q":"peco.Finish",
+        "C-c":"peco.Cancel"
     }
 }
 
