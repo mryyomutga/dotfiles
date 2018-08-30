@@ -49,5 +49,6 @@ source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
 |uninstall.sh|自動で設定を戻すスクリプト|
 |vimrc|vimの設定ファイル|
 |zshrc|zshの設定ファイル|
+|init.vim|neovimの設定ファイル|
 |tmux.conf|tmuxの設定ファイル|
 |peco.conf.json|pecoの設定ファイル|

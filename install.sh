@@ -72,8 +72,8 @@ fi
 if [ ! -e ${HOME}/.config/nvim ] || [ ! -e ${HOME}/.config/nvim/init.vim ]; then
     echo "mkdir -p ${HOME}/.config/nvim"
     mkdir -p ${HOME}/.config/nvim
-    echo "link ${HOME}/.dotfiles/vimrc -> ${HOME}/.config/nvim/init.vim"
-    ln -s ${HOME}/.dotfiles/vimrc ${HOME}/.config/nvim/init.vim
+    echo "link ${HOME}/.dotfiles/init.vim -> ${HOME}/.config/nvim/init.vim"
+    ln -s ${HOME}/.dotfiles/init.vim ${HOME}/.config/nvim/init.vim
 fi
 if [ ! -e ${HOME}/.tmux.conf ]; then
     echo "link ${HOME}/.dotfiles/tmux.conf -> ${HOME}/.tmux.conf"

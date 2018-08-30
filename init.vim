@@ -215,10 +215,10 @@ let &t_SR.="\e[4 q"
 
 " clipboardの有効化
 " " + y でクリップボードにコピー
-set clipboard=unnamed,autoselect
+" set clipboard=unnamed,autoselect
 
 " シンタックスのカラー
-set term=xterm-256color
+" set term=xterm-256color
 
 " 背景色の設定
 set background=dark
