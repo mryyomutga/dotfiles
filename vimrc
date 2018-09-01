@@ -143,7 +143,7 @@ set autoread
 set showcmd
 
 " カーソルの回り込み
-" set whichwrap=b,s,h,l,<,>,[,]
+set whichwrap=b,s,h,l,<,>,[,]
 
 " マルチバイト文字列の描画設定
 set ambiwidth=double
@@ -158,23 +158,6 @@ autocmd BufReadPost *
             \ if line("'\"") > 0 && line ("'\"") <= line("$") |
             \   execute "normal! g'\"" |
             \ endif
-
-" カーソル位置に下線を引く
-set cursorline
-" hi clear CursorLine
-hi CursorLine cterm=underline ctermfg=none ctermbg=none
-" hi CursorLine term=reverse cterm=none ctermbg=none
-" hi CursorLineNr ctermfg=199 ctermbg=none
-" hi CursorLineNr term=bold cterm=none ctermfg=lightgreen ctermbg=none
-" hi CursorLine ctermbg=none
-
-" 行番号表示
-set number
-hi LineNr cterm=bold ctermfg=white ctermbg=none
-hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
-
-" カーソルの位置を表示
-set ruler
 
 " インデント機能の有効化
 set autoindent
@@ -202,17 +185,6 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " 256色の対応(lightline用)
 set t_Co=256
 
-" カーソルの表示をモードで変更する
-" let &t_SI.="\<Esc>[6 q"
-" let &t_SR.="\<Esc>[4 q"
-" let &t_EI.="\<Esc>[2 q"
-let &t_SI.="\e[6 q"
-let &t_EI.="\e[2 q"
-let &t_SR.="\e[4 q"
-" let &t_SI.="\<Esc>]50;CursorShape=1\x7"
-" let &t_SR.="\<Esc>]50;CursorShape=2\x7"
-" let &t_EI.="\<Esc>]50;CursorShape=0\x7"
-
 " clipboardの有効化
 " " + y でクリップボードにコピー
 set clipboard=unnamed,autoselect
@@ -227,15 +199,36 @@ set background=dark
 syntax on
 
 " カラースキームの設定
-" colorscheme molokai
+colorscheme molokai
 " colorscheme hybrid
 " set termguicolors
 " colorscheme monokai_pro
-colorscheme pencil
+" colorscheme pencil
 " let g:pencil_higher_contrast_ui=0
 " let g:pencil_neutral_code_bg=1
 " let g:pencil_gutter_color=1
 " let g:pencil_spell_undercurl=1
+
+" カーソル位置に下線を引く
+set cursorline
+hi clear CursorLine
+hi CursorLine cterm=underline ctermfg=none
+augroup exit_write_mode
+    autocmd!
+    autocmd InsertEnter * hi CursorLine cterm=none ctermfg=none
+    autocmd InsertLeave * hi CursorLine cterm=underline ctermfg=none
+augroup END
+" hi CursorLine term=reverse cterm=none
+" hi CursorLineNr ctermfg=199
+hi CursorLineNr term=none cterm=none ctermfg=lightgreen
+
+" 行番号表示
+set number
+hi LineNr cterm=none ctermfg=white
+" hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
+
+" カーソルの位置を表示
+set ruler
 
 " カラースキームを当てたときの背景透過処理
 highlight Normal ctermbg=none
@@ -244,10 +237,21 @@ highlight LineNr ctermbg=none
 highlight Folded ctermbg=none
 highlight EndOfBuffer ctermbg=none
 
+" カーソルの表示をモードで変更する
+" let &t_SI.="\<Esc>[6 q"
+" let &t_SR.="\<Esc>[4 q"
+" let &t_EI.="\<Esc>[2 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_SR.="\e[4 q"
+" let &t_SI.="\<Esc>]50;CursorShape=1\x7"
+" let &t_SR.="\<Esc>]50;CursorShape=2\x7"
+" let &t_EI.="\<Esc>]50;CursorShape=0\x7"
+
 " lightline用設定
 " scriptencoding utf-8
 " set encoding=utf-8
-set guifont=Ricty\ Bold:h10
+" set guifont=Ricty\ Bold:h10
 " set guifontwide=Ricty=5
 
 " <---------- Tab ---------->
@@ -361,7 +365,7 @@ if dein#check_install('neocomplete.vim')
         \ 'default' : '',
         \ 'vimshell' : $HOME.'/.vimshell_hist',
         \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
+        \ }
 
     " Define keyword.
     if !exists('g:neocomplete#keyword_patterns')
