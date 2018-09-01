@@ -242,7 +242,7 @@ highlight EndOfBuffer ctermbg=none
 " let &t_SR.="\<Esc>[4 q"
 " let &t_EI.="\<Esc>[2 q"
 let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
+let &t_EI.="\e[2 q"
 let &t_SR.="\e[4 q"
 " let &t_SI.="\<Esc>]50;CursorShape=1\x7"
 " let &t_SR.="\<Esc>]50;CursorShape=2\x7"

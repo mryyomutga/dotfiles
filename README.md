@@ -8,13 +8,13 @@ Linux設定ファイル
 
 この設定を適用するには以下のコマンドを実行してください
 
-```bash
+```sh
 $ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/install.sh | sh
 ```
 
 この設定が不要になり一括削除したい場合は以下のコマンドでリセットできます
 
-```bash
+```sh
 $ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/uninstall.sh | sh
 ```
 
