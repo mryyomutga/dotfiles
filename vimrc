@@ -52,6 +52,9 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
 
     " call dein#add('rhysd/vim-operator-surround.vim')
 
+    " Kotlinのsyntax
+    call dein#add('udalov/kotlin-vim')
+
     " Vimでシェルを使う
     call dein#add('Shougo/vimshell.vim')
     call dein#add('Shougo/vimproc.vim', {'build':'make'})
@@ -143,7 +146,10 @@ set autoread
 set showcmd
 
 " カーソルの回り込み
-set whichwrap=b,s,h,l,<,>,[,]
+" set whichwrap=b,s,h,l,<,>,[,]
+
+" 行末の1文字先まで移動する
+set virtualedit=onemore
 
 " マルチバイト文字列の描画設定
 set ambiwidth=double
@@ -193,7 +199,7 @@ set clipboard=unnamed,autoselect
 set term=xterm-256color
 
 " 背景色の設定
-set background=dark
+set background=light
 
 " シンタックスハイライトを有効化
 syntax on
@@ -481,7 +487,7 @@ let g:lightline = {
         \ 'colorscheme': 'solarized',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], ['filetype' ,'fileencoding'] ],
+        \   'left': [ [ 'mode', 'paste' ], ['filetype'] , ['fileencoding']],
         \   'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
         \
         \ },
@@ -495,10 +501,11 @@ let g:lightline = {
         \   'fileencoding': 'LightlineFileencoding',
         \   'mode': 'LightlineMode',
         \ },
-        \ 'separator' : {'left' : "\u2b80", 'right' : "\u2b82" },
-        \ 'subseparator' : {'left' : "\u2b81", 'right' : "\u2b83" },
+        \ 'separator' : {'left' : "⮀", 'right' : "⮂" },
+        \ 'subseparator' : {'left' : "⮁", 'right' : "⮃" },
         \ }
-
+" \u2b80\u2b82
+"\u2b81\u2b83
 let g:lightline.tabline={
         \ 'filename': 'tabs'
         \ }

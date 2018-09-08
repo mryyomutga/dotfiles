@@ -139,26 +139,6 @@ zstyle ':completion:*:manuals' separate-sections true
 # カーソル位置を保持してファイル名一覧を補完
 # setopt always_last_prompt
 
-# 補完候補一覧をカラー表示する
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
-
-# <---------- Setting history ---------->
-
-function peco-history-selection() {
-    BUFFER=`history -n -r 1 | awk '!a[$0]++' | peco --query "$LBUFFER"`
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-
-HISTFILE=${HOME}/.zsh_history
-HISTSIZE=1000
-SAVEHIST=100000
-
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
-
 # 同時に起動したzsh間でヒストリを共有する
 setopt share_history
 
@@ -201,6 +181,9 @@ setopt print_eight_bit
 setopt nonomatch
 
 # bindkeys
+# interface like vi
+# bindkey -v
+
 # Deleteキーの有効化
 bindkey "^[[3~" delete-char
 
@@ -220,6 +203,30 @@ alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
 # Terminalの使用できる色の確認
 alias termcolor='for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo'
+
+# 補完候補一覧をカラー表示する
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
+
+# <---------- Setting history ---------->
+
+function peco-history-selection() {
+    BUFFER=`history -n -r 1 | awk '!a[$0]++' | peco --query "$LBUFFER"`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+HISTFILE=${HOME}/.zsh_history
+HISTSIZE=1000
+SAVEHIST=100000
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
+
+function set_proxy(){
+    . ~/.proxy
+}
 
 # 外部ファイルの設定
 # source /opt/ros/kinetic/setup.zsh
