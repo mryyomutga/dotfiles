@@ -30,6 +30,9 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     " クラス・関数名を一覧表示する
     " call dein#add('Shougo/unite-outline.vim')
 
+    " プログラムの編集中に実行
+    call dein#add('thinca/vim-quickrun')
+
     " 入力補完
     call dein#add('Shougo/neocomplete.vim')
     call dein#add('Shougo/neco-vim')
@@ -64,6 +67,9 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
 
     " コメントアウトを楽に行う
     call dein#add('tyru/caw.vim.git')
+
+    " ウィンドウのサイズ調整プラグイン
+    call dein#add('simeji/winresizer')
 
     " ステータスラインのカスタマイズ
     call dein#add('itchyny/lightline.vim')
@@ -337,12 +343,31 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 " imap <C-_> <esc><Plug>(caw:hatpos:toggle)<S-$>a
 
 " config NERDTree
-" ctrl + eでNERDTreeを起動
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" ctrl + tでNERDTreeを起動
+nnoremap <silent><C-t> :NERDTreeToggle<CR>
 
+"ctrl + cでQuickRunを停止させる
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 " <---------- End ---------->
 
 " <---------- Plugin Setting ---------->
+
+" vim-quickrunの設定
+:command Run QuickRun
+let g:quickrun_config = {
+\   "_" : {
+\       "outputter/buffer/split" : ":botright 8sp",
+\       "outputter/buffer/close_on_empty" : 1,
+\       "outputter/error/error" : "quickfix",
+\       "outputter/error/success" : "buffer",
+\       "outputter/buffer/into" : 1,
+\       "outputter" : "error",
+\       }
+\  }
+
+" winresizerの設定
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
 
 " vim-goの設定
 let g:go_highlight_functions = 1
