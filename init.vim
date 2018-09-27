@@ -24,11 +24,17 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     " ファイル操作を簡単にする
     call dein#add('Shougo/denite.nvim')
 
+    " タイムスタンプを自動挿入
+    call dein#add('vim-scripts/autodate.vim')
+
     " 最近使用したファイルを表示する
     call dein#add('Shougo/neomru.vim')
 
     " クラス・関数名を一覧表示する
     " call dein#add('Shougo/unite-outline.vim')
+
+    " プログラムの編集中に実行
+    call dein#add('thinca/vim-quickrun')
 
     " 入力補完
     call dein#add('Shougo/neocomplete.vim')
@@ -52,15 +58,21 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
 
     " call dein#add('rhysd/vim-operator-surround.vim')
 
+    " Kotlinのsyntax
+    call dein#add('udalov/kotlin-vim')
+
     " Vimでシェルを使う
-    call dein#add('Shougo/vimshell.vim')
-    call dein#add('Shougo/vimproc.vim', {'build':'make'})
+    " call dein#add('Shougo/vimshell.vim')
+    " call dein#add('Shougo/vimproc.vim', {'build':'make'})
 
     " インデントの可視化
     call dein#add('nathanaelkane/vim-indent-guides')
 
     " コメントアウトを楽に行う
     call dein#add('tyru/caw.vim.git')
+
+    " ウィンドウのサイズ調整プラグイン
+    call dein#add('simeji/winresizer')
 
     " ステータスラインのカスタマイズ
     call dein#add('itchyny/lightline.vim')
@@ -70,6 +82,7 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
 
     " ファイルツリー操作
     call dein#add('scrooloose/nerdtree')
+    " call dein#add('ryanoasis/vim-devicons')
 
     " C++コード補完
     call dein#add('justmao945/vim-clang')
@@ -145,6 +158,9 @@ set showcmd
 " カーソルの回り込み
 " set whichwrap=b,s,h,l,<,>,[,]
 
+" 行末の1文字先まで移動する
+set virtualedit=onemore
+
 " マルチバイト文字列の描画設定
 set ambiwidth=double
 
@@ -158,15 +174,6 @@ autocmd BufReadPost *
             \ if line("'\"") > 0 && line ("'\"") <= line("$") |
             \   execute "normal! g'\"" |
             \ endif
-
-" カーソル位置に下線を引く
-set cursorline
-" hi clear CursorLine
-hi CursorLine cterm=underline ctermfg=none ctermbg=none
-" hi CursorLine term=reverse cterm=none ctermbg=none
-" hi CursorLineNr ctermfg=199 ctermbg=none
-" hi CursorLineNr term=bold cterm=none ctermfg=lightgreen ctermbg=none
-" hi CursorLine ctermbg=none
 
 " 行番号表示
 set number
@@ -202,17 +209,6 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " 256色の対応(lightline用)
 set t_Co=256
 
-" カーソルの表示をモードで変更する
-" let &t_SI.="\<Esc>[6 q"
-" let &t_SR.="\<Esc>[4 q"
-" let &t_EI.="\<Esc>[2 q"
-let &t_SI.="\e[6 q"
-let &t_EI.="\e[2 q"
-let &t_SR.="\e[4 q"
-" let &t_SI.="\<Esc>]50;CursorShape=1\x7"
-" let &t_SR.="\<Esc>]50;CursorShape=2\x7"
-" let &t_EI.="\<Esc>]50;CursorShape=0\x7"
-
 " clipboardの有効化
 " " + y でクリップボードにコピー
 " set clipboard=unnamed,autoselect
@@ -236,6 +232,26 @@ colorscheme pencil
 " let g:pencil_neutral_code_bg=1
 " let g:pencil_gutter_color=1
 " let g:pencil_spell_undercurl=1
+
+" カーソル位置に下線を引く
+" set cursorline
+" hi clear CursorLine
+" hi CursorLine cterm=underline ctermfg=none ctermbg=none
+" hi CursorLine term=reverse cterm=none ctermbg=none
+" hi CursorLineNr ctermfg=199 ctermbg=none
+" hi CursorLineNr term=bold cterm=none ctermfg=lightgreen ctermbg=none
+" hi CursorLine ctermbg=none
+
+" カーソルの表示をモードで変更する
+" let &t_SI.="\<Esc>[6 q"
+" let &t_SR.="\<Esc>[4 q"
+" let &t_EI.="\<Esc>[2 q"
+" let &t_SI.="\e[6 q"
+" let &t_EI.="\e[2 q"
+" let &t_SR.="\e[4 q"
+" let &t_SI.="\<Esc>]50;CursorShape=1\x7"
+" let &t_SR.="\<Esc>]50;CursorShape=2\x7"
+" let &t_EI.="\<Esc>]50;CursorShape=0\x7"
 
 " カラースキームを当てたときの背景透過処理
 highlight Normal ctermbg=none
@@ -284,6 +300,20 @@ set hlsearch
 " ESC2回入力でハイライトの解除
 nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
+" vim 起動時にtmuxのステータスバーを非表示
+if !has('gui_running') && $TMUX !=# ''
+  augroup Tmux
+    autocmd!
+    autocmd VimEnter,VimLeave * silent !tmux set status
+  augroup END
+endif
+
+" ノーマルモードになる時にfcitxを無効化
+function! ImInActivate()
+  call system('fcitx-remote -c')
+endfunction
+inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+
 " <---------- keymap ---------->
 
 " <<--------- normal --------->>
@@ -294,6 +324,15 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Right> <Nop>
 noremap <Left> <Nop>
+
+" Ctrl + h & lでタブの移動
+nmap <C-l> gt
+nmap <C-h> gT
+
+" 水平分割
+nmap ss :split<CR>
+" 垂直分割
+nmap sv :vsplit<CR>
 
 " <<--------- insert --------->>
 
@@ -315,10 +354,10 @@ vnoremap <Left> <Nop>
 " <<--------- Plugin --------->>
 
 " ctrl + lを2回入力でVimShellを起動
-nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
-let g:vimshell_prompt='>> '
-let g:vimshell_user_prompt='getcwd()'
-let g:vimshell_secondary_prompt="〉 "
+" nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
+" let g:vimshell_prompt='>> '
+" let g:vimshell_user_prompt='getcwd()'
+" let g:vimshell_secondary_prompt="〉 "
 
 " config tryu
 " ctrl + /で選択行のコメントアウト
@@ -327,13 +366,59 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 " imap <C-_> <esc><Plug>(caw:hatpos:toggle)<S-$>a
 
 " config NERDTree
-" ctrl + eでNERDTreeを起動
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" ctrl + tでNERDTreeを起動
+nnoremap <silent><C-t> :NERDTreeToggle<CR>
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" 隠しファイルをデフォルトで表示
+let NERDTreeShowHidden = 1
+let NERDTreeShowBookmarks = 1
+
+"ctrl + cでQuickRunを停止させる
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
 " <---------- End ---------->
 
 " <---------- Plugin Setting ---------->
 
+" autodate.vimの設定
+let autodate_format="%a %d %b %Y %H:%M:%S"
+
+"NERDTreeの設定
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('py',     'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
+
+" vim-quickrunの設定
+:command Run QuickRun
+let g:quickrun_config = {
+\   "_" : {
+\       "outputter/buffer/split" : ":botright 8sp",
+\       "outputter/buffer/close_on_empty" : 1,
+\       "outputter/error/error" : "quickfix",
+\       "outputter/error/success" : "buffer",
+\       "outputter/buffer/into" : 1,
+\       "outputter" : "error",
+\       }
+\  }
+
+" winresizerの設定
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1
 " vim-goの設定
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -361,7 +446,7 @@ if dein#check_install('neocomplete.vim')
         \ 'default' : '',
         \ 'vimshell' : $HOME.'/.vimshell_hist',
         \ 'scheme' : $HOME.'/.gosh_completions'
-            \ }
+        \ }
 
     " Define keyword.
     if !exists('g:neocomplete#keyword_patterns')

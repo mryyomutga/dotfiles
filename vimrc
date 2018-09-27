@@ -59,8 +59,8 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     call dein#add('udalov/kotlin-vim')
 
     " Vimでシェルを使う
-    call dein#add('Shougo/vimshell.vim')
-    call dein#add('Shougo/vimproc.vim', {'build':'make'})
+    " call dein#add('Shougo/vimshell.vim')
+    " call dein#add('Shougo/vimproc.vim', {'build':'make'})
 
     " インデントの可視化
     call dein#add('nathanaelkane/vim-indent-guides')
@@ -79,6 +79,7 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
 
     " ファイルツリー操作
     call dein#add('scrooloose/nerdtree')
+    " call dein#add('ryanoasis/vim-devicons')
 
     " C++コード補完
     call dein#add('justmao945/vim-clang')
@@ -311,6 +312,16 @@ noremap <Down> <Nop>
 noremap <Right> <Nop>
 noremap <Left> <Nop>
 
+
+" Ctrl + h & lでタブの移動
+nmap <C-l> gt
+nmap <C-h> gT
+
+" 水平分割
+nmap ss :split<CR>
+" 垂直分割
+nmap sv :vsplit<CR>
+
 " <<--------- insert --------->>
 
 " inoremap <C-k> <Up>
@@ -346,11 +357,39 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 " ctrl + tでNERDTreeを起動
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
 
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" 隠しファイルをデフォルトで表示
+let NERDTreeShowHidden = 1
+let NERDTreeShowBookmarks = 1
+
 "ctrl + cでQuickRunを停止させる
 nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 " <---------- End ---------->
 
 " <---------- Plugin Setting ---------->
+
+" autodate.vimの設定
+let autodate_format="%a %d %b %Y %H:%M:%S"
+
+" NERDTreeの設定
+" 拡張子のハイライト
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('py',     'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('md',     'blue',    'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml',    'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('config', 'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('conf',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('json',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('html',   'yellow',  'none', 'yellow',  '#151515')
+call NERDTreeHighlightFile('styl',   'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('css',    'cyan',    'none', 'cyan',    '#151515')
+call NERDTreeHighlightFile('rb',     'Red',     'none', 'red',     '#151515')
+call NERDTreeHighlightFile('js',     'Red',     'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php',    'Magenta', 'none', '#ff00ff', '#151515')
 
 " vim-quickrunの設定
 :command Run QuickRun
