@@ -204,13 +204,19 @@ alias pbpaste='xsel --clipboard --output'
 # Terminalの使用できる色の確認
 alias termcolor='for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo'
 
-
+# launch chrome
 alias google='google-chrome-stable &'
 
 # 補完候補一覧をカラー表示する
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
+
+# <---------- Setting multidisplay-config ---------->
+
+function display_off() {
+    . ${HOME}/.display_off
+}
 
 # <---------- Setting history ---------->
 
@@ -227,6 +233,7 @@ SAVEHIST=100000
 zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
+# <---------- Setting Proxy ---------->
 function set_proxy(){
     . ~/.proxy
 }

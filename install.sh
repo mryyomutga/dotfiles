@@ -90,3 +90,4 @@ if [ ! -e ${HOME}/.config/peco/config.json ]; then
     echo "link ${HOME}/.dotfiles/peco.conf.json -> ${HOME}/.config/peco/config.json"
     ln -s ${HOME}/.dotfiles/peco.conf.json ${HOME}/.config/peco/config.json
 fi
+cp ${HOME}/.dotfiles/display_off ${HOME}/.display_off
