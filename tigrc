@@ -14,7 +14,8 @@ set log-view    = line-number:yes,interval=1 text
 set blob-view   = line-number:yes,interval=1 text
 set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
 
-# cursor color
+# color
+color id            color011 default bold
 color cursor        color219 color017 bold
 
 set line-graphics = utf-8
