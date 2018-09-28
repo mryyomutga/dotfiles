@@ -24,6 +24,9 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     " ファイル操作を簡単にする
     call dein#add('Shougo/denite.nvim')
 
+    " タイムスタンプを自動で挿入
+    call dein#add('vim-scripts/autodate.vim')
+
     " 最近使用したファイルを表示する
     call dein#add('Shougo/neomru.vim')
 
@@ -301,6 +304,20 @@ set hlsearch
 " ESC2回入力でハイライトの解除
 nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
+" vim 起動時にtmuxのステータスバーを非表示
+if !has('gui_running') && $TMUX !=# ''
+  augroup Tmux
+    autocmd!
+    autocmd VimEnter,VimLeave * silent !tmux set status
+  augroup END
+endif
+
+" ノーマルモードになる時にfcitxを無効化
+function! ImInActivate()
+  call system('fcitx-remote -c')
+endfunction
+inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+
 " <---------- keymap ---------->
 
 " <<--------- normal --------->>
@@ -370,7 +387,8 @@ nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() 
 " <---------- Plugin Setting ---------->
 
 " autodate.vimの設定
-let autodate_format="%a %d %b %Y %H:%M:%S"
+let g:autodate_lines=20
+let g:autodate_format="%a %d %b %Y %H:%M:%S"
 
 " NERDTreeの設定
 " 拡張子のハイライト

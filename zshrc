@@ -194,6 +194,7 @@ bindkey "\E[1;2D" beginning-of-line
 bindkey "\E[1;2C" end-of-line
 
 # alias
+alias e='exit'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'

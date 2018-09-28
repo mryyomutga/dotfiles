@@ -61,6 +61,7 @@ echo "make zsh history"
 touch ${HOME}/.zsh_history
 
 # make synbolic link
+## rc file
 if [ ! -e ${HOME}/.zshrc ]; then
     echo "link ${HOME}/.dotfiles/zshrc -> ${HOME}/.zshrc"
     ln -s ${HOME}/.dotfiles/zshrc ${HOME}/.zshrc
@@ -69,20 +70,26 @@ if [ ! -e ${HOME}/.vimrc ]; then
     echo "link ${HOME}/.dotfiles/vimrc -> ${HOME}/.vimrc"
     ln -s ${HOME}/.dotfiles/vimrc ${HOME}/.vimrc
 fi
+if [ ! -e ${HOME}/.tigrc ]; then
+    echo "link ${HOME}/.dotfiles/tigrc -> ${HOME}/.tigrc"
+    ln -s ${HOME}/.dotfiles/tigrc ${HOME}/.tigrc
+fi
+if [ ! -e ${HOME}/.tmux.conf ]; then
+    echo "link ${HOME}/.dotfiles/tmux.conf -> ${HOME}/.tmux.conf"
+    ln -s ${HOME}/.dotfiles/tmux.conf ${HOME}/.tmux.conf
+fi
 if [ ! -e ${HOME}/.config/nvim ] || [ ! -e ${HOME}/.config/nvim/init.vim ]; then
     echo "mkdir -p ${HOME}/.config/nvim"
     mkdir -p ${HOME}/.config/nvim
     echo "link ${HOME}/.dotfiles/init.vim -> ${HOME}/.config/nvim/init.vim"
     ln -s ${HOME}/.dotfiles/init.vim ${HOME}/.config/nvim/init.vim
 fi
-if [ ! -e ${HOME}/.tmux.conf ]; then
-    echo "link ${HOME}/.dotfiles/tmux.conf -> ${HOME}/.tmux.conf"
-    ln -s ${HOME}/.dotfiles/tmux.conf ${HOME}/.tmux.conf
-fi
-if [ ! -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
-    echo "link ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh -> ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh"
-    ln -s ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
-fi
+
+## self made command
+echo "${HOME}/.dotfiles/display_off ${HOME}/.display_off"
+cp -r ${HOME}/.dotfiles/display_off ${HOME}/.display_off
+
+## config
 if [ ! -e ${HOME}/.config/peco/config.json ]; then
     echo "Not found ${HOME}/.config/peco/config.json"
     echo "mkdir -p ${HOME}/.config/peco"
@@ -90,4 +97,9 @@ if [ ! -e ${HOME}/.config/peco/config.json ]; then
     echo "link ${HOME}/.dotfiles/peco.conf.json -> ${HOME}/.config/peco/config.json"
     ln -s ${HOME}/.dotfiles/peco.conf.json ${HOME}/.config/peco/config.json
 fi
-cp ${HOME}/.dotfiles/display_off ${HOME}/.display_off
+
+if [ ! -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
+    echo "link ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh -> ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh"
+    ln -s ${HOME}/.dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
+fi
+

@@ -1,0 +1,31 @@
+# view
+set main-view   = id date author:email-user commit-title:graph=v2,refs=yes
+set blame-view  = id:yes,color file-name:auto author:full date:default line-number:yes,interval=1 text
+set grep-view	= file-name:no line-number:yes,interval=1 text
+set refs-view   = line-number:no id:no date:default author:full ref commit-title
+set stash-view  = line-number:no,interval=5 id:no date:default author:full commit-title
+set status-view = line-number:no,interval=5 status:short file-name
+set tree-view   = line-number:no,interval=5 mode author:full file-size date:default id:no file-name
+
+# Pager based views
+set pager-view  = line-number:yes,interval=1 text
+set stage-view  = line-number:yes,interval=1 text
+set log-view    = line-number:yes,interval=1 text
+set blob-view   = line-number:yes,interval=1 text
+set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
+
+# cursor color
+color cursor        color219 color017 bold
+
+set line-graphics = utf-8
+set ignore-case = true
+set split-view-height = 80%
+
+bind generic g      move-first-line
+bind generic E      view-grep
+
+bind generic G      move-last-line
+bind main    G      move-last-line
+
+bind main    <Esc>g :toggle commit-title-graph
+
