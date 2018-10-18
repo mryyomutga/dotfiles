@@ -182,7 +182,7 @@ setopt nonomatch
 
 # bindkeys
 # interface like vi
-# bindkey -v
+bindkey -e
 
 # Deleteキーの有効化
 bindkey "^[[3~" delete-char
@@ -199,13 +199,20 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 alias l='ls --color=auto'
 alias vi='vim'
-# Macのpbpaste,pbcopyをxselを呼び出して行う
+
+## git関連
+alias git='hub'
+alias see='hub browse'
+alias pr='hub pull-request'
+
+## Macのpbpaste,pbcopyをxselを呼び出して行う
 alias pbcopy='xsel --clipboard --input'
 alias pbpaste='xsel --clipboard --output'
-# Terminalの使用できる色の確認
+
+## Terminalの使用できる色の確認
 alias termcolor='for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && echo;done;echo'
 
-# launch chrome
+## launch chrome
 alias google='google-chrome-stable &'
 
 # 補完候補一覧をカラー表示する
@@ -213,7 +220,7 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 zstyle 'completion:*' list-colors ${(s.:.)LS_COlORS}
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
 
-# <---------- Setting multidisplay-config ---------->
+# <---------- Turn off Laptop monitor ---------->
 
 function display_off() {
     . ${HOME}/.display_off
@@ -241,3 +248,5 @@ function set_proxy(){
 
 # 外部ファイルの設定
 # source /opt/ros/kinetic/setup.zsh
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

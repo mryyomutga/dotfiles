@@ -137,6 +137,9 @@ endif
 " Required:
 filetype plugin indent on
 
+" シンタックスハイライトを有効化
+syntax on
+
 " <---------- Setting ---------->
 
 " 文字コードをUTF-8に設定
@@ -209,14 +212,11 @@ set clipboard=unnamed,autoselect
 set term=xterm-256color
 
 " 背景色の設定
-set background=light
-
-" シンタックスハイライトを有効化
-syntax on
+set background=dark
 
 " カラースキームの設定
-colorscheme molokai
-" colorscheme hybrid
+" colorscheme molokai
+colorscheme hybrid
 " set termguicolors
 " colorscheme monokai_pro
 " colorscheme pencil
@@ -227,13 +227,13 @@ colorscheme molokai
 
 " カーソル位置に下線を引く
 set cursorline
-hi clear CursorLine
-hi CursorLine cterm=underline ctermfg=none
-augroup exit_write_mode
-    autocmd!
-    autocmd InsertEnter * hi CursorLine cterm=none ctermfg=none
-    autocmd InsertLeave * hi CursorLine cterm=underline ctermfg=none
-augroup END
+" hi clear CursorLine
+hi CursorLine cterm=bold ctermfg=none
+" augroup exit_write_mode
+"     autocmd!
+"     autocmd InsertEnter * hi CursorLine cterm=none ctermfg=none
+"     autocmd InsertLeave * hi CursorLine cterm=underline ctermfg=none
+" augroup END
 " hi CursorLine term=reverse cterm=none
 " hi CursorLineNr ctermfg=199
 hi CursorLineNr term=none cterm=none ctermfg=lightgreen
@@ -247,11 +247,11 @@ hi LineNr cterm=none ctermfg=white
 set ruler
 
 " カラースキームを当てたときの背景透過処理
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight LineNr ctermbg=none
-highlight Folded ctermbg=none
-highlight EndOfBuffer ctermbg=none
+" highlight Normal ctermbg=none
+" highlight NonText ctermbg=none
+" highlight LineNr ctermbg=none
+" highlight Folded ctermbg=none
+" highlight EndOfBuffer ctermbg=none
 
 " カーソルの表示をモードで変更する
 " let &t_SI.="\<Esc>[6 q"
@@ -305,12 +305,12 @@ set hlsearch
 nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
 " vim 起動時にtmuxのステータスバーを非表示
-if !has('gui_running') && $TMUX !=# ''
-  augroup Tmux
-    autocmd!
-    autocmd VimEnter,VimLeave * silent !tmux set status
-  augroup END
-endif
+" if !has('gui_running') && $TMUX !=# ''
+"   augroup Tmux
+"     autocmd!
+"     autocmd VimEnter,VimLeave * silent !tmux set status
+"   augroup END
+" endif
 
 " ノーマルモードになる時にfcitxを無効化
 function! ImInActivate()
@@ -328,7 +328,6 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Right> <Nop>
 noremap <Left> <Nop>
-
 
 " Ctrl + h & lでタブの移動
 nmap <C-l> gt
@@ -359,10 +358,10 @@ vnoremap <Left> <Nop>
 " <<--------- Plugin --------->>
 
 " ctrl + lを2回入力でVimShellを起動
-nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
-let g:vimshell_prompt='>> '
-let g:vimshell_user_prompt='getcwd()'
-let g:vimshell_secondary_prompt="〉 "
+" nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
+" let g:vimshell_prompt='>> '
+" let g:vimshell_user_prompt='getcwd()'
+" let g:vimshell_secondary_prompt="〉 "
 
 " config tryu
 " ctrl + /で選択行のコメントアウト

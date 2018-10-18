@@ -31,6 +31,10 @@ if ! type vim > /dev/null 2>&1; then
     echo "vim is not installed."
     packages="${packages}vim "
 fi
+if ! type fzf > /dev/null 2>&1; then
+    echo "fzf is not installed."
+    packages="${packages}fzf"
+fi
 # check "not installed packages" and install
 if [ "$packages" != "" ]; then
     password_read
@@ -41,6 +45,12 @@ if [ ! -e ${HOME}/.dotfiles ]; then
     git clone https://github.com/mryyomutga/dotfiles.git ${HOME}/.dotfiles
     echo ""
 fi
+
+# fzf
+# if [ ! -e ${HOME}.fzf ]; then
+#     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+#     sh ~/.fzf/install
+# fi
 
 #  install zsh-syntax-highlighting
 if [ ! -e ${HOME}/.dotfiles/zsh-syntax-highlighting ]; then
