@@ -2,7 +2,6 @@
 
 function get_airport_status() {
     if [ -z $(iwconfig wlp5s0 | grep -o unassociated) ]; then
-        # signals=(▂ ▃ ▄ ▆ █ ▁)
         ssid=`iwconfig wlp5s0 | grep -oP '(?<=").+(?="\s)'`
         rssi=`iwconfig wlp5s0 | grep -oP '(?<=level=)\d+(?=/100\s)'`
         signals=(▂ ▃ ▄ ▆ █ ▁)
@@ -24,8 +23,6 @@ function get_airport_status() {
     fi
     echo "#[bold]|#[default]${airport}#[bold]|#[default]"
 }
-# echo "signal : ${signal}"
-# echo "ssid   : ${ssid}"
 
 function main() {
     local airport=$(get_airport_status)

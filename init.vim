@@ -24,7 +24,7 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     " ファイル操作を簡単にする
     call dein#add('Shougo/denite.nvim')
 
-    " タイムスタンプを自動挿入
+    " タイムスタンプを自動で挿入
     call dein#add('vim-scripts/autodate.vim')
 
     " 最近使用したファイルを表示する
@@ -60,10 +60,6 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
 
     " Kotlinのsyntax
     call dein#add('udalov/kotlin-vim')
-
-    " Vimでシェルを使う
-    " call dein#add('Shougo/vimshell.vim')
-    " call dein#add('Shougo/vimproc.vim', {'build':'make'})
 
     " インデントの可視化
     call dein#add('nathanaelkane/vim-indent-guides')
@@ -117,6 +113,7 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     call dein#add('w0ng/vim-hybrid')
     call dein#add('phanviet/vim-monokai-pro')
     call dein#add('reedes/vim-colors-pencil')
+    call dein#add('benjaminwhite/Benokai')
 
     " Required:
     call dein#end()
@@ -136,6 +133,9 @@ endif
 
 " Required:
 filetype plugin indent on
+
+" シンタックスハイライトを有効化
+syntax on
 
 " <---------- Setting ---------->
 
@@ -175,14 +175,6 @@ autocmd BufReadPost *
             \   execute "normal! g'\"" |
             \ endif
 
-" 行番号表示
-set number
-hi LineNr cterm=bold ctermfg=white ctermbg=none
-hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
-
-" カーソルの位置を表示
-set ruler
-
 " インデント機能の有効化
 set autoindent
 
@@ -209,62 +201,54 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " 256色の対応(lightline用)
 set t_Co=256
 
-" clipboardの有効化
-" " + y でクリップボードにコピー
-" set clipboard=unnamed,autoselect
-
-" シンタックスのカラー
-" set term=xterm-256color
+source ~/.dotfiles/toggle_background.vim
 
 " 背景色の設定
 set background=dark
 
-" シンタックスハイライトを有効化
-syntax on
-
 " カラースキームの設定
-" colorscheme molokai
+colorscheme molokai
 " colorscheme hybrid
+" colorscheme Benokai
 " set termguicolors
 " colorscheme monokai_pro
-colorscheme pencil
+" colorscheme pencil
 " let g:pencil_higher_contrast_ui=0
 " let g:pencil_neutral_code_bg=1
 " let g:pencil_gutter_color=1
 " let g:pencil_spell_undercurl=1
 
 " カーソル位置に下線を引く
-" set cursorline
+set cursorline
 " hi clear CursorLine
-" hi CursorLine cterm=underline ctermfg=none ctermbg=none
-" hi CursorLine term=reverse cterm=none ctermbg=none
-" hi CursorLineNr ctermfg=199 ctermbg=none
-" hi CursorLineNr term=bold cterm=none ctermfg=lightgreen ctermbg=none
-" hi CursorLine ctermbg=none
+hi CursorLine cterm=bold ctermfg=none
+" augroup exit_write_mode
+"     autocmd!
+"     autocmd InsertEnter * hi CursorLine cterm=none ctermfg=none
+"     autocmd InsertLeave * hi CursorLine cterm=underline ctermfg=none
+" augroup END
+" hi CursorLine term=reverse cterm=none
+" hi CursorLineNr ctermfg=199
+hi CursorLineNr term=none cterm=bold ctermfg=darkblue
+
+" 行番号表示
+set number
+hi LineNr cterm=none ctermbg=none ctermfg=250
+" hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
+
+" カーソルの位置を表示
+set ruler
 
 " カーソルの表示をモードで変更する
-" let &t_SI.="\<Esc>[6 q"
-" let &t_SR.="\<Esc>[4 q"
-" let &t_EI.="\<Esc>[2 q"
-" let &t_SI.="\e[6 q"
-" let &t_EI.="\e[2 q"
-" let &t_SR.="\e[4 q"
-" let &t_SI.="\<Esc>]50;CursorShape=1\x7"
-" let &t_SR.="\<Esc>]50;CursorShape=2\x7"
-" let &t_EI.="\<Esc>]50;CursorShape=0\x7"
-
-" カラースキームを当てたときの背景透過処理
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight LineNr ctermbg=none
-highlight Folded ctermbg=none
-highlight EndOfBuffer ctermbg=none
-
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[2 q"
+let &t_SR.="\e[4 q"
+"
 " lightline用設定
-" scriptencoding utf-8
-" set encoding=utf-8
+scriptencoding utf-8
+set encoding=utf-8
 set guifont=Ricty\ Bold:h10
-" set guifontwide=Ricty=5
+set guifontwide=Ricty=5
 
 " <---------- Tab ---------->
 
@@ -298,66 +282,71 @@ set incsearch
 set hlsearch
 
 " ESC2回入力でハイライトの解除
-nnoremap <Esc><Esc> :nohlsearch<CR><CR>
+nmap <Esc><Esc> :nohlsearch<CR><CR>
 
 " vim 起動時にtmuxのステータスバーを非表示
-if !has('gui_running') && $TMUX !=# ''
-  augroup Tmux
-    autocmd!
-    autocmd VimEnter,VimLeave * silent !tmux set status
-  augroup END
-endif
+" if !has('gui_running') && $TMUX !=# ''
+"   augroup Tmux
+"     autocmd!
+"     autocmd VimEnter,VimLeave * silent !tmux set status
+"   augroup END
+" endif
 
 " ノーマルモードになる時にfcitxを無効化
 function! ImInActivate()
   call system('fcitx-remote -c')
 endfunction
-inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+imap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
 " <---------- keymap ---------->
 
 " <<--------- normal --------->>
 
-nnoremap s <Nop>
+" カーソル移動系
+nmap j gj
+nmap k gk
+nmap <S-h> ^
+nmap <S-j> }
+nmap <S-k> {
+nmap <S-l> $
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Right> <Nop>
-noremap <Left> <Nop>
+nmap s <Nop>
+
+nmap <Up> <Nop>
+nmap <Down> <Nop>
+nmap <Right> <Nop>
+nmap <Left> <Nop>
 
 " Ctrl + h & lでタブの移動
 nmap <C-l> gt
 nmap <C-h> gT
 
 " 水平分割
-nmap ss :split<CR>
+nmap ss :split<CR> <C-w><C-w>
 " 垂直分割
-nmap sv :vsplit<CR>
+nmap sv :vsplit<CR> <C-w><C-w>
+
+" 背景の透過切り替え
+nmap tp :ToggleBackground<CR>
 
 " <<--------- insert --------->>
 
-" inoremap <C-k> <Up>
-" inoremap <C-j> <Down>
-" inoremap <C-h> <Left>
-" inoremap <C-l> <Right>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Right> <Nop>
-inoremap <Left> <Nop>
+" imap <C-k> <Up>
+" imap <C-j> <Down>
+" imap <C-h> <Left>
+" imap <C-l> <Right>
+imap <Up> <Nop>
+imap <Down> <Nop>
+imap <Right> <Nop>
+imap <Left> <Nop>
 
 " <<--------- Visual --------->>
-vnoremap <Up> <Nop>
-vnoremap <Down> <Nop>
-vnoremap <Right> <Nop>
-vnoremap <Left> <Nop>
+vmap <Up> <Nop>
+vmap <Down> <Nop>
+vmap <Right> <Nop>
+vmap <Left> <Nop>
 
 " <<--------- Plugin --------->>
-
-" ctrl + lを2回入力でVimShellを起動
-" nnoremap <S-l><S-l> :split<CR>:VimShell<CR><esc><C-w>J:res -10<esc>i 
-" let g:vimshell_prompt='>> '
-" let g:vimshell_user_prompt='getcwd()'
-" let g:vimshell_secondary_prompt="〉 "
 
 " config tryu
 " ctrl + /で選択行のコメントアウト
@@ -367,25 +356,29 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 
 " config NERDTree
 " ctrl + tでNERDTreeを起動
-nnoremap <silent><C-t> :NERDTreeToggle<CR>
+nmap <silent><C-t> :NERDTreeToggle<CR>
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if  argc() != 0 && !exists("s:std_in") | NERDTree | endif
+
 " 隠しファイルをデフォルトで表示
-let NERDTreeShowHidden = 1
+" let NERDTreeShowHidden = 1
 let NERDTreeShowBookmarks = 1
 
 "ctrl + cでQuickRunを停止させる
-nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
 " <---------- End ---------->
 
 " <---------- Plugin Setting ---------->
 
 " autodate.vimの設定
-let autodate_format="%a %d %b %Y %H:%M:%S"
+let g:autodate_lines=20
+let g:autodate_format="%a %d %b %Y %H:%M:%S"
 
-"NERDTreeの設定
+" NERDTreeの設定
+" 拡張子のハイライト
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
  exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
@@ -419,6 +412,7 @@ let g:quickrun_config = {
 " winresizerの設定
 let g:winresizer_vert_resize = 1
 let g:winresizer_horiz_resize = 1
+
 " vim-goの設定
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -562,7 +556,7 @@ let g:lightline = {
         \ 'colorscheme': 'solarized',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], ['filetype' ,'fileencoding'] ],
+        \   'left': [ [ 'mode', 'paste' ], ['filetype'] , ['fileencoding']],
         \   'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
         \
         \ },
@@ -576,10 +570,11 @@ let g:lightline = {
         \   'fileencoding': 'LightlineFileencoding',
         \   'mode': 'LightlineMode',
         \ },
-        \ 'separator' : {'left' : "\u2b80", 'right' : "\u2b82" },
-        \ 'subseparator' : {'left' : "\u2b81", 'right' : "\u2b83" },
+        \ 'separator' : {'left' : "⮀", 'right' : "⮂" },
+        \ 'subseparator' : {'left' : "⮁", 'right' : "⮃" },
         \ }
-
+" \u2b80\u2b82
+"\u2b81\u2b83
 let g:lightline.tabline={
         \ 'filename': 'tabs'
         \ }
