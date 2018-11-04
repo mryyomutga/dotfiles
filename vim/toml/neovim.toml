@@ -1,0 +1,41 @@
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+    if has('win32')
+        let cmd = 'tools\\update-dll-mingw'
+    elseif has('win32unix')
+        let cmd = 'make -f make_cygwin.mak'
+    elseif execuatble('gmake')
+        let cmd = 'gmake'
+    else
+        let cmd = 'make'
+    endif
+    let g:dein#plugin.build = cmd
+'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = ['vimproc']
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+depends = ['vimproc', 'unite.vim']
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = '''
+    let g:deoplate#enable_at_startup = 1
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:deoplete#omni#functions = {}
+    " let g:deoplete#omni#input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+    " let g:deoplete#omni#functions.python = 'jedi#completions'
+    inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+'''
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+depends = ['vimproc', 'unite.vim', 'unite-outline']

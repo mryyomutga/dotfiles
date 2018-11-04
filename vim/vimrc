@@ -1,7 +1,10 @@
+" Last Change : Sun 04 Nov 2018 02:19:06.
 " <---------- dein ---------->
-if &compatible
-    set nocompatible
-endif
+
+set nocompatible
+
+set encoding=utf-8
+scriptencoding utf-8
 
 filetype plugin indent off
 
@@ -40,6 +43,7 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     call dein#add('Shougo/neocomplete.vim')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/neco-syntax')
+    call dein#add('Shougo/vimproc.vim',{'build':'make'})
     " call dein#add('Shougo/deoplete.nvim')
     " if !has('nvim')
     "     call dein#add('roxma/nvim-yarp')
@@ -49,12 +53,6 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     " スニペット
     call dein#add('Shougo/neosnippet')
     call dein#add('Shougo/neosnippet-snippets')
-
-    " IDE的な機能を設定する
-    " call dein#add('kana/vim-smartinput.vim')
-    " call dein#add('kana/vim-operator.vim')
-    " call dein#add('kana/vim-textobj-user.vim')
-    " call dein#add('kana/vim-operator-replace.vim')
 
     " call dein#add('rhysd/vim-operator-surround.vim')
 
@@ -114,6 +112,9 @@ if dein#load_state('~/.dotfiles/.vim/plugins')
     call dein#add('phanviet/vim-monokai-pro')
     call dein#add('reedes/vim-colors-pencil')
     call dein#add('benjaminwhite/Benokai')
+    call dein#add('cocopon/iceberg.vim')
+
+    call dein#add('popkirby/lightline-iceberg')
 
     " Required:
     call dein#end()
@@ -201,55 +202,60 @@ set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " 256色の対応(lightline用)
 set t_Co=256
 
-source ~/.dotfiles/toggle_background.vim
+" clipboardの有効化
+" " + y でクリップボードにコピー
+set clipboard=unnamed,autoselect
+
+" シンタックスのカラー
+" set term=xterm-256color
+
+source ~/.dotfiles/vim/scripts/toggle_background.vim
 
 " 背景色の設定
 set background=dark
 
+" autocmd ColorScheme * highlight Search ctermbg=11
+
 " カラースキームの設定
-colorscheme molokai
+" colorscheme molokai
 " colorscheme hybrid
 " colorscheme Benokai
-" set termguicolors
+colorscheme iceberg
 " colorscheme monokai_pro
-" colorscheme pencil
-" let g:pencil_higher_contrast_ui=0
-" let g:pencil_neutral_code_bg=1
-" let g:pencil_gutter_color=1
-" let g:pencil_spell_undercurl=1
 
 " カーソル位置に下線を引く
 set cursorline
-" hi clear CursorLine
-hi CursorLine cterm=bold ctermfg=none
-" augroup exit_write_mode
-"     autocmd!
-"     autocmd InsertEnter * hi CursorLine cterm=none ctermfg=none
-"     autocmd InsertLeave * hi CursorLine cterm=underline ctermfg=none
-" augroup END
-" hi CursorLine term=reverse cterm=none
-" hi CursorLineNr ctermfg=199
-hi CursorLineNr term=none cterm=bold ctermfg=darkblue
+set cursorcolumn
+hi CursorLine term=underline cterm=bold ctermbg=235
+hi CursorColumn term=underline ctermbg=235
+augroup exit_write_mode
+    autocmd!
+    autocmd InsertEnter * hi CursorLine term=none cterm=bold ctermbg=none
+    autocmd InsertEnter * hi CursorColumn term=none ctermbg=none
+    autocmd InsertLeave * hi CursorLine term=underline cterm=bold ctermbg=235
+    autocmd InsertLeave * hi CursorColumn term=underline ctermbg=235
+augroup END
 
 " 行番号表示
 set number
-hi LineNr cterm=none ctermbg=none ctermfg=250
-" hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
+hi LineNr ctermbg=none ctermfg=239
+" hi LineNr cterm=none ctermbg=none ctermfg=green
+hi CursorLineNr cterm=bold ctermfg=69 ctermbg=none
 
 " カーソルの位置を表示
 set ruler
+
+" ポップアップメニューの設定
+highlight Pmenu ctermfg=46 ctermbg=0
+highlight PmenuSel cterm=bold ctermfg=51 ctermbg=8
+highlight PmenuSbar ctermbg=5
+highlight PmenuThumb ctermfg=7
 
 " カーソルの表示をモードで変更する
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[2 q"
 let &t_SR.="\e[4 q"
 "
-" lightline用設定
-scriptencoding utf-8
-set encoding=utf-8
-set guifont=Ricty\ Bold:h10
-set guifontwide=Ricty=5
-
 " <---------- Tab ---------->
 
 " タブページを常に表示
@@ -281,9 +287,6 @@ set incsearch
 " 検索結果をハイライト
 set hlsearch
 
-" ESC2回入力でハイライトの解除
-nmap <Esc><Esc> :nohlsearch<CR><CR>
-
 " vim 起動時にtmuxのステータスバーを非表示
 " if !has('gui_running') && $TMUX !=# ''
 "   augroup Tmux
@@ -296,55 +299,64 @@ nmap <Esc><Esc> :nohlsearch<CR><CR>
 function! ImInActivate()
   call system('fcitx-remote -c')
 endfunction
-imap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+inoremap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
 " <---------- keymap ---------->
 
 " <<--------- normal --------->>
 
 " カーソル移動系
-nmap j gj
-nmap k gk
-nmap <S-h> ^
-nmap <S-j> }
-nmap <S-k> {
-nmap <S-l> $
+nnoremap j gj
+nnoremap k gk
+nnoremap <S-h> ^
+nnoremap <S-j> }
+nnoremap <S-k> {
+nnoremap <S-l> $
 
-nmap s <Nop>
+nnoremap s <Nop>
 
-nmap <Up> <Nop>
-nmap <Down> <Nop>
-nmap <Right> <Nop>
-nmap <Left> <Nop>
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Left> <Nop>
 
 " Ctrl + h & lでタブの移動
-nmap <C-l> gt
-nmap <C-h> gT
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 
 " 水平分割
-nmap ss :split<CR> <C-w><C-w>
+nnoremap ss :split<CR> <C-w><C-w>
 " 垂直分割
-nmap sv :vsplit<CR> <C-w><C-w>
+nnoremap sv :vsplit<CR> <C-w><C-w>
 
 " 背景の透過切り替え
-nmap tp :ToggleBackground<CR>
+nnoremap tp :ToggleBackground<CR>
+
+" ESC2回入力でハイライトの解除
+nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 
 " <<--------- insert --------->>
 
-" imap <C-k> <Up>
-" imap <C-j> <Down>
-" imap <C-h> <Left>
-" imap <C-l> <Right>
-imap <Up> <Nop>
-imap <Down> <Nop>
-imap <Right> <Nop>
-imap <Left> <Nop>
+" inoremap <C-k> <Up>
+" inoremap <C-j> <Down>
+" inoremap <C-h> <Left>
+" inoremap <C-l> <Right>
+
+" inoremap <Up> <Nop>
+" inoremap <Down> <Nop>
+" inoremap <Right> <Nop>
+" inoremap <Left> <Nop>
+inoremap OA <Nop>
+inoremap OB <Nop>
+inoremap OC <Nop>
+inoremap OD <Nop>
 
 " <<--------- Visual --------->>
-vmap <Up> <Nop>
-vmap <Down> <Nop>
-vmap <Right> <Nop>
-vmap <Left> <Nop>
+
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Left> <Nop>
 
 " <<--------- Plugin --------->>
 
@@ -352,11 +364,11 @@ vmap <Left> <Nop>
 " ctrl + /で選択行のコメントアウト
 nmap <C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_> <Plug>(caw:hatpos:toggle)
-" imap <C-_> <esc><Plug>(caw:hatpos:toggle)<S-$>a
+" inoremap <C-_> <Plug>(caw:hatpos:toggle)
 
 " config NERDTree
 " ctrl + tでNERDTreeを起動
-nmap <silent><C-t> :NERDTreeToggle<CR>
+nnoremap <silent><C-t> :NERDTreeToggle<CR>
 
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -367,7 +379,7 @@ nmap <silent><C-t> :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks = 1
 
 "ctrl + cでQuickRunを停止させる
-nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
 " <---------- End ---------->
 
@@ -375,6 +387,7 @@ nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\
 
 " autodate.vimの設定
 let g:autodate_lines=20
+let g:autodate_keyword_pre='Last Change : '
 let g:autodate_format="%a %d %b %Y %H:%M:%S"
 
 " NERDTreeの設定
@@ -552,8 +565,10 @@ let g:clang_c_options = '-std=c11'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 
 " lightlineの設定
+" let g:lightline ={}
+" let g:lightline.colorscheme = 'iceberg
 let g:lightline = {
-        \ 'colorscheme': 'solarized',
+        \ 'colorscheme': 'srcery_drk',
         \ 'mode_map': {'c': 'NORMAL'},
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ], ['filetype'] , ['fileencoding']],
@@ -570,11 +585,7 @@ let g:lightline = {
         \   'fileencoding': 'LightlineFileencoding',
         \   'mode': 'LightlineMode',
         \ },
-        \ 'separator' : {'left' : "⮀", 'right' : "⮂" },
-        \ 'subseparator' : {'left' : "⮁", 'right' : "⮃" },
         \ }
-" \u2b80\u2b82
-"\u2b81\u2b83
 let g:lightline.tabline={
         \ 'filename': 'tabs'
         \ }
@@ -632,4 +643,3 @@ function! LightlineMode()
 endfunction
 
 " <---------- End ---------->
-

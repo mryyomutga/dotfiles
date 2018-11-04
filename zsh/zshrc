@@ -1,3 +1,4 @@
+# Last Change : Sun 04 Nov 2018 14:57:00.
 # 環境変数の設定
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -13,8 +14,8 @@ if [ -d "${HOME}/.pyenv" ]; then
 fi
 
 # コマンドのシンタックスハイライト
-if [ -e ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh ]; then
-    source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
+if [ -e ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # zshの色設定を引っ張る
@@ -64,12 +65,12 @@ precmd(){
 
 # プロンプトの表示設定
 ## Root Prompt
-ROOTPROMPT1='%F{047}%n%f%F{153}#%f%U%F{197}%M%f%u %F{003}%~%f ${VCSPROMPT}
+ROOTPROMPT1='%F{047}%n%f%F{153}#%f%U%F{197}%M%f%u %F{003}%(3~,%-1~/.../%1~,%~)%f ${VCSPROMPT}
 %(?.%F{047}>%f%F{048}>%f%F{049}>.%F{196}>>>)%f '
 ROOTPROMPT2='%%F{047}>%f%F{048}>%f%F{049}>%f '
 
 ## User Prompt
-USERPROMPT1='%F{044}%n%F{226}$%U%F{197}%m%f%u %f%F{003}%~%f ${VCSPROMPT}%b
+USERPROMPT1='%F{044}%n%F{226}$%U%F{197}%m%f%u%f %F{003}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}%b
 %B%(?.%F{043}>%F{044}>%F{045}>.%F{196}>>>)%f%b '
 USERPROMPT2='%B%F{049}>%F{050}>%F{051}>%f%b '
 
@@ -225,6 +226,8 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COlORS}
 function display_off() {
     . ${HOME}/.display_off
 }
+
+alias lab_monitor_setting='xrandr --output eDP1 --off --output HDMI1 --auto --primary --right-of DP1 --output DP1 --mode 1920x1080 --rotate right'
 
 # <---------- Setting history ---------->
 

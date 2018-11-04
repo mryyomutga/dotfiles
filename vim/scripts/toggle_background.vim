@@ -1,29 +1,28 @@
 command! -nargs=0 ToggleBackground call s:Background()
-
-let s:background_tp=1
-
-function! s:Background()
+function! Background()
+    let s:background_tp=1
     if s:background_tp == 0
         " カラースキームの設定
-        colorscheme molokai
+        colorscheme iceberg
 
         " カーソル位置に下線を引く
         set cursorline
-        " hi clear CursorLine
-        hi CursorLine cterm=bold ctermfg=none
-        " augroup exit_write_mode
-        "     autocmd!
-        "     autocmd InsertEnter * hi CursorLine cterm=none ctermfg=none
-        "     autocmd InsertLeave * hi CursorLine cterm=underline ctermfg=none
-        " augroup END
-        " hi CursorLine term=reverse cterm=none
-        " hi CursorLineNr ctermfg=199
-        hi CursorLineNr term=none cterm=bold ctermfg=darkblue
+        set cursorcolumn
+        hi CursorLine term=underline cterm=bold ctermbg=235
+        hi CursorColumn term=underline ctermbg=235
+        augroup exit_write_mode
+            autocmd!
+            autocmd InsertEnter * hi CursorLine term=none cterm=bold ctermbg=none
+            autocmd InsertEnter * hi CursorColumn term=none ctermbg=none
+            autocmd InsertLeave * hi CursorLine term=underline cterm=bold ctermbg=235
+            autocmd InsertLeave * hi CursorColumn term=underline ctermbg=235
+        augroup END
 
         " 行番号表示
         set number
-        hi LineNr cterm=none ctermbg=none ctermfg=250
-        " hi CursorLineNr cterm=bold ctermfg=lightgreen ctermbg=none
+        hi LineNr ctermbg=none ctermfg=239
+        " hi LineNr cterm=none ctermbg=none ctermfg=green
+        hi CursorLineNr cterm=bold ctermfg=69 ctermbg=none
 
         " カーソルの位置を表示
         set ruler

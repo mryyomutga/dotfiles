@@ -1,3 +1,4 @@
+# Last Change : Wed 24 Oct 2018 16:47:25.
 # view
 set main-view   = id date author:email-user commit-title:graph=v2,refs=yes
 set blame-view  = id:yes,color file-name:auto author:full date:default line-number:yes,interval=1 text

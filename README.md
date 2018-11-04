@@ -9,26 +9,20 @@ Linux設定ファイル
 この設定を適用するには以下のコマンドを実行してください
 
 ```sh
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/install.sh | sh
+$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/scripts/install.sh | sh
 ```
 
 この設定が不要になり一括削除したい場合は以下のコマンドでリセットできます
 
 ```sh
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/uninstall.sh | sh
+$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/scripts/uninstall.sh | sh
 ```
 
 `install.sh`を実行すると、\~/に`.filename`形式で設定ファイルのシンボリックリンクが作成されます
 
 また、zshのコマンドにシンタックスをつけるスクリプトがネットに公開されており、それも同時にインストールするようになっています
 
-もし、シンタックス機能が不要の場合、`~/.dotfiles/zshrc`の16行目の
-
-```sh
-source ${HOME}/.dotfiles/.zsh-syntax-highlighting.zsh
-```
-
-を削除、コメントアウトすることで無効化できます
+もし、シンタックス機能が不要の場合、`~/.dotfiles/zsh/zshrc`の17~19行目を削除、コメントアウトすることで無効化できます
 
 `peco`をインストールしている場合、`C-r`でzshの履歴をpecoで検索することができます。
 
