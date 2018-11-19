@@ -95,12 +95,24 @@ if [ ! -e ${HOME}/.config/nvim ] || [ ! -e ${HOME}/.config/nvim/init.vim ]; then
     echo "link ${HOME}/.dotfiles/vim/init.vim -> ${HOME}/.config/nvim/init.vim"
     ln -s ${HOME}/.dotfiles/vim/init.vim ${HOME}/.config/nvim/init.vim
 fi
+if [ ! -e ${HOME}/.config/nvim/ginit.vim ]; then
+    echo "link ${HOME}/.dotfiles/vim/ginit.vim -> ${HOME}/.config/nvim/ginit.vim"
+    ln -s ${HOME}/.dotfiles/vim/ginit.vim ${HOME}/.config/nvim/ginit.vim
+fi
 
 ## self made command
-echo "${HOME}/.dotfiles/zsh/display_off ${HOME}/.display_off"
-cp -r ${HOME}/.dotfiles/zsh/display_off ${HOME}/.display_off
+# echo "${HOME}/.dotfiles/zsh/display_off ${HOME}/.display_off"
+# cp -r ${HOME}/.dotfiles/zsh/display_off ${HOME}/.display_off
 
 ## config
+if [ ! -e ${HOME}/.config/peco/config.json ]; then
+    echo "Not found ${HOME}/.config/alaritty/alacritty.yml"
+    echo "mkdir -p ${HOME}/.config/alacritty"
+    mkdir -p ${HOME}/.config/alacritty
+    echo "link ${HOME}/.dotfiles/alacritty.yml -> ${HOME}/.config/alacritty/alacritty.yml"
+    ln -s ${HOME}/.dotfiles/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
+fi
+
 if [ ! -e ${HOME}/.config/peco/config.json ]; then
     echo "Not found ${HOME}/.config/peco/config.json"
     echo "mkdir -p ${HOME}/.config/peco"

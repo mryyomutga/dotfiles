@@ -3,9 +3,9 @@
     "Style":{
         "Basic":["on_default", "green"],
         "SavedSelection":["bold", "on_green", "white"],
-        "Selected":["bold", "cyan", "on_magenta"],
+        "Selected":["italic", "cyan", "on_magenta"],
         "Query":["bold", "yellow"],
-        "Matched":["bold", "red"]
+        "Matched":["bold", "yellow"]
     },
     "keymap":{
         "C-j":"peco.SelectDown",

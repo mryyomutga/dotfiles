@@ -1,4 +1,4 @@
-" Last Change : Sun 04 Nov 2018 02:19:06.
+" Last Change : Tue 06 Nov 2018 23:34:15.
 " <---------- dein ---------->
 
 set nocompatible
@@ -9,7 +9,7 @@ scriptencoding utf-8
 filetype plugin indent off
 
 " Required:
-set runtimepath+=~/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim
 
 " Required:
 " Pythonの設定
@@ -17,12 +17,12 @@ let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog=expand('$HOME/bin/python')
 
 " Required:
-if dein#load_state('~/.dotfiles/.vim/plugins')
-    call dein#begin('~/.dotfiles/.vim/plugins')
+if dein#load_state('~/.dotfiles/vim/plugins')
+    call dein#begin('~/.dotfiles/vim/plugins')
 
     " Plugin Manager
     " Required:
-    call dein#add('~/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim')
+    call dein#add('~/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim')
 
     " ファイル操作を簡単にする
     call dein#add('Shougo/denite.nvim')
@@ -346,10 +346,18 @@ nnoremap <Esc><Esc> :nohlsearch<CR><CR>
 " inoremap <Down> <Nop>
 " inoremap <Right> <Nop>
 " inoremap <Left> <Nop>
-inoremap OA <Nop>
-inoremap OB <Nop>
-inoremap OC <Nop>
-inoremap OD <Nop>
+" inoremap OA <Nop>
+" inoremap OB <Nop>
+" inoremap OC <Nop>
+" inoremap OD <Nop>
+imap <Up> <Nop>
+imap <Down> <Nop>
+imap <Right> <Nop>
+imap <Left> <Nop>
+" imap OA <Nop>
+" imap OB <Nop>
+" imap OC <Nop>
+" imap OD <Nop>
 
 " <<--------- Visual --------->>
 

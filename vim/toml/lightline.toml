@@ -4,78 +4,94 @@ repo = 'popkirby/lightline-iceberg'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-let g:lightline = {
-        \ 'colorscheme': 'srcery_drk',
-        \ 'mode_map': {'c': 'NORMAL'},
-        \ 'active': {
-        \   'left': [ [ 'mode', 'paste' ], ['filetype'] , ['fileencoding']],
-        \   'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
-        \
-        \ },
-        \ 'component_function': {
-        \   'modified': 'LightlineModified',
-        \   'readonly': 'LightlineReadonly',
-        \   'fugitive': 'LightlineFugitive',
-        \   'filename': 'LightlineFilename',
-        \   'fileformat': 'LightlineFileformat',
-        \   'filetype': 'LightlineFiletype',
-        \   'fileencoding': 'LightlineFileencoding',
-        \   'mode': 'LightlineMode',
-        \ },
-        \ }
-let g:lightline.tabline={
-        \ 'filename': 'tabs'
-        \ }
-let g:lightline.tab={
-        \ 'active': ['tabnum', 'filename', 'modified'],
-        \ 'inactive': ['tabnum', 'filename', 'modified']
-        \ }
+    let g:lightline = {
+           \  'colorscheme':'deus',
+           \  'mode_map': {'c': 'NORMAL'},
+           \  'active': {
+           \    'left': [ [ 'mode', 'paste' ], ['filetype'] , ['fileencoding']],
+           \    'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
+           \ 
+           \  },
+           \  'component_function': {
+           \    'modified': 'LightlineModified',
+           \    'readonly': 'LightlineReadonly',
+           \    'fugitive': 'LightlineFugitive',
+           \    'filename': 'LightlineFilename',
+           \    'fileformat': 'LightlineFileformat',
+           \    'filetype': 'LightlineFiletype',
+           \    'fileencoding': 'LightlineFileencoding',
+           \    'mode': 'LightlineMode',
+           \  },
+           \  }
+    let g:lightline.tabline={
+           \  'filename': 'tabs'
+           \  }
+    let g:lightline.tab={
+           \  'active': ['tabnum', 'filename', 'modified'],
+           \  'inactive': ['tabnum', 'filename', 'modified']
+           \  }
 
-function! LightlineModified()
-  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
+    " colorschemeであるdeusの色直し
+    let s:palette = g:lightline#colorscheme#deus#palette
+    let s:blue = 14
+    let s:dark_blue = 39
+    let s:green = 114
+    let s:black = 235
+    let s:white = 145
+    let s:gray = 236
+    
+    let s:palette.normal.left  = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#8eb2f7', '292c33',  s:dark_blue,  s:black ] ]
+    let s:palette.normal.right = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#abb2bf', '#3e4452', s:white, s:black ], [ '#8eb2f7', '292c33', s:dark_blue, s:black ] ]
+    let s:palette.insert.left  = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#98c379', '#292c33', s:green, s:black ] ]
+    let s:palette.insert.right = [ [ '#292c33', '#98c379', s:black, s:green         ], [ '#abb2bf', '#3e4452', s:white, s:gray  ], [ '#98c379', '#292c33', s:green, s:black ] ]
+    let s:palette.tabline.tabsel = [ s:palette.normal.left[0] ]
+    let s:palette.tabline.right  = [ s:palette.normal.left[1] ]
 
-function! LightlineReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
-endfunction
+    function! LightlineModified()
+        return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
 
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
+    function! LightlineReadonly()
+        return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+    endfunction
 
-function! LightlineFugitive()
-  if exists('*fugitive#head')
-    let branch = fugitive#head()
-    return branch != '' ? "\u2b60 ".branch : ''
-  endif
-endfunction
+    function! LightlineFilename()
+        return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+             \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+             \  &ft == 'unite' ? unite#get_status_string() :
+             \  &ft == 'vimshell' ? vimshell#get_status_string() :
+             \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+             \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+    endfunction
 
-" function! LightlineFugitive()
-"   if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-"     return "\u2b60 ".fugitive#head()
-" else
-"     return '-'
-"   endif
-" endfunction
+    function! LightlineFugitive()
+        if exists('*fugitive#head')
+            let branch = fugitive#head()
+            return branch != '' ? "\u2b60 ".branch : ''
+        endif
+    endfunction
 
-function! LightlineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
+    " function! LightlineFugitive()
+    "     if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+    "         return "\u2b60 ".fugitive#head()
+    "     else
+    "         return '-'
+    "     endif
+    " endfunction
 
-function! LightlineFiletype()
-  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
-endfunction
+    function! LightlineFileformat()
+        return winwidth(0) > 70 ? &fileformat : ''
+    endfunction
 
-function! LightlineFileencoding()
-  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
-endfunction
+    function! LightlineFiletype()
+        return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+    endfunction
 
-function! LightlineMode()
-  return winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
+    function! LightlineFileencoding()
+        return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+    endfunction
+
+    function! LightlineMode()
+        return winwidth(0) > 60 ? lightline#mode() : ''
+    endfunction
 '''

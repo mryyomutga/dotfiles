@@ -1,3 +1,4 @@
+# Last Change : Mon 12 Nov 2018 15:54:05.
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
@@ -13,29 +14,58 @@ hook_post_update = '''
     let g:dein#plugin.build = cmd
 '''
 
-[[plugins]]
-repo = 'Shougo/unite.vim'
-depends = ['vimproc']
+#[[plugins]]
+#repo = 'Shougo/unite.vim'
+#depends = ['vimproc']
 
 [[plugins]]
 repo = 'Shougo/unite-outline'
 depends = ['vimproc', 'unite.vim']
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = '''
-    let g:deoplate#enable_at_startup = 1
-    if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-    endif
-    let g:deoplete#omni#functions = {}
-    " let g:deoplete#omni#input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-    " let g:deoplete#omni#functions.python = 'jedi#completions'
-    inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-    inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
+repo = 'Shougo/denite.nvim'
+depends = ['vimproc', 'unite-outline']
+hook_source = '''
+    call denite#custom#var('files_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+    call denite#custom#var('grep', 'command', ['ag'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opts', [])
+    call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
+
+    call denite#custom#option('default', 'prompt', '>')
+    call denite#custom#option('default', 'short_source_names', v:true)
+    call denite#custom#option('default', {
+        \    'auto_accel':v:true,
+        \    'prompt':'>',
+        \    'source_names':'short',
+        \ })
 '''
-on_i = 1
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-depends = ['vimproc', 'unite.vim', 'unite-outline']
+repo = 'Shougo/deoplete.nvim'
+hook_source = '''
+    " Use deoplete.
+    let g:deoplate#enable_at_startup = 1
+    " Use smartcase.
+    let g:deoplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:deoplete#sources#syntax#min_keyword_length = 3
+    " Set auto delimiter
+    let g:deoplete#enable_auto_delimiter = 1
+    " set auto completion start length
+    let g:deoplete#auto_complete_start_length = 1
+    let g:deoplete#auto_complete_delay = 0
+    let g:deoplete#enable_camel_case = 0
+    let g:deoplete#enable_ignore_case = 0
+    let g:deoplete#enable_refresh_always = 0
+    
+    let g:deoplete#file#enable_buffer_path = 1
+    let g:deoplete#max_list = 10000
+    set completeopt-=preview
+
+    call deoplete#enable()
+
+    noremap <expr><Tab> pumvisible() ? "\<DOWN>" : "\<Tab>"
+    inoremap <expr><S-Tab> pumvisible() ? "\<UP>" : "\<S-Tab>"
+'''
+on_i = 1

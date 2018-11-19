@@ -1,5 +1,5 @@
 #!/bin/sh
-# Last Change : Sat 03 Nov 2018 17:48:27.
+# Last Change : Mon 19 Nov 2018 15:31:09.
 
 function get_airport_status() {
     if [ -z $(iwconfig wlp5s0 | grep -o unassociated) ]; then
@@ -18,7 +18,7 @@ function get_airport_status() {
                 signal=${signal}${signals[5]}
             fi
         done
-        airport=" #[fg=colour10,underscore,bold]${ssid}#[default] ${signal} "
+        airport=" #[fg=colour10,bold]${ssid}#[default] ${signal} "
     else
         airport="#[fg=red,bold] ✘ #[default]"
     fi

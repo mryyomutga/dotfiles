@@ -1,16 +1,14 @@
-" Last Change : Sun 04 Nov 2018 15:38:50.
+" Last Change : Thu 15 Nov 2018 18:43:35.
 " <---------- dein ---------->
 set nocompatible
-
-set encoding=utf-8
-scriptencoding utf-8
 
 filetype plugin indent off
 syntax off
 
 " Required:
-" let g:python_host_prog = '/usr/bin/python2'
-" let g:python3_hosy_prog = $PYENV_ROOT . '/shims/python3'
+let g:python_host_prog =  $PYENV_ROOT . '/versions/neovim2/bin/python'
+let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+
 let s:base_dir = expand('~/.dotfiles/vim')
 let s:dein_dir = s:base_dir . '/plugins'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -28,14 +26,17 @@ if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
 
     call dein#load_toml(s:toml_dir . '/general.toml',     {'lazy':0})
-    call dein#load_toml(s:toml_dir . '/appearance.toml',  {'lazy':0})
+    call dein#load_toml(s:toml_dir . '/colorscheme.toml', {'lazy':0})
     call dein#load_toml(s:toml_dir . '/nerdtree.toml',    {'lazy':0})
     call dein#load_toml(s:toml_dir . '/lightline.toml',   {'lazy':0})
     call dein#load_toml(s:toml_dir . '/neovim.toml',      {'lazy':0})
+    call dein#load_toml(s:toml_dir . '/completion.toml',  {'lazy':0})
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
+    call dein#add('dzhou121/gonvim-fuzzy')
+    call dein#add('equalsraf/neovim-gui-shim')
     call dein#end()
     call dein#save_state()
 endif

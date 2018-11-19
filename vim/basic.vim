@@ -1,4 +1,11 @@
-" Last Change : Sun 04 Nov 2018 15:40:14.
+" Last Change : Tue 20 Nov 2018 01:49:43.
+
+" 文字コードをUTF-8に設定
+set encoding=utf-8
+set fileencoding=utf-8
+set fileformats=unix,mac,dos
+scriptencoding utf-8
+
 " バックアップファイルとスワップファイルを作成しない
 set nobackup
 set noswapfile
@@ -7,7 +14,7 @@ set noswapfile
 set autoread
 
 " カーソルの回り込み
-" set whichwrap=b,s,h,l,<,>,[,]
+"  whichwrap=b,s,h,l,<,>,[,]
 
 " 行末の1文字先まで移動する
 set virtualedit=onemore
@@ -30,6 +37,7 @@ set smartindent
 " コマンドラインモード時の補完機能有効化
 set wildmenu wildmode=list:longest,full
 
+set clipboard=unnamed
 " <---------- Tab ---------->
 
 " タブページを常に表示
@@ -43,6 +51,11 @@ set expandtab
 
 " タブ幅
 set shiftwidth=4
+
+" <---------- buffer ---------->
+
+" 編集中でもバッファの切り替えを行う
+ set hidden
 
 " <---------- search ---------->
 
@@ -62,7 +75,7 @@ set hlsearch
 " if !has('gui_running') && $TMUX !=# ''
 "   augroup Tmux
 "     autocmd!
-"     autocmd VimEnter,VimLeave * silent !tmux set status
+"     autocmd VimEnter,VimLeave * silent !tmux  status
 "   augroup END
 " endif
 
@@ -72,3 +85,14 @@ function! ImInActivate()
 endfunction
 imap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
+set inccommand=split
+
+autocmd TermOpen * setlocal norelativenumber
+autocmd TermOpen * setlocal nonumber
+
+augroup NewBufTemplate
+    autocmd!
+    autocmd BufNewFile *.py  0r $HOME/.dotfiles/vim/snippets/template.py
+    autocmd BufNewFile *.c   0r $HOME/.dotfiles/vim/snippets/template.c
+    autocmd BufNewFile *.sh  0r $HOME/.dotfiles/vim/snippets/template.sh
+augroup END
