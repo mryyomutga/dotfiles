@@ -1,4 +1,4 @@
-" Last Change : Mon 19 Nov 2018 21:42:47.
+" Last Change : Thu 22 Nov 2018 21:46:13.
 " 256色の対応(lightline用)
 if !has('gui_running')
     set t_Co=256
@@ -66,9 +66,7 @@ augroup exit_write_mode
     " autocmd InsertEnter * hi CursorColumn term=none ctermbg=none
     " autocmd InsertLeave * hi CursorLine term=underline ctermbg=235
     " autocmd InsertLeave * hi CursorColumn term=underline ctermbg=235
-    autocmd InsertEnter * set nocursorline
     autocmd InsertEnter * set nocursorcolumn
-    autocmd InsertLeave * set cursorline
     autocmd InsertLeave * set cursorcolumn
 augroup END
 " highlight CursorLine term=none ctermbg=none

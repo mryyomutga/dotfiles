@@ -1,4 +1,4 @@
-" Last Change : Thu 15 Nov 2018 18:43:35.
+" Last Change : Tue 20 Nov 2018 14:15:53.
 " <---------- dein ---------->
 set nocompatible
 
@@ -9,7 +9,7 @@ syntax off
 let g:python_host_prog =  $PYENV_ROOT . '/versions/neovim2/bin/python'
 let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
 
-let s:base_dir = expand('~/.dotfiles/vim')
+let s:base_dir = expand($HOME . '/.dotfiles/vim')
 let s:dein_dir = s:base_dir . '/plugins'
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 let s:toml_dir = s:base_dir . '/toml'

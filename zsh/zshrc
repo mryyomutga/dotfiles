@@ -1,4 +1,4 @@
-# Last Change : Tue 20 Nov 2018 01:26:41.
+# Last Change : Tue 20 Nov 2018 19:40:22.
 # 環境変数の設定
 export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -29,6 +29,10 @@ if [ -e ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting/zsh-syntax-highlighting.z
     ZSH_HIGHLIGHT_STYLES[precommand]='fg=039'
     ZSH_HIGHLIGHT_STYLES[path]='fg=039,bold'
     ZSH_HIGHLIGHT_STYLES[arg0]='fg=green'
+fi
+
+if [ -e ${HOME}/.dotfiles/zsh/.zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source ${HOME}/.dotfiles/zsh/.zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # 色に関する文字コード一覧
@@ -80,13 +84,13 @@ ROOTPROMPT2='%%F{047}▶%f%F{048}▶%f%F{049}▶%f '
 
 # >
 ## User Prompt
-USERPROMPT1='%F{044}%n%F{226}$%F{197}%m%f%f %F{003}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
-%B%(?.%F{043}▶%F{044}▶%F{045}▶.%F{196}▶▶▶)%f%b '
-USERPROMPT2='%B%F{049}▶%F{050}▶%F{051}▶%f%b '
+# USERPROMPT1='%F{197}%m%f%f %F{003}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
+# %B%F{226}$%f%(?.%F{043}▶%F{044}▶%F{045}▶.%F{196}▶▶▶)%f%b '
+# USERPROMPT2='%B%F{049}▶%F{050}▶%F{051}▶%f%b '
 
-USERPROMPT1='%F{044}%n%F{226}$%f %F{245}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
-%B%(?.%F{027}▶▶▶.%F{196}▶▶▶)%f%b '
-USERPROMPT2='%B%F{049}▶%F{050}▶%F{051}▶%f%b '
+USERPROMPT1='%F{245}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
+%B%F{226}$ %f%(?.%F{027}▶▶▶.%F{196}▶▶▶)%f%b '
+USERPROMPT2='  %B%F{027}▶▶▶%f%b '
 
 # RPROMPT='${VCSPROMPT}'
 

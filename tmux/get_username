@@ -1,0 +1,8 @@
+#!/bin/sh
+# Last Change : Tue 20 Nov 2018 19:28:42.
+
+function main() {
+    echo $USER
+}
+
+main $@

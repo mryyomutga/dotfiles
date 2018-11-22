@@ -1,0 +1,1 @@
+/home/ryoga/.fzf/shell/key-bindings.fish

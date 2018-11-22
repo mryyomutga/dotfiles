@@ -59,8 +59,15 @@ if [ ! -e ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting ]; then
     echo ""
 fi
 
+# install zsh-autosuggestions
+if [ ! -e ${HOME}/.dotfiles/zsh/.zsh-autosuggestions ]; then
+    echo "\"${HOME}/.dotfiles/zsh/.zsh-autosuggestions\" is not found."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.dotfiles/zsh/.zsh-autosuggestions
+    echo ""
+fi
+
 # install vim plugins
-if [ ! -e ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim ]; then
+if [ ! -e ${HOME}/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim ]; then
     echo "\"${HOME}/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim\" is not found."
     mkdir -p ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
     git clone https://github.com/Shougo/dein.vim.git ${HOME}/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim

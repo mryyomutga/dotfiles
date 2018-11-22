@@ -1,0 +1,1 @@
+/home/aster/.dotfiles/vim/ginit.vim

@@ -1,0 +1,71 @@
+{
+    "http.proxy": "http://wwwproxy.kanazawa-it.ac.jp:8080",
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "files.eol": "\n",
+    "files.autoGuessEncoding": true,
+    "editor.tabSize":4,
+    "editor.insertSpaces": true,
+    "editor.lineNumbers": "on",
+    "editor.snippetSuggestions":"top",
+    "editor.tabCompletion":"on",
+    "editor.renderControlCharacters": true,
+
+    "workbench.colorTheme": "Iceberg",
+
+    "workbench.editor.showTabs": true,
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true,
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.activityBar.visible": true,
+    "vim.incsearch": true,
+    "vim.ignorecase": true,
+    "vim.useSystemClipboard":true,
+    "vim.hlsearch": true,
+    "vim.easymotion": true,
+    "vim.visualstar": true,
+    "vim.useCtrlKeys": true,
+
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/bin/nvim",
+
+    "vim.leader": "<space>",
+
+    "vim.statusBarColorControl": true,
+    "vim.statusBarColors.normal": "#0b173b",
+    "vim.statusBarColors.insert": "#0b3b17",
+    "vim.statusBarColors.visual": "#240b3b",
+    "vim.statusBarColors.visualblock": "#240b3b",
+    "vim.statusBarColors.visualline": "#240b3b",
+    "vim.statusBarColors.replace": "#3b0b17",
+    // "vim.statusBarColors.normal": "#98c379",
+    // "vim.statusBarColors.insert": "#61afef",
+    // "vim.statusBarColors.visual": "#c678dd",
+    // "vim.statusBarColors.visualblock": "#c678dd",
+    // "vim.statusBarColors.visualline": "#c678dd",
+    // "vim.statusBarColors.replace": "#e06c75",
+
+    "window.titleBarStyle": "custom",
+    "window.menuBarVisibility": "default",
+
+    "breadcrumbs.enabled": true,
+
+    "python.pythonPath": "/home/ryoga/.pyenv/versions/neovim3/bin/python",
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider":"yapf",
+    // "python.linting.pylintEnabled": true,
+    "[python]":{
+
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "editor.formatOnPaste": true,
+
+    },
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#0b173b",
+        "statusBar.noFolderBackground": "#0b173b",
+        "statusBar.debuggingBackground": "#0b173b"
+    },
+
+}

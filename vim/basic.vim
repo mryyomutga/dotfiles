@@ -1,4 +1,4 @@
-" Last Change : Tue 20 Nov 2018 01:49:43.
+" Last Change : Thu 22 Nov 2018 18:20:39.
 
 " 文字コードをUTF-8に設定
 set encoding=utf-8
@@ -96,3 +96,6 @@ augroup NewBufTemplate
     autocmd BufNewFile *.c   0r $HOME/.dotfiles/vim/snippets/template.c
     autocmd BufNewFile *.sh  0r $HOME/.dotfiles/vim/snippets/template.sh
 augroup END
+
+autocmd BufNewFile,BufRead *.hs set tabstop=2
+autocmd BufNewFile,BufRead *.hs set shiftwidth=2
