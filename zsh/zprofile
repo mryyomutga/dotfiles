@@ -1,2 +1,0 @@
-export TERMINAL="alacritty"
-setxkbmap -layout jp

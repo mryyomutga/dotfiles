@@ -53,7 +53,7 @@ fi
 # fi
 
 #  install zsh-syntax-highlighting
-if [ ! -e ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting ]; then
+if [ ! -e ${HOME}/.dotfiles/src/zsh/.zsh-syntax-highlighting ]; then
     echo "\"${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting\" is not found."
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting
     echo ""
@@ -61,16 +61,16 @@ fi
 
 # install zsh-autosuggestions
 if [ ! -e ${HOME}/.dotfiles/zsh/.zsh-autosuggestions ]; then
-    echo "\"${HOME}/.dotfiles/zsh/.zsh-autosuggestions\" is not found."
+    echo "\"${HOME}/.dotfiles/src/zsh/.zsh-autosuggestions\" is not found."
     git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.dotfiles/zsh/.zsh-autosuggestions
     echo ""
 fi
 
 # install vim plugins
 if [ ! -e ${HOME}/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim ]; then
-    echo "\"${HOME}/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim\" is not found."
-    mkdir -p ${HOME}/.dotfiles/.vim/plugins/repos/github.com/Shougo/dein.vim
-    git clone https://github.com/Shougo/dein.vim.git ${HOME}/.dotfiles/vim/plugins/repos/github.com/Shougo/dein.vim
+    echo "\"${HOME}/.dotfiles/src/.config/nvim/plugins/repos/github.com/Shougo/dein.vim\" is not found."
+    mkdir -p ${HOME}/.dotfiles/src/.config/nvim/plugins/repos/github.com/Shougo/dein.vim
+    git clone https://github.com/Shougo/dein.vim.git ${HOME}/.dotfiles/.config/nvim/plugins/repos/github.com/Shougo/dein.vim
     echo ""
 fi
 
@@ -80,31 +80,29 @@ touch ${HOME}/.zsh_history
 
 # make synbolic link
 ## rc file
-if [ ! -e ${HOME}/.zshrc ]; then
-    echo "link ${HOME}/.dotfiles/zsh/zshrc -> ${HOME}/.zshrc"
-    ln -s ${HOME}/.dotfiles/zsh/zshrc ${HOME}/.zshrc
+# if [ ! -e ${HOME}/.zshrc ]; then
+#     echo "link ${HOME}/.dotfiles/src/.zshrc -> ${HOME}/.zshrc"
+#     ln -s ${HOME}/.dotfiles/.zshrc ${HOME}/.zshrc
+# fi
+if [ ! -e ${HOME}/.zshenv ]; then
+    echo "link ${HOME}/.dotfiles/zsh/.zshenv -> ${HOME}/.zshenv"
+    ln -s ${HOME}/.dotfiles/zsh/.zshenv ${HOME}/.zshenv
 fi
 if [ ! -e ${HOME}/.vimrc ]; then
-    echo "link ${HOME}/.dotfiles/vim/vimrc -> ${HOME}/.vimrc"
-    ln -s ${HOME}/.dotfiles/vim/vimrc ${HOME}/.vimrc
+    echo "link ${HOME}/.dotfiles/.vimrc -> ${HOME}/.vimrc"
+    ln -s ${HOME}/.dotfiles/vim/init.vim ${HOME}/.vimrc
 fi
 if [ ! -e ${HOME}/.tigrc ]; then
-    echo "link ${HOME}/.dotfiles/tigrc -> ${HOME}/.tigrc"
-    ln -s ${HOME}/.dotfiles/tigrc ${HOME}/.tigrc
+    echo "link ${HOME}/.dotfiles/.tigrc -> ${HOME}/.tigrc"
+    ln -s ${HOME}/.dotfiles/.tigrc ${HOME}/.tigrc
 fi
 if [ ! -e ${HOME}/.tmux.conf ]; then
-    echo "link ${HOME}/.dotfiles/tmux/tmux.conf -> ${HOME}/.tmux.conf"
-    ln -s ${HOME}/.dotfiles/tmux/tmux.conf ${HOME}/.tmux.conf
+    echo "link ${HOME}/.dotfiles/.tmux.conf -> ${HOME}/.tmux.conf"
+    ln -s ${HOME}/.dotfiles/tmux/.tmux.conf ${HOME}/.tmux.conf
 fi
-if [ ! -e ${HOME}/.config/nvim ] || [ ! -e ${HOME}/.config/nvim/init.vim ]; then
-    echo "mkdir -p ${HOME}/.config/nvim"
-    mkdir -p ${HOME}/.config/nvim
-    echo "link ${HOME}/.dotfiles/vim/init.vim -> ${HOME}/.config/nvim/init.vim"
-    ln -s ${HOME}/.dotfiles/vim/init.vim ${HOME}/.config/nvim/init.vim
-fi
-if [ ! -e ${HOME}/.config/nvim/ginit.vim ]; then
-    echo "link ${HOME}/.dotfiles/vim/ginit.vim -> ${HOME}/.config/nvim/ginit.vim"
-    ln -s ${HOME}/.dotfiles/vim/ginit.vim ${HOME}/.config/nvim/ginit.vim
+if [ ! -e ${HOME}/.config/nvim ]; then
+    echo "${HOME}/.config/nvim is not found. make link to ${HOME}/.config/nvim"
+    ln -s ${HOME}/.dotfiles/.config/nvim ${HOME}/.config/nvim
 fi
 
 ## self made command
@@ -112,19 +110,15 @@ fi
 # cp -r ${HOME}/.dotfiles/zsh/display_off ${HOME}/.display_off
 
 ## config
-if [ ! -e ${HOME}/.config/peco/config.json ]; then
+if [ ! -e ${HOME}/.config/alacritty ]; then
     echo "Not found ${HOME}/.config/alaritty/alacritty.yml"
-    echo "mkdir -p ${HOME}/.config/alacritty"
-    mkdir -p ${HOME}/.config/alacritty
-    echo "link ${HOME}/.dotfiles/alacritty.yml -> ${HOME}/.config/alacritty/alacritty.yml"
-    ln -s ${HOME}/.dotfiles/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml
+    echo "link to ${HOME}/.config/alacritty"
+    ln -s ${HOME}/.dotfiles/.config/alacritty ${HOME}/.config/alacritty
 fi
 
-if [ ! -e ${HOME}/.config/peco/config.json ]; then
-    echo "Not found ${HOME}/.config/peco/config.json"
-    echo "mkdir -p ${HOME}/.config/peco"
-    mkdir -p ${HOME}/.config/peco
-    echo "link ${HOME}/.dotfiles/peco.conf.json -> ${HOME}/.config/peco/config.json"
-    ln -s ${HOME}/.dotfiles/peco.conf.json ${HOME}/.config/peco/config.json
+if [ ! -e ${HOME}/.config/peco ]; then
+    echo "Not found ${HOME}/.config/peco"
+    echo "link to ${HOME}/.config/peco"
+    ln -s ${HOME}/.dotfiles/.config/peco ${HOME}/.config/peco
 fi
 

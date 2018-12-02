@@ -164,15 +164,28 @@ exec --no-startup-id "feh --bg-scale $HOME/Pictures/signal.jpg"
 # startup applications
 exec --no-startup-id fcitx
 
+# exec_always --no-startup-id "setxkbmap -model jp106 -layout jp"
+
 ## --------- ##
 # If laptop is attached USB-c monitor, auto expand screen
 exec --no-startup-id ~/.config/i3/script/monitor_detect.sh
 
 ## screen lock
-exec --nostartup-id light-locker --lock-on-suspend
+exec --no-startup-id light-locker --lock-on-suspend
+
+## launch Polybar
+# exec --nostartup-id ~/.config/polybar/launch.sh
+
+## Natural Scrolling
+exec --no-startup-id synclient VertScrollDelta=-112 HorizScrollDelta=-112
+
+## TouchPad Edge Scrolling
+exec --no-startup-id synclient VertEdgeScroll=1 HorizEdgeScroll=1 CornerCoasting=1
+
+## TouchPad tap enable
+exec --no-startup-id synclient TapButton1=1 TapButton2=3
 
 ## --------- ##
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode

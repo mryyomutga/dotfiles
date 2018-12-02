@@ -1,0 +1,20 @@
+[[plugins]]
+repo = 'ujihisa/unite-colorscheme'
+
+[[plugins]]
+repo = 'tomasr/molokai'
+ 
+[[plugins]]
+repo = 'w0ng/vim-hybrid'
+ 
+[[plugins]]
+repo = 'phanviet/vim-monokai-pro'
+ 
+[[plugins]]
+repo = 'reedes/vim-colors-pencil'
+ 
+[[plugins]]
+repo = 'benjaminwhite/Benokai'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'

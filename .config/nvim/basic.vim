@@ -1,10 +1,13 @@
-" Last Change : Tue 27 Nov 2018 00:29:20.
+" Last Change : Sun 02 Dec 2018 15:52:27.
 
 " 文字コードをUTF-8に設定
 set encoding=utf-8
 set fileencoding=utf-8
-set fileformats=unix,mac,dos
 scriptencoding utf-8
+set fileformats=unix,dos,mac
+
+set binary
+set bomb
 
 " バックアップファイルとスワップファイルを作成しない
 set nobackup

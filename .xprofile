@@ -5,8 +5,10 @@ export XMODIFIERS="@im=fcitx"
 
 export TERMINAL="alacritty"
 
-if [ "${DESKTOP_SESSION}" == "xmonad" ]; then
+if [ "${DESKTOP_SESSION}" = "xmonad" ]; then
     fcitx &
+    ibus-daemon --xim &
+    ibus-setup
 fi
 setxkbmap -layout jp
 xsetroot -cursor_name left_ptr

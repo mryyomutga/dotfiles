@@ -1,14 +1,17 @@
--- Last Change : Fri 23 Nov 2018 00:33:29.
+-- Last Change : Sun 25 Nov 2018 22:20:23.
 
 ------------------------------------------------------------
 
-import XMonad
-import Data.Monoid
-import System.Exit
-
-import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
+import Control.XMonad (liftM2)
+import Data.Monoid
 
+import XMonad
+import XMonad.Hooks.DynamicLog
+import qualified XMonad.StackSet as W
+
+import System.IO                      -- xmobar
+import System.Exit
 ------------------------------------------------------------
 
 -- The preferred terminal program, which is used in a binding below and by
@@ -254,34 +257,37 @@ myStartupHook = return ()
  
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = do
+  xmonad =<< statusBar myBar myPP ToggleStrutsKey myConfig
 
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
-defaults = defaultConfig {
-  -- simple stuff
-  terminal            = myTerminal,
-  focusFollowsMouse   = myFocusFollowsMouse,
-  borderWidth         = myBorderWidth,
-  modMask             = myModMask,
-  -- numlockMask deprecated in 0.9.1
-  -- numlockMask         = myNumlockMask
-  workspaces          = myWorkspaces,
-  normalBorderColor   = myNormalBorderColor,
-  focusedBorderColor  = myFocusedBorderColor,
-  -- key bindings
-  keys                = myKeys,
-  mouseBindings       = myMouseBindings,
-  -- hooks, layouts
-  layoutHook          = myLayout,
-  manageHook          = myManageHook,
-  handleEventHook     = myEventHook,
-  logHook             = myLogHook,
-  startupHook         = myStartupHook
-}
+  myBar = "xmobar ~/.xmobarrc"
+
+  -- A structure containing your configuration settings, overriding
+  -- fields in the default config. Any you don't override, will
+  -- use the defaults defined in xmonad/XMonad/Config.hs
+  --
+  -- No need to modify this.
+  --
+  myConfig = defaultConfig {
+    -- simple stuff
+    terminal            = myTerminal,
+    focusFollowsMouse   = myFocusFollowsMouse,
+    borderWidth         = myBorderWidth,
+    modMask             = myModMask,
+    -- numlockMask deprecated in 0.9.1
+    -- numlockMask         = myNumlockMask
+    workspaces          = myWorkspaces,
+    normalBorderColor   = myNormalBorderColor,
+    focusedBorderColor  = myFocusedBorderColor,
+    -- key bindings
+    keys                = myKeys,
+    mouseBindings       = myMouseBindings,
+    -- hooks, layouts
+    layoutHook          = myLayout,
+    manageHook          = myManageHook,
+    handleEventHook     = myEventHook,
+    logHook             = myLogHook,
+    startupHook         = myStartupHook
+  }
 
 

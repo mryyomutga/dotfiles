@@ -1,90 +1,50 @@
+-- vim: ft=haskell
 Config {
     -- appearance
-    font        = "xfs:Cousine:size=9:bold:antialias=true",
-    bgColor     = "black",
-    fgColor     = "#646464",
+    font        = "xfs:Noto Sans Display:size=13",
+    bgColor     = "#1a1e1b",
+    fgColor     = "#676767",
     position    = Top,
-    border      = BottomB,
-    borderColor = "#323232",
 
-    -- layout
-    sepChar = "%",
-    alignSep = "}{",
-    template = "%battery% | %multicpu% | %coretemp% | %memory% | &dynnetwork% }{ %RJTT% | %date% || %kdb% ",
-
-    -- general behavior
     lowerOnStart = True,
     hideOnStart = False,
-    allDesktop = True,
     overrideRedirect = True,
-    pickBroadest = False,
-    presistent = True,
 
-    -- plugin
-    [ Run Weather "RJTT" [ "--template", "<skyCondition> | <fc=#4682B4><tempC></fc>°C | <fc=#4682B4><rh></fc>% | <fc=#4682B4><pressure></fc>hPa"
-                                 ] 36000
-
-            -- network activity monitor (dynamic interface resolution)
-            , Run DynNetwork     [ "--template" , "<dev>: <tx>kB/s|<rx>kB/s"
-                                 , "--Low"      , "1000"       -- units: kB/s
-                                 , "--High"     , "5000"       -- units: kB/s
-                                 , "--low"      , "darkgreen"
-                                 , "--normal"   , "darkorange"
-                                 , "--high"     , "darkred"
-                                 ] 10
-
-            -- cpu activity monitor
-            , Run MultiCpu       [ "--template" , "Cpu: <total0>%|<total1>%"
-                                 , "--Low"      , "50"         -- units: %
-                                 , "--High"     , "85"         -- units: %
-                                 , "--low"      , "darkgreen"
-                                 , "--normal"   , "darkorange"
-                                 , "--high"     , "darkred"
-                                 ] 10
-
-            -- cpu core temperature monitor
-            , Run CoreTemp       [ "--template" , "Temp: <core0>°C|<core1>°C"
-                                 , "--Low"      , "70"        -- units: °C
-                                 , "--High"     , "80"        -- units: °C
-                                 , "--low"      , "darkgreen"
-                                 , "--normal"   , "darkorange"
-                                 , "--high"     , "darkred"
-                                 ] 50
-
-            -- memory usage monitor
-            , Run Memory         [ "--template" ,"Mem: <usedratio>%"
-                                 , "--Low"      , "20"        -- units: %
-                                 , "--High"     , "90"        -- units: %
-                                 , "--low"      , "darkgreen"
-                                 , "--normal"   , "darkorange"
-                                 , "--high"     , "darkred"
-                                 ] 10
-
-            -- battery monitor
-            , Run Battery        [ "--template" , "Batt: <acstatus>"
-                                 , "--Low"      , "10"        -- units: %
-                                 , "--High"     , "80"        -- units: %
-                                 , "--low"      , "darkred"
-                                 , "--normal"   , "darkorange"
-                                 , "--high"     , "darkgreen"
-
-                                 , "--" -- battery specific options
-                                           -- discharging status
-                                           , "-o"	, "<left>% (<timeleft>)"
-                                           -- AC "on" status
-                                           , "-O"	, "<fc=#dAA520>Charging</fc>"
-                                           -- charged status
-                                           , "-i"	, "<fc=#006000>Charged</fc>"
-                                 ] 50
-
-            -- time and date indicator 
-            --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-            , Run Date           "<fc=#ABABAB>%F (%a) %T</fc>" "date" 10
-
-            -- keyboard layout indicator
-            , Run Kbd            [ ("us(dvorak)" , "<fc=#00008B>DV</fc>")
-                                 , ("us"         , "<fc=#8B0000>US</fc>")
-                                 ]
-            ]
-       }
+    commands = [
+        Run Network "wlp5s0" [ "-t"      , " ⇩ <rx>  ⇧ <tx>",
+                               "-L"      , "40",
+                               "-H"      , "200",
+                               "--normal", "#d3d7cf",
+                               "--high"  , "#88b986"
+                             ] 10,
+        Run MultiCpu         [ "-t"      , "■ <total0>.<total1>.<total2>.<total3>  ",
+                               "-L"      , "40",
+                               "-H"      , "85",
+                               "--normal", "#d3d7cf",
+                               "--high"  , "#c16666"
+                             ] 50,
+        Run Memory           [ "-t"      , "<usedratio>%",
+                               "-L"      , "40",
+                               "-H"      , "90",
+                               "--normal", "#d3d7cf",
+                               "--high"  , "#c16666"
+                             ] 10,
+        Run BatteryP         [ "CMB1" ]
+                             [ "-t"      , "⌇ <acstatus> ",
+                               "-L"      , "20",
+                               "-H"      , "80",
+                               "--low"   , "#c16666",
+                               "--normal", "#d3d7cf",
+                               "--",
+                                     "-o", "<left>% (<timeleft>)",
+                                     "-O", "Charging <left>%",
+                                     "-i", "<left>%"
+                             ] 50,
+        Run Date "%a %m %d %H:%M" "date" 10,
+        Run StdinReader
+    ],
+    sepChar = "%",
+    alignSep = "}{",
+    template = "%StdinReader% }{ %multicpu% %memory% %wlp5s0% %battery% <fc=#c7a273>%date%</fc> "
+}
 

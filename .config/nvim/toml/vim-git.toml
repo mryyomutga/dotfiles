@@ -1,0 +1,12 @@
+# Last Change : Sun 02 Dec 2018 16:14:57.
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tpope/vim-rhubarb'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'vim-scripts/git-commit'
