@@ -3,7 +3,7 @@ export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # i3wm default terminal emulator
-export TERMINAL="alacritty"
+# export TERMINAL="alacritty"
 
 export BROWSER="firefox"
 export EDITOR="nvim"
@@ -106,7 +106,7 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 # when is launched Alacritty, launch tmux
-if [ "$TERM_PROGRAM" = "alacritty" ]; then
+if [ "$TERM_PROGRAM" = "alacritty" ] || [ "$TERM_PROGRAM" = "termite" ]; then
     if [[ -z "$TMUX" && ! -z "$PS1" ]]; then
         tmux
     fi

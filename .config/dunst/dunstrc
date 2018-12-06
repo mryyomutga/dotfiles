@@ -1,0 +1,65 @@
+# Polybar config
+# Auther      : Ryoga Miyamoto
+# Last Change : Thu 06 Dec 2018 02:06:03.
+# Since       : Wed 05 Dec 2018 01:58:03.
+# Copyright (c) 2018, Ryoga Miyamoto
+
+[global]
+    font = Noto Sans CJK JP 9
+    markup = yes
+    format = "<b>%s</b>\n%b"
+    class = Dunst
+    title = Dunst
+    sort = yes
+    indicate_hidden = yes
+    alignment = left
+    bounce_freq = 0
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+    geometry = "300x5-30+30"
+    shrink = no
+    transparency = 20
+    idle_threshold = 120
+    monitor = 0
+    follow = mouse
+    sticky_history = yes
+    history_length = 20
+    show_indicators = yes
+    line_height = 0
+    separator_height = 1
+    padding = 5
+    horizontal_padding = 5
+    separator_color = frame
+    startup_notification = false
+    browser = firefox
+    # icon_position = left
+    # icon_path = /usr/share/icons/deepin/status/16:/usr/share/icons/deepin/devices/16
+    # max_icon_size = 16
+    icon_position = off
+    width = 1
+    frame_width = 1
+    color = "#1529ff"
+
+[shortcuts]
+    close_all = mod4+shift+n
+
+[urgency_low]
+    background = "#000000"
+    foreground = "#ffffff"
+    frame_color = "#1529ff"
+    timeout = 10
+
+[urgency_normal]
+    background = "#000000"
+    foreground = "#ffffff"
+    frame_color = "#1529ff"
+    timeout = 10
+
+[urgency_critical]
+    background = "#000000"
+    foreground = "#ffffff"
+    frame_color = "#a51a64"
+    timeout = 0
+
+# vim:ft=conf

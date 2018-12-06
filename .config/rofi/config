@@ -1,0 +1,10 @@
+rofi.modi:             window,drun,combi,system:~/.config/rofi/rofi_system.sh
+rofi.combi-modi:       window,drun
+rofi.run-command:      fish -c '{cmd}'
+rofi.run-list-command: 'fish -c functions'
+rofi.sidebar-mode:     true
+rofi.hide-scrollbar:   false
+rofi.kb-cancel:        Escape,Control+q
+rofi.kb-mode-previous: Shift+Tab,Alt+h
+rofi.kb-mode-next:     Alt+l
+rofi.theme:            .config/rofi/great_barrier_reef

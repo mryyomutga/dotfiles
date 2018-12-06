@@ -1,4 +1,4 @@
-# Last Change : Tue 20 Nov 2018 14:43:59.
+# Last Change : Wed 05 Dec 2018 14:52:02.
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
@@ -6,7 +6,7 @@ hook_post_update = '''
         let cmd = 'tools\\update-dll-mingw'
     elseif has('win32unix')
         let cmd = 'make -f make_cygwin.mak'
-    elseif execuatble('gmake')
+    elseif executable('gmake')
         let cmd = 'gmake'
     else
         let cmd = 'make'

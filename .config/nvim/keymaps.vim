@@ -1,9 +1,9 @@
-" Last Change : Sun 02 Dec 2018 16:27:47.
-" カーソル移動系
+" Last Change : Sun 02 Dec 2018 20:44:00.
 
-" Leaderを<Space>にする
+" Leader <Space>
 let mapleader="\<Space>"
 
+" Cursor move
 nnoremap j gj
 nnoremap k gk
 nnoremap <S-h> ^
@@ -11,45 +11,73 @@ nnoremap <S-j> }
 nnoremap <S-k> {
 nnoremap <S-l> $
 
-" nmap s <Nop>
+" Buffer nav
+"" edit file (new buffer)
+noremap  <Leader>e :e 
+"" opened buffer
+nnoremap <Leader>bo :b 
+"" close buffer
+noremap  <Leader>c :bdelete<CR>
+"" show buffer list
+noremap  <silent> <Leader>bl :buffers<CR>
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Right> <Nop>
-noremap <Left> <Nop>
+" noremap <Leader>n :bnext<CR>
+" noremap <Leader>m :bprevious<CR>
 
-" <Tab> でタブの移動
+"" Buffer move
+noremap  <Leader>q  :bnext<CR>
+noremap  <Leader>z  :bnext<CR>
+noremap  <Leader>w  :bprevious<CR>
+noremap  <Leader>x  :bprevious<CR>
+
+" Tabs nav
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
+"" Tab open file
+noremap  <Leader>te :tabe 
+"" Tab open none
+noremap  <silent> <S-t> :tabnew<CR>
 
-" Ctrl + hjklでウィンドウの移動
+" Windows
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-" 水平分割
+" Splits
 noremap <Leader>h :<C-u>split<CR>
-" 垂直分割
 noremap <Leader>v :<C-u>vsplit<CR>
 
-" 背景の透過切り替え
-" nmap tp :ToggleBackground<CR>
+" Git
+noremap  <Leader>ga  :Gwrite<CR>
+noremap  <Leader>gr  :Gread<CR>
+noremap  <Leader>gc  :Gcommit<CR>
+noremap  <Leader>gsh :Gpush<CR>
+noremap  <Leader>gll :Gpull<CR>
+noremap  <Leader>gs  :Gstatus<CR>
+noremap  <Leader>gb  :Gblame<CR>
+noremap  <Leader>gd  :Gvdiff<CR>
+noremap  <Leader>grm :Gremove<CR>
+nnoremap <Leader>go  :.Gbrowse<CR>
 
-" ESC2回入力でハイライトの解除
+" Set working directory
+nnoremap <Leader>. :lcd %:p:h<CR>
+
+" NoHighlight
 nnoremap <silent><Esc><Esc> :nohlsearch<CR>
 
-" NERDTreeのトグル
+" NERDTree
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
 
-" quickrunの実行
+" launch quickrun
 " nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
-" imap <C-k> <Up>
-" imap <C-j> <Down>
-" imap <C-h> <Left>
-" imap <C-l> <Right>
+" Nop Cursor keys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Right> <Nop>
+noremap <Left> <Nop>
+
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
@@ -60,9 +88,8 @@ vnoremap <Down> <Nop>
 vnoremap <Right> <Nop>
 vnoremap <Left> <Nop>
 
-nnoremap <Leader>c :e 
-nnoremap <Leader>n :bNext<CR>
-nnoremap <Leader>m :bprevious<CR>
+" Exit from Insert mode when input jj in Insert mode
 inoremap <silent> jj <Esc>
 
+" Terminal
 tnoremap <Esc> <C-\><C-n>

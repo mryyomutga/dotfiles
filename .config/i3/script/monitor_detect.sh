@@ -7,7 +7,7 @@ do
     if [ $st_prev != $st_next ]; then
         st_prev=$st_next
         if [ $st_next = "connected" ]; then
-            xrandr --output eDP1 --auto --output DP1 --auto
+            xrandr --output eDP1 --primary --output DP1 --auto --left-of eDP1
         else
             xrandr --output eDP1 --auto --output DP1 --off --left-of eDP1
         fi

@@ -1,33 +1,63 @@
 #!/bin/sh
-# Last Change : Mon 19 Nov 2018 15:31:09.
+# Last Change : Thu 06 Dec 2018 01:40:00.
 
+# function get_airport_status() {
+#     if [ -z $(iwconfig wlp5s0 | grep -o unassociated) ]; then
+#         ssid=`iwconfig wlp5s0 | grep -oP '(?<=").+(?="\s)'`
+#         rssi=`iwconfig wlp5s0 | grep -oP '(?<=level=)\d+(?=/100\s)'`
+#         signals=(▂ ▃ ▄ ▆ █ ▁)
+#         signal=""
+#         rssi_=$((rssi / 20 + 1))
+#         if [ $((rssi % 20)) -eq 0 ] && [ ${rssi_} -gt 1 ]; then
+#             rssi_=$((rssi_ - 1))
+#         fi
+#         for ((i=0; i < 5; i++)); do
+#             if [ $i -lt ${rssi_} ]; then
+#                 signal=${signal}${signals[$i]}
+#             elif [ $i -ge ${rssi_} ]; then
+#                 signal=${signal}${signals[5]}
+#             fi
+#         done
+#         airport=" #[fg=colour10,bold]${ssid}#[default] ${signal} "
+#     else
+#         airport="#[fg=red,bold] ✘ #[default]"
+#     fi
+#     echo "${airport}#[bold]|#[default]"
+# }
+
+function get_ssid() {
+    ssid=`iwconfig wlp5s0 | grep -oP '(?<=").+(?="\s)'`
+    echo " #[fg=colour10,bold]${ssid}#[default]"
+}
+function get_signal_status() {
+    rssi=`iwconfig wlp5s0 | grep -oP '(?<=level=)\d+(?=/100\s)'`
+    signals=(▂ ▃ ▄ ▆ █ ▁)
+    signal=""
+    rssi_=$((rssi / 20 + 1))
+    if [ $((rssi % 20)) -eq 0 ] && [ ${rssi_} -gt 1 ]; then
+        rssi_=$((rssi_ - 1))
+    fi
+    for ((i=0; i < 5; i++)); do
+        if [ $i -lt ${rssi_} ]; then
+            signal=${signal}${signals[$i]}
+        elif [ $i -ge ${rssi_} ]; then
+            signal=${signal}${signals[5]}
+        fi
+    done
+    echo " ${signal}"
+}
 function get_airport_status() {
     if [ -z $(iwconfig wlp5s0 | grep -o unassociated) ]; then
-        ssid=`iwconfig wlp5s0 | grep -oP '(?<=").+(?="\s)'`
-        rssi=`iwconfig wlp5s0 | grep -oP '(?<=level=)\d+(?=/100\s)'`
-        signals=(▂ ▃ ▄ ▆ █ ▁)
-        signal=""
-        rssi_=$((rssi / 20 + 1))
-        if [ $((rssi % 20)) -eq 0 ] && [ ${rssi_} -gt 1 ]; then
-            rssi_=$((rssi_ - 1))
-        fi
-        for ((i=0; i < 5; i++)); do
-            if [ $i -lt ${rssi_} ]; then
-                signal=${signal}${signals[$i]}
-            elif [ $i -ge ${rssi_} ]; then
-                signal=${signal}${signals[5]}
-            fi
-        done
-        airport=" #[fg=colour10,bold]${ssid}#[default] ${signal} "
+        echo "$(get_ssid)$(get_signal_status)"
     else
-        airport="#[fg=red,bold] ✘ #[default]"
+        echo "#[fg=red,bold] ✘ #[default]"
     fi
-    echo "${airport}#[bold]|#[default]"
 }
-
 function main() {
-    local airport=$(get_airport_status)
-    echo "${airport}"
+    if [ "$DESKTOP_SESSION" != "i3" ]; then
+        local airport=$(get_airport_status)
+        echo "${airport}"
+    fi
 }
 
 main $@

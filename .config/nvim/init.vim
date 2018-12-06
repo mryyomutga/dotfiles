@@ -1,9 +1,9 @@
-" Last Change : Tue 20 Nov 2018 14:14:35.
+" Last Change : Sun 02 Dec 2018 20:41:01.
 " <---------- Setting ---------->
 
 let s:base_dir = expand($HOME . '/.config/nvim')
 
-" runtimepathに追加
+" Add runtimepath
 execute 'set runtimepath+=' . fnamemodify(s:base_dir, ':p')
 
 runtime! basic.vim

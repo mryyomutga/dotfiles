@@ -1,6 +1,6 @@
-" Last Change : Sun 02 Dec 2018 15:52:27.
+" Last Change : Mon 03 Dec 2018 13:39:00.
 
-" 文字コードをUTF-8に設定
+" Set charcter code UTF-8
 set encoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8
@@ -9,72 +9,74 @@ set fileformats=unix,dos,mac
 set binary
 set bomb
 
-" バックアップファイルとスワップファイルを作成しない
+" Enable modeline
+set modeline
+
+" No make backup and swap file
 set nobackup
 set noswapfile
 
-" 編集中にファイルに変更があれば自動更新
+" Auto reload file when while editting file
 set autoread
 
-" カーソルの回り込み
+" Go around cursor
 "  whichwrap=b,s,h,l,<,>,[,]
 
-" 行末の1文字先まで移動する
+" Move one more EOF
 set virtualedit=onemore
 
-" 前回のカーソル位置で開く
+" Open the last cursor position
 autocmd BufReadPost *
             \ if line("'\"") > 0 && line ("'\"") <= line("$") |
             \   execute "normal! g'\"" |
             \ endif
 
-" インデント機能の有効化
+" Enable auto indent
 set autoindent
 
-" バックスペースで行頭を削除
+" Delete Beginning of line at backspace
 set backspace=indent,eol,start
 
-" スマートインデントの設定
 set smartindent
 
-" コマンドラインモード時の補完機能有効化
+" Enable completion at command mode
 set wildmenu wildmode=list:longest,full
 
 set clipboard=unnamed
 " <---------- Tab ---------->
 
-" タブページを常に表示
+" Show always tabline
 set showtabline=2
 
-" タブ幅
+" appearance tab length on screen
 set tabstop=4
 
-" タブを半角スペースで埋め込む
+" tab to space
 set expandtab
 
-" タブ幅
+" appearance indent width
 set shiftwidth=4
 
 " <---------- buffer ---------->
 
-" 編集中でもバッファの切り替えを行う
+" Switch buffer while editting
  set hidden
 
 " <---------- search ---------->
 
-" 検索文字列が小文字の場合、大文字小文字を区別する
+" Case sensitive
 set noignorecase
 
 " 大文字が含まれている場合は区別する
 set smartcase
 
-" インクリメンタルサーチ(順次対象文字列をヒット)
+" Incremental searching
 set incsearch
 
-" 検索結果をハイライト
+" Highlight search result
 set hlsearch
 
-" vim 起動時にtmuxのステータスバーを非表示
+" Hide tmux status line when launch vim
 " if !has('gui_running') && $TMUX !=# ''
 "   augroup Tmux
 "     autocmd!
@@ -82,7 +84,7 @@ set hlsearch
 "   augroup END
 " endif
 
-" ノーマルモードになる時にfcitxを無効化
+" disable fcitx when escape insert mode
 function! ImInActivate()
   call system('fcitx-remote -c')
 endfunction
@@ -95,9 +97,9 @@ autocmd TermOpen * setlocal nonumber
 
 augroup NewBufTemplate
     autocmd!
-    autocmd BufNewFile *.py  0r $HOME/.dotfiles/src/vim/snippets/template.py
-    autocmd BufNewFile *.c   0r $HOME/.dotfiles/src/vim/snippets/template.c
-    autocmd BufNewFile *.sh  0r $HOME/.dotfiles/src/vim/snippets/template.sh
+    autocmd BufNewFile *.py  0r $HOME/.dotfiles/vim/snippets/template.py
+    autocmd BufNewFile *.c   0r $HOME/.dotfiles/vim/snippets/template.c
+    autocmd BufNewFile *.sh  0r $HOME/.dotfiles/vim/snippets/template.sh
 augroup END
 
 autocmd BufNewFile,BufRead *.hs set tabstop=2
