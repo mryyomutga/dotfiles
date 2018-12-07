@@ -20,27 +20,42 @@ if [ -d "${HOME}/.pyenv" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+export ZPLUG_HOME="$ZDOTDIR/.zplug"
+if [ ! -d $ZPLUG_HOME ]; then
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
+    source $ZPLUG_HOME/init.zsh && zplug update --self
+fi
+source $ZPLUG_HOME/init.zsh
+
 autoload -U promptinit && promptinit
 autoload -U colors && colors
 
 # comand syntax highlight
-if [ -e ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source ${HOME}/.dotfiles/zsh/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    typeset -A ZSH_HIGHLIGHT_STYLES
-    ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-    ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=blue,bold'
-    ZSH_HIGHLIGHT_STYLES[builtin]='fg=027'
-    ZSH_HIGHLIGHT_STYLES[command]='fg=027'
-    ZSH_HIGHLIGHT_STYLES[alias]='fg=027'
-    ZSH_HIGHLIGHT_STYLES[precommand]='fg=039'
-    ZSH_HIGHLIGHT_STYLES[path]='fg=039,bold'
-    ZSH_HIGHLIGHT_STYLES[arg0]='fg=green'
-fi
+zplug "zsh-users/zsh-syntax-highlighting"
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=027'
+ZSH_HIGHLIGHT_STYLES[command]='fg=027'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=027'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=039'
+ZSH_HIGHLIGHT_STYLES[path]='fg=039,bold'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=green'
 
 # autosuggests command
-if [ -e ${HOME}/.dotfiles/zsh/.zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    source ${HOME}/.dotfiles/zsh/.zsh-autosuggestions/zsh-autosuggestions.zsh
+zplug "zsh-users/zsh-autosuggestions"
+
+# additional completion
+zplug "zsh-users/zsh-completions"
+
+# check not install zsh plugin
+if ! zplug check --verbose; then
+    printf "Install [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
+zplug load
 
 # color code
 # xterm color

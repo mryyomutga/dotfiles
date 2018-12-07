@@ -1,6 +1,6 @@
 # Polybar config
 # Auther      : Ryoga Miyamoto
-# Last Change : Thu 06 Dec 2018 01:43:32.
+# Last Change : Fri 07 Dec 2018 16:07:34.
 # Since       : Wed 05 Dec 2018 08:30:21.
 # Copyright (c) 2018, Ryoga Miyamoto
 
@@ -28,10 +28,10 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id rofi -show combi
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
@@ -40,10 +40,10 @@ bindsym $mod+l focus right
 # bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -52,10 +52,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym Ctrl+Shift+h split h
+bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym Ctrl+Shift+v split v
+bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -117,6 +117,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 for_window [class="^Arandr$"] floating enable
 for_window [class="Pavucontrol$"] floating enable
 for_window [title="Oracle VM VirtualBox Manager"] floating enable
+for_window [class="Blueberry"] floating enable
 
 bindsym $mod+Left workspace prev
 bindsym $mod+Right workspace next
@@ -165,11 +166,10 @@ exec --no-startup-id feh --bg-scale $HOME/Pictures/arch_pacman_invaders_by_dotva
 
 exec --no-startup-id fcitx
 exec --no-startup-id dunst
+exec --no-startup-id blueberry-tray
 exec --no-startup-id compton -b --config $HOME/.config/compton/compton.conf
 
 # exec --no-startup-id $HOME/.config/i3/script/launch_slack.sh
-
-# exec_always --no-startup-id "setxkbmap -model jp106 -layout jp"
 
 ## --------- ##
 # If laptop is attached USB-c monitor, auto expand screen
@@ -199,10 +199,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 5 px or 5 ppt

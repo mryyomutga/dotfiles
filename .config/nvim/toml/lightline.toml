@@ -8,7 +8,7 @@ hook_add = '''
            \  'colorscheme':'deus',
            \  'mode_map': {'c': 'NORMAL'},
            \  'active': {
-           \    'left': [ [ 'mode', 'paste' ], ['filetype'] , ['fileencoding']],
+           \    'left': [ [ 'mode', 'paste' ], ['filetype', 'fileencoding' ] ],
            \    'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
            \ 
            \  },

@@ -1,1 +1,7 @@
-.zsh*
+.zplug
+.zsh-*
+.zcompdump
+
+!.zprofile
+!.zshrc
+!.zshenv
