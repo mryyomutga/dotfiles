@@ -1,6 +1,6 @@
 ; Polybar config
 ; Auther      : Ryoga Miyamoto
-; Last Change : Fri 07 Dec 2018 16:02:42.
+; Last Change : Mon 10 Dec 2018 08:54:25.
 ; Since       : Wed 05 Dec 2018 01:58:03.
 ; Copyright (c) 2018, Ryoga Miyamoto
 
@@ -157,8 +157,8 @@ label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
-label-unfocused-foreground = #323232
-label-unfocused-underline = #4f4f4f
+label-unfocused-foreground = #4b4b4b
+label-unfocused-underline = #5c5c5c
 ; label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 label-unfocused-padding = 2
 
@@ -167,7 +167,7 @@ label-visible = %index%
 label-visible-foreground = #6d6d6d
 ; label-visible-background = ${self.label-focused-background}
 ; label-visible-underline = ${self.label-unfocused-underline}
-label-visible-underline = #4f4f4f
+label-visible-underline = #5c5c5c
 ; label-visible-padding = ${self.label-unfocused-padding}
 label-visible-padding = 2
 

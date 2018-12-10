@@ -3,12 +3,18 @@
 
 echo "dotfiles config clean"
 
-rm ${HOME}/.zshrc
-rm ${HOME}/.vimrc
-rm ${HOME}/.tigrc
-rm ${HOME}/.config/nvim/init.vim
-rm ${HOME}/.zsh_history
-rm ${HOME}/.tmux.conf
-rm ${HOME}/.config/peco/config.json
-rm -rf ${HOME}/.dotfiles
+rm -rf ~/.config/alacritty
+rm -rf ~/.config/Code
+rm -rf ~/.config/compton
+rm -rf ~/.config/dunst
+rm -rf ~/.config/i3
+rm -rf ~/.config/nvim
+rm -rf ~/.config/polybar
+rm -rf ~/.config/ranger
+rm -rf ~/.config/rofi
+rm -rf ~/.config/termite
 
+rm ~/.zshenv
+rm ~/.tmux.conf
+rm ~/.vimrc
+rm ~/.tigrc

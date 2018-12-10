@@ -1,25 +1,27 @@
-# set global value
+#!/usr/bin/zsh
+
+# LANG
 export LANG=en_US.UTF-8
-export XDG_CONFIG_HOME="$HOME/.config"
 
-# i3wm default terminal emulator
-# export TERMINAL="alacritty"
+# XDG
+export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
 
-export BROWSER="firefox"
-export EDITOR="nvim"
-export VISUAL="nvim"
-export PAGER="less"
+# BASE
+export PAGER=less
+export EDITOR=nvim
+export DIFFPROG="nvim -d"
+export TERMINAL=alacritty
+export BROWSER=firefox
 
-# pyenv
-if [ -d "${HOME}/.pyenv" ]; then
-    export PYENV_ROOT=$HOME/.pyenv
-    export PATH=$PYENV_ROOT/bin:$PATH
-    eval "$(pyenv init -)"
+# Programing
+# export GOPATH="$HOME/.local"
 
-    # pyenv-virtualenv
-    eval "$(pyenv virtualenv-init -)"
-fi
+# ZSH PATH
+export ZDOTDIR=~/.dotfiles/zsh
 
+# ZPLUG
 export ZPLUG_HOME="$ZDOTDIR/.zplug"
 if [ ! -d $ZPLUG_HOME ]; then
     git clone https://github.com/zplug/zplug $ZPLUG_HOME
@@ -80,49 +82,58 @@ COLOR_228="%{[38;5;228m%}"   # Yellow
 
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-# appearance prompt
-## Root Prompt
-ROOTPROMPT1='%F{047}%n%f%F{153}#%f%U%F{197}%M%f%u %F{003}%(3~,%-1~/.../%1~,%~)%f
-%(?.%F{047}▶%f%F{048}▶%f%F{049}▶.%F{196}▶▶▶)%f '
-ROOTPROMPT2='%%F{047}▶%f%F{048}▶%f%F{049}▶%f '
+# zsh history
+HISTFILE=$ZDOTDIR/.zsh_history
+HISTSIZE=1000
+SAVEHIST=100000
 
-# >
-## User Prompt
-# USERPROMPT1='%F{197}%m%f%f %F{003}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
-# %B%F{226}$%f%(?.%F{043}▶%F{044}▶%F{045}▶.%F{196}▶▶▶)%f%b '
-# USERPROMPT2='%B%F{049}▶%F{050}▶%F{051}▶%f%b '
+# get vcs infomation
+autoload -Uz vcs_info
+setopt prompt_subst
+
+# format
+zstyle ':vcs_info:git:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+# zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
+# zstyle ':vcs_info:git:*' unstagedstr "%F{009}!"
+# zstyle ':vcs_info:*' formats "${COLOR_153}<%s>${COLOR_075}(%c%u${COLOR_154}%b${COLOR_075})${COLOR_WHITE}"
+# zstyle ':vcs_info:*' actionformats "${COLOR_153}<%s>${COLOR_075}(${COLOR_154}%b${COLOR_WHITE}/${COLOR_096}%a${COLOR_075})${COLOR_WHITE}"
+zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
+zstyle ':vcs_info:git:*' unstagedstr "%F{009}!%f"
+zstyle ':vcs_info:*' formats "%u%c %F{245}%b%f"
+zstyle ':vcs_info:*' actionformats "%a %F{245}%b%f"
+
+precmd(){
+	LANG=en_US.UTF-8 vcs_info
+	# set VCS_PROMPT
+	VCSPROMPT="$vcs_info_msg_0_"
+}
 
 USERPROMPT1='%F{245}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
 %B%F{226}$ %f%(?.%F{027}▶▶▶.%F{196}▶▶▶)%f%b '
 USERPROMPT2='  %B%F{027}▶▶▶%f%b '
 
-# RPROMPT='${VCSPROMPT}'
-
-# switch prompt
-case ${UID} in
-	0)
-		PROMPT=$ROOTPROMPT1
-		PROMPT2=$ROOTPROMPT2
-		# PS1 = $ROOTPROMPT1
-		;;
-	*)
-		PROMPT=$USERPROMPT1
-		PROMPT2=$USERPROMPT2
-		;;
-esac
-
-# zsh history
-HISTFILE=${HOME}/.zsh_history
-HISTSIZE=1000
-SAVEHIST=100000
+PROMPT=$USERPROMPT1
+PROMPT2=$USERPROMPT2
 
 # GOPATH
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOPATH/bin
+
+# execute x
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 
 # when is launched Alacritty, launch tmux
-if [ "$TERM_PROGRAM" = "alacritty" ] || [ "$TERM_PROGRAM" = "termite" ]; then
-    if [[ -z "$TMUX" && ! -z "$PS1" ]]; then
-        tmux
-    fi
-fi
+# if [ "$TERM_PROGRAM" = "alacritty" ] || [ "$TERM_PROGRAM" = "termite" ]; then    
+#     if [[ -z "$TMUX" && ! -z "$PS1" ]]; then
+#         tmux
+#     fi
+# fi
+
+# if [[ -n $DISPLAY ]]  && [[ $XDG_VTNR -eq 1 ]]; then
+#     if tmux has-session > /dev/null 2>&1; then
+#         exec tmux attach -d > /dev/null 2>&1
+#     else
+#         exec tmux
+#     fi
+# fi

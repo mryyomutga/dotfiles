@@ -1,7 +1,5 @@
-.zplug
-.zsh-*
-.zcompdump
-
+*
+!.gitignore
 !.zprofile
 !.zshrc
 !.zshenv

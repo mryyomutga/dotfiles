@@ -6,10 +6,10 @@ repo = 'itchyny/lightline.vim'
 hook_add = '''
     let g:lightline = {
            \  'colorscheme':'deus',
-           \  'mode_map': {'c': 'NORMAL'},
+           \  'mode_map': { 'c': 'NORMAL' },
            \  'active': {
-           \    'left': [ [ 'mode', 'paste' ], ['filetype', 'fileencoding' ] ],
-           \    'right': [ ['percent'], ['lineinfo'], ['fugitive', 'fileformat'] ]
+           \    'left': [ [ 'mode', 'paste' ], [ 'filetype', 'fileencoding' ] ],
+           \    'right': [ [ 'percent' ], [ 'lineinfo' ], [ 'fugitive', 'fileformat' ] ]
            \ 
            \  },
            \  'component_function': {
@@ -30,8 +30,9 @@ hook_add = '''
            \  'active': ['tabnum', 'filename', 'modified'],
            \  'inactive': ['tabnum', 'filename', 'modified']
            \  }
+    " 'separator': {'left':'', 'right':''},
+    " 'subseparator':{'left':'', 'right':''},
 
-    " colorschemeであるdeusの色直し
     let s:palette = g:lightline#colorscheme#deus#palette
     let s:blue = 14
     let s:dark_blue = 39
@@ -42,30 +43,35 @@ hook_add = '''
     let s:white = 145
     let s:gray = 236
 
+    let s:g_normal  = [ '#292c33', '#8eb2f7' ]
+    let s:g_insert  = [ '#292c33', '#98c379' ]
+    let s:g_visual  = [ '#292c33', '#c678dd' ]
+    let s:g_replace = [ '#292c33', '#e06c75' ]
+
     " palette Normal
-    let s:palette.normal.left   = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#8eb2f7', '292c33',  s:dark_blue,  s:black ] ]
-    let s:palette.normal.right  = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#abb2bf', '#2c3042', s:white, s:black ], [ '#8eb2f7', '292c33', s:dark_blue, s:black ] ]
-    let s:palette.normal.middle = [ [ '#abb2bf', '#2c3042', s:white, s:black ] ]
+    let s:palette.normal.left   = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#8eb2f7', '#292c33',  s:dark_blue,  s:black ] ]
+    let s:palette.normal.right  = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#abb2bf', '#292c33', s:white, s:black ], [ '#8eb2f7', '#292c33', s:dark_blue, s:black ] ]
+    let s:palette.normal.middle = [ s:palette.normal.left[1] ]
 
     " palette Insert
-    let s:palette.insert.left   = [ [ '#2c3042', '#98c379', s:black, s:green, 'bold' ], [ '#98c379', '#2c3042', s:green, s:black ] ]
-    let s:palette.insert.right  = [ [ '#292c33', '#98c379', s:black, s:green         ], [ '#abb2bf', '#2c3042', s:white, s:gray  ], [ '#98c379', '#2c3042', s:green, s:black ] ]
-    let s:palette.insert.middle = s:palette.normal.middle
+    let s:palette.insert.left   = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#98c379', '#292c33', s:green, s:black ] ]
+    let s:palette.insert.right  = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#abb2bf', '#292c33', s:white, s:gray  ], [ '#98c379', '#292c33', s:green, s:black ] ]
+    let s:palette.insert.middle = [ s:palette.insert.left[1] ]
 
     " palette Visual
     let s:palette.visual.left   = [ [ '#292c33', '#c678dd', s:black, s:purple, 'bold' ], [ '#c678dd', '#292c33', s:purple, s:black ] ]
     let s:palette.visual.right  = [ [ '#292c33', '#c678dd', s:black, s:purple, 'bold' ], s:palette.normal.right[1], [ '#c678dd', '#292c33', s:purple, s:black ] ]
+    let s:palette.visual.middle = [ s:palette.visual.left[1] ]
 
     " palette Replace
     let s:palette.replace.left   = [ [ '#292c33', '#e06c75', s:black, s:red, 'bold' ], [ '#e06c75', '#292c33', s:red, s:black ] ]
     let s:palette.replace.right  = [ [ '#292c33', '#e06c75', s:black, s:red, 'bold' ], s:palette.normal.right[1], [ '#e06c75', '#292c33', s:red, s:black ] ]
-    let s:palette.replace.middle = s:palette.normal.middle
+    let s:palette.replace.middle = [ s:palette.replace.left[1] ]
 
     let s:palette.tabline.left   = [ s:palette.normal.left[1] ]
     let s:palette.tabline.tabsel = [ s:palette.normal.left[0] ]
-    " let s:palette.tabline.middle = s:palette.normal.middle
-    let s:palette.tabline.middle = [ s:palette.normal.left[1] ]
-    let s:palette.tabline.right  = [ s:palette.normal.left[1] ]
+    let s:palette.tabline.middle = [ [ '#161821', '#161821', s:black, s:dark_blue ] ]
+    let s:palette.tabline.right  = [ [ '#8eb2f7', '#161821', s:dark_blue, s:black ] ]
 
     function! LightlineModified()
         return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -87,13 +93,14 @@ hook_add = '''
     function! LightlineFugitive()
         if exists('*fugitive#head')
             let branch = fugitive#head()
-            return branch != '' ? "\u2b60 ".branch : ''
+            " return branch != '' ? "\ue0a0 ".branch : ''
+            return branch != '' ? " ".branch:''
         endif
     endfunction
 
     " function! LightlineFugitive()
     "     if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    "         return "\u2b60 ".fugitive#head()
+    "         return " ".fugitive#head()
     "     else
     "         return '-'
     "     endif

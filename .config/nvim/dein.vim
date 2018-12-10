@@ -6,8 +6,10 @@ filetype plugin indent off
 syntax off
 
 " Required:
-let g:python_host_prog =  $PYENV_ROOT . '/versions/neovim2/bin/python'
-let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+" let g:python_host_prog =  $PYENV_ROOT . '/versions/neovim2/bin/python'
+" let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+let g:python_host_prog = '/usr/bin/python2' 
+let g:python3_host_prog ='/usr/bin/python3' 
 
 let s:base_dir = expand($HOME . '/.config/nvim')
 let s:dein_dir = s:base_dir . '/plugins'

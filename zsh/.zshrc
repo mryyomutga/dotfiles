@@ -1,28 +1,4 @@
-# Last Change : Fri 07 Dec 2018 18:53:32.
-
-# get vcs infomation
-autoload -Uz vcs_info
-setopt prompt_subst
-
-# format
-zstyle ':vcs_info:git:*' enable git
-zstyle ':vcs_info:git:*' check-for-changes true
-# zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
-# zstyle ':vcs_info:git:*' unstagedstr "%F{009}!"
-# zstyle ':vcs_info:*' formats "${COLOR_153}<%s>${COLOR_075}(%c%u${COLOR_154}%b${COLOR_075})${COLOR_WHITE}"
-# zstyle ':vcs_info:*' actionformats "${COLOR_153}<%s>${COLOR_075}(${COLOR_154}%b${COLOR_WHITE}/${COLOR_096}%a${COLOR_075})${COLOR_WHITE}"
-zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
-zstyle ':vcs_info:git:*' unstagedstr "%F{009}!%f"
-zstyle ':vcs_info:*' formats "%u%c %F{245}⭠%b%f"
-zstyle ':vcs_info:*' actionformats "%a %F{245}%b%f"
-
-# 補完を効かせた時にコマンドが被るのを回避
-# たぶんLANG=en_US.UTF-8を指定してないからだと思われる
-precmd(){
-	LANG=en_US.UTF-8 vcs_info
-	# set VCS_PROMPT
-	VCSPROMPT="$vcs_info_msg_0_"
-}
+# Last Change : Mon 10 Dec 2018 10:35:39.
 
 # <---------- Setting Completion ---------->
 
@@ -196,3 +172,4 @@ case ${TERM} in
         TERM_PROGRAM="alacritty"
         ;;
 esac
+alias powerfont='echo "\ue0b0 \u2b80 \ue0b2 \u2b82 \ue0b1 \u2b81 \ue0b3 \u2b81 \ue0b3 \u2b83 \ue0a0 \u2b60 \ue0a2 \u2b64 \ue0a1 \u2b61"'
