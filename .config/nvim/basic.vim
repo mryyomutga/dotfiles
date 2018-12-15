@@ -1,4 +1,4 @@
-" Last Change : Sat 15 Dec 2018 01:52:04.
+" Last Change : Sat 15 Dec 2018 18:03:46.
 
 " Set charcter code UTF-8
 set encoding=utf-8
@@ -71,8 +71,6 @@ set shiftwidth=4
 
 " Case sensitive
 set noignorecase
-
-" 大文字が含まれている場合は区別する
 set smartcase
 
 " wrap search

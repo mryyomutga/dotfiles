@@ -14,22 +14,14 @@ __Uninstall:__
 $ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/scripts/uninstall.sh | sh
 ```
 
-### peco's keybinds
-|keybind|description|
-|:---|:---|
-|C-r|search zsh history by peco|
-|C-j|cursor down line|
-|C-k|cursor up line|
-|C-f|scroll down|
-|C-b|scroll up|
-|C-q|exit from peco|
-
 ## file list
 
 |file|description|
 |:---|:---|
 |install.sh|dotfiles install script|
 |uninstall.sh|dotfiles uninstall script|
-|/vim|vim and neovim configuration|
+|/vim|vim(Gvim) setting file|
 |/zsh|zsh configuration|
-|/tmux|tmux configuration|
+|/tmux|tmux setting files|
+|.config/|~/.config list|
+|.xinitrc|X initial setting|
