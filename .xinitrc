@@ -1,9 +1,10 @@
-# Last Change : Fri 14 Dec 2018 22:53:53.
+# Last Change : Sun 16 Dec 2018 00:14:53.
 
 # Base
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODFILERS="@im=fcitx"
+export $XDG_RUNTIME_DIR=""
 
 # Input Method
 setxkbmap -layout jp

@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
-# Last Change : Sat 15 Dec 2018 17:03:54.
+# Last Change : Sat 15 Dec 2018 17:01:01.
 
 # LANG
 export LANG=en_US.UTF-8
