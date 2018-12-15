@@ -1,4 +1,4 @@
-" Last Change : Wed 05 Dec 2018 20:39:33.
+" Last Change : Sat 15 Dec 2018 02:32:53.
 " Use 256 color on terminal
 if !has('gui_running')
     set t_Co=256

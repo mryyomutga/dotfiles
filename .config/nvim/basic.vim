@@ -1,4 +1,4 @@
-" Last Change : Mon 03 Dec 2018 13:39:00.
+" Last Change : Sat 15 Dec 2018 01:52:04.
 
 " Set charcter code UTF-8
 set encoding=utf-8
@@ -20,10 +20,13 @@ set noswapfile
 set autoread
 
 " Go around cursor
-"  whichwrap=b,s,h,l,<,>,[,]
+set whichwrap=b,s,h,l,<,>,[,]
 
 " Move one more EOF
-set virtualedit=onemore
+" set virtualedit=onemore
+
+" set ctags
+" set tags=.tags;$HOME
 
 " Open the last cursor position
 autocmd BufReadPost *
@@ -42,7 +45,9 @@ set smartindent
 " Enable completion at command mode
 set wildmenu wildmode=list:longest,full
 
-set clipboard=unnamed
+" Enable clipboard
+set clipboard^=unnamedplus
+
 " <---------- Tab ---------->
 
 " Show always tabline
@@ -69,6 +74,9 @@ set noignorecase
 
 " 大文字が含まれている場合は区別する
 set smartcase
+
+" wrap search
+set wrapscan
 
 " Incremental searching
 set incsearch

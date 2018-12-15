@@ -4,7 +4,7 @@
 #bold_is_bright = true
 #clickable_url = true
 #dynamic_title = true
-; font = FontAwesome 12
+font = FontAwesome 12
 font = "Noto Sans CJK JP" 12
 font = Hack 12
 
@@ -21,10 +21,10 @@ scrollback_lines = 10000
 #hyperlinks = false
 
 # $BROWSER is used by default if set, with xdg-open as a fallback
-#browser = xdg-open
+browser = xdg-open
 
 # "system", "on" or "off"
-#cursor_blink = system
+ursor_blink = system
 
 # "block", "underline" or "ibeam"
 #cursor_shape = block
@@ -46,8 +46,8 @@ TERM_PROGRAM = termite
 [colors]
 # If both of these are unset, cursor falls back to the foreground color,
 # and cursor_foreground falls back to the background color.
-cursor = #dcdccc
-#cursor_foreground = #dcdccc
+cursor = #005fff
+cursor_foreground = #dcdccc
 
 #foreground = #dcdccc
 #foreground_bold = #ffffff
@@ -78,7 +78,7 @@ cursor = #dcdccc
 # color15 = #ffffff
 
 foreground = #eaeaea
-background = rgba(22, 24, 33, 0.8)
+background = rgba(22, 24, 33, 1.0)
 [hints]
 #font = Monospace 12
 #foreground = #dcdccc

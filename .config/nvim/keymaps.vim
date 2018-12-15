@@ -1,4 +1,4 @@
-" Last Change : Sun 02 Dec 2018 20:44:00.
+" Last Change : Thu 13 Dec 2018 16:49:18.
 
 " Leader <Space>
 let mapleader="\<Space>"
@@ -67,7 +67,7 @@ nnoremap <Leader>. :lcd %:p:h<CR>
 nnoremap <silent><Esc><Esc> :nohlsearch<CR>
 
 " NERDTree
-nnoremap <silent><C-t> :NERDTreeToggle<CR>
+nnoremap <silent><Leader>n :NERDTreeToggle<CR>
 
 " launch quickrun
 " nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"

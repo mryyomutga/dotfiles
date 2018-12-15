@@ -1,5 +1,5 @@
 GuiLinespace 2
-GuiFont Cousine:h12
+GuiFont Hack:h12
 
 let g:gonvim_draw_statusline = 0
 let g:gonvim_draw_tabline = 0

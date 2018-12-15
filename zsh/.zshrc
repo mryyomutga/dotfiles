@@ -1,4 +1,81 @@
-# Last Change : Mon 10 Dec 2018 10:35:39.
+#          _
+#  _______| |__  _ __ ___
+# |_  / __| '_ \| '__/ __|
+#  / /\__ \ | | | | | (__
+# /___|___/_| |_|_|  \___|
+#
+# Last Change : Sat 15 Dec 2018 02:47:43.
+
+# get vcs infomation
+autoload -Uz vcs_info
+setopt prompt_subst
+
+
+# ZPLUG
+export ZPLUG_HOME="$ZDOTDIR/.zplug"
+if [ ! -d $ZPLUG_HOME ]; then
+    git clone https://github.com/zplug/zplug $ZPLUG_HOME
+    source $ZPLUG_HOME/init.zsh && zplug update --self
+fi
+source $ZPLUG_HOME/init.zsh
+
+autoload -U promptinit && promptinit
+autoload -U colors && colors
+
+# comand syntax highlight
+zplug "zsh-users/zsh-syntax-highlighting"
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=blue,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=027'
+ZSH_HIGHLIGHT_STYLES[command]='fg=027'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=027'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=039'
+ZSH_HIGHLIGHT_STYLES[path]='fg=039,bold'
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=green'
+
+# autosuggests command
+zplug "zsh-users/zsh-autosuggestions"
+
+# additional completion
+zplug "zsh-users/zsh-completions"
+
+# check not install zsh plugin
+if ! zplug check --verbose; then
+    printf "Install [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+zplug load
+
+# format
+zstyle ':vcs_info:git:*' enable git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{075}+%f"
+zstyle ':vcs_info:git:*' unstagedstr "%F{048}*%f"
+zstyle ':vcs_info:*' formats "%F{245} %b%f %u%c"
+zstyle ':vcs_info:*' actionformats " %F{245}%b%f %a"
+# zstyle ':vcs_info:git:*' stagedstr "%F{226}+%f"
+# zstyle ':vcs_info:git:*' unstagedstr "%F{009}!"
+# zstyle ':vcs_info:*' formats "${COLOR_153}<%s>${COLOR_075}(%c%u${COLOR_154}%b${COLOR_075})${COLOR_WHITE}"
+# zstyle ':vcs_info:*' actionformats "${COLOR_153}<%s>${COLOR_075}(${COLOR_154}%b${COLOR_WHITE}/${COLOR_096}%a${COLOR_075})${COLOR_WHITE}"
+
+precmd(){
+    LANG=en_US.UTF-8 vcs_info
+    # set VCS_PROMPT
+    VCSPROMPT="$vcs_info_msg_0_"
+}
+
+USERPROMPT1='%F{245}%(3~,%-2~/.../%1~,%~)%f ${VCSPROMPT}
+%B%F{226}$ %f%(?.%F{027}▶▶▶.%F{196}▶▶▶)%f%b '
+USERPROMPT2='  %B%F{027}▶▶▶%f%b '
+
+PROMPT=$USERPROMPT1
+PROMPT2=$USERPROMPT2
+
+## dircolors
+eval $(dircolors $HOME/.config/dircolors)
 
 # <---------- Setting Completion ---------->
 
@@ -98,16 +175,7 @@ setopt nonomatch
 
 # bindkeys
 # interface like vi
-bindkey -e
-
-# Deleteキーの有効化
-bindkey "^[[3~" delete-char
-
-# Shift+←で行頭にカーソルを移動
-bindkey "\E[1;2D" beginning-of-line
-
-# Shift+→で末尾にカーソルを移動
-bindkey "\E[1;2C" end-of-line
+bindkey -v
 
 # alias
 alias e='exit'
@@ -155,9 +223,9 @@ alias lab_monitor_setting='xrandr --output eDP1 --off --output HDMI1 --auto --pr
 # bindkey '^R' peco-history-selection
 
 # <---------- Setting Proxy ---------->
-function set_proxy(){
-    . ~/.proxy
-}
+# function set_proxy(){
+#     . ~/.proxy
+# }
 
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -168,8 +236,23 @@ case ${TERM} in
     tmux-256color)
         TERM_PROGRAM="alacritty"
         ;;
-    *)
-        TERM_PROGRAM="alacritty"
-        ;;
 esac
+
 alias powerfont='echo "\ue0b0 \u2b80 \ue0b2 \u2b82 \ue0b1 \u2b81 \ue0b3 \u2b81 \ue0b3 \u2b83 \ue0a0 \u2b60 \ue0a2 \u2b64 \ue0a1 \u2b61"'
+
+# added by Anaconda3 5.3.1 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/aster/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/aster/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/aster/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/aster/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<

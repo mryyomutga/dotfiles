@@ -1,4 +1,11 @@
-" Last Change : Mon 10 Dec 2018 06:30:08.
+"             _
+"      __   _(_)_ __ ___  _ __ ___
+"     \ \ / / | '_ ` _ \| '__/ __|
+"      \ V /| | | | | | | | | (__
+"       \_/ |_|_| |_| |_|_|  \___|
+"
+" Last Change : Wed 12 Dec 2018 13:46:00.
+
 set nocompatible
 filetype plugin indent on
 syntax on
@@ -42,7 +49,7 @@ set smartindent
 set tabstop=4
 set expandtab
 set shiftwidth=4
-set showtabline=2
+" set showtabline=2
 set laststatus=2
 set ambiwidth=double
 

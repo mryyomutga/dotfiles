@@ -1,5 +1,4 @@
 {
-    "http.proxy": "http://wwwproxy.kanazawa-it.ac.jp:8080",
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 14,
     "files.eol": "\n",
@@ -50,7 +49,6 @@
 
     "breadcrumbs.enabled": true,
 
-    "python.pythonPath": "/home/ryoga/.pyenv/versions/neovim3/bin/python",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
     "python.formatting.provider":"yapf",
