@@ -1,5 +1,5 @@
 *
 !.gitignore
-!.zprofile
-!.zshrc
-!.zshenv
+!.zprofile*
+!.zshrc*
+!.zshenv*
