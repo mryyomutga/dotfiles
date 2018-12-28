@@ -9,5 +9,5 @@ if status --is-interactive
     abbr --add r    rg
     abbr --add s    sudo
     abbr --add tr   trash
-    abbr --add noto "$EDITOR ~/Documents/notes/(date +%y%m%d).md"
+    abbr --add note "$EDITOR ~/Documents/notes/(date +%y%m%d).md"
 end

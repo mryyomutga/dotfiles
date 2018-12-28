@@ -66,7 +66,22 @@ set smartcase
 set incsearch
 set hlsearch
 
+set background=dark
+colorscheme pablo
+
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[2 q"
 let &t_SR.="\e[4 q"
 
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Right> <Nop>
+nnoremap <Left> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Right> <Nop>
+inoremap <Left> <Nop>
+vnoremap <Up> <Nop>
+vnoremap <Down> <Nop>
+vnoremap <Right> <Nop>
+vnoremap <Left> <Nop>

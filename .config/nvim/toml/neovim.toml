@@ -1,4 +1,4 @@
-# Last Change : Sat 15 Dec 2018 01:53:10.
+# Last Change : Sun 23 Dec 2018 17:15:24.
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 hook_post_update = '''
@@ -50,7 +50,7 @@ hook_source = '''
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-hook_add = '''
+hook_source = '''
     " Use deoplete.
     let g:deoplate#enable_at_startup = 1
     " Use smartcase.

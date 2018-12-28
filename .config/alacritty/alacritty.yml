@@ -306,8 +306,8 @@ live_config_reload: true
 #
 shell:
   program: /usr/bin/zsh
-  args:
-    - --login
+  # args:
+    # - --login
 
 # Key bindings
 #
