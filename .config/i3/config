@@ -1,6 +1,6 @@
 # Polybar config
 # Auther      : Ryoga Miyamoto
-# Last Change : Mon 10 Dec 2018 08:46:56.
+# Last Change : Fri 21 Dec 2018 13:32:33.
 # Since       : Wed 05 Dec 2018 08:30:21.
 # Copyright (c) 2018, Ryoga Miyamoto
 
@@ -33,6 +33,9 @@ bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
+# no mouse focus
+focus_follows_mouse no
+
 # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
 # bindsym $mod+Down focus down
@@ -52,10 +55,13 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+h split horizontal
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+v split vertical
+
+# toggle split orientation
+bindsym $mod+t split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -114,9 +120,10 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # for_window [class="Firefox"] move to workspace $ws1
+for_window [class="Slack"] move to workspace $ws10
 for_window [class="^Arandr$"] floating enable
 for_window [class="Pavucontrol$"] floating enable
-for_window [title="Oracle VM VirtualBox Manager"] floating enable
+for_window [title="Oracle VM VirtualBox Manager"] floating enable, move to workspace $ws9
 for_window [class="Blueberry"] floating enable
 
 bindsym $mod+Left workspace prev
@@ -129,6 +136,7 @@ bindsym $mod+Next workspace next
 ### move workspace
 bindsym $mod+Shift+Prior workspace prev
 bindsym $mod+Shift+Next workspace next
+bindsym $mod+Ctrl+semicolon workspace next
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -150,7 +158,8 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 3
 bindsym XF86MonBrightnessDown exec xbacklight -dec 3
 
 # screen lock
-bindsym $mod+Shift+x exec i3lock-fancy -- scrot -z
+# bindsym $mod+Shift+x exec i3lock-fancy -- scrot -z
+bindsym $mod+Shift+x exec ~/i3lock_script.sh
 
 # bindsym $mod+Ctrl+p exec --no-startup-id $HOME/.config/i3/scrip/toggle_composite.sh
 

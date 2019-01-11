@@ -1,4 +1,4 @@
-" Last Change : Sun 02 Dec 2018 16:15:42.
+" Last Change : Sat 12 Jan 2019 01:54:31.
 " <---------- dein ---------->
 set nocompatible
 

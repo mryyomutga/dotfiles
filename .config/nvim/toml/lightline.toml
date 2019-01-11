@@ -9,9 +9,7 @@ hook_add = '''
            \  'mode_map': { 'c': 'NORMAL' },
            \  'active': {
            \    'left': [ [ 'mode', 'paste' ], [ 'filetype', 'fileencoding' ] ],
-           \    'right': [ [ 'percent' ], [ 'lineinfo' ], [ 'fugitive', 'fileformat' ] ]
-           \ 
-           \  },
+           \    'right': [ [ 'lineinfo' ], [ 'fugitive', 'fileformat' ] ] },
            \  'component_function': {
            \    'modified': 'LightlineModified',
            \    'readonly': 'LightlineReadonly',
@@ -20,18 +18,20 @@ hook_add = '''
            \    'fileformat': 'LightlineFileformat',
            \    'filetype': 'LightlineFiletype',
            \    'fileencoding': 'LightlineFileencoding',
-           \    'mode': 'LightlineMode',
-           \  },
+           \    'mode': 'LightlineMode' },
+           " \  'separator': {'left':'', 'right':''},
+           " \  'subseparator':{'left':'', 'right':''},
            \  }
     let g:lightline.tabline={
-           \  'filename': 'tabs'
-           \  }
+           \  'filename': 'tabs',
+           \  'right':[[]] }
+    let g:lightline.component={
+           \  'lineinfo':'%-2v',
+           \  'filetype':'%{&ft!=#""?ft:"-"}',
+           \  'paste':'%{&paste?"P":""}' }
     let g:lightline.tab={
            \  'active': ['tabnum', 'filename', 'modified'],
-           \  'inactive': ['tabnum', 'filename', 'modified']
-           \  }
-    " 'separator': {'left':'', 'right':''},
-    " 'subseparator':{'left':'', 'right':''},
+           \  'inactive': ['tabnum', 'filename', 'modified'] }
 
     let s:palette = g:lightline#colorscheme#deus#palette
     let s:blue = 14
@@ -50,22 +50,26 @@ hook_add = '''
 
     " palette Normal
     let s:palette.normal.left   = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#8eb2f7', '#292c33',  s:dark_blue,  s:black ] ]
-    let s:palette.normal.right  = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#abb2bf', '#292c33', s:white, s:black ], [ '#8eb2f7', '#292c33', s:dark_blue, s:black ] ]
+    " let s:palette.normal.right  = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#abb2bf', '#292c33', s:white, s:black ], [ '#8eb2f7', '#292c33', s:dark_blue, s:black ] ]
+    let s:palette.normal.right  = [ [ '#292c33', '#8eb2f7', s:black, s:dark_blue,  'bold' ], [ '#8eb2f7', '#292c33', s:dark_blue, s:black ] ]
     let s:palette.normal.middle = [ s:palette.normal.left[1] ]
 
     " palette Insert
     let s:palette.insert.left   = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#98c379', '#292c33', s:green, s:black ] ]
-    let s:palette.insert.right  = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#abb2bf', '#292c33', s:white, s:gray  ], [ '#98c379', '#292c33', s:green, s:black ] ]
+    " let s:palette.insert.right  = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#abb2bf', '#292c33', s:white, s:gray  ], [ '#98c379', '#292c33', s:green, s:black ] ]
+    let s:palette.insert.right  = [ [ '#292c33', '#98c379', s:black, s:green, 'bold' ], [ '#98c379', '#292c33', s:green, s:black ] ]
     let s:palette.insert.middle = [ s:palette.insert.left[1] ]
 
     " palette Visual
     let s:palette.visual.left   = [ [ '#292c33', '#c678dd', s:black, s:purple, 'bold' ], [ '#c678dd', '#292c33', s:purple, s:black ] ]
-    let s:palette.visual.right  = [ [ '#292c33', '#c678dd', s:black, s:purple, 'bold' ], s:palette.normal.right[1], [ '#c678dd', '#292c33', s:purple, s:black ] ]
+    " let s:palette.visual.right  = [ [ '#292c33', '#c678dd', s:black, s:purple, 'bold' ], s:palette.normal.right[1], [ '#c678dd', '#292c33', s:purple, s:black ] ]
+    let s:palette.visual.right  = [ [ '#292c33', '#c678dd', s:black, s:purple, 'bold' ], [ '#c678dd', '#292c33', s:purple, s:black ] ]
     let s:palette.visual.middle = [ s:palette.visual.left[1] ]
 
     " palette Replace
     let s:palette.replace.left   = [ [ '#292c33', '#e06c75', s:black, s:red, 'bold' ], [ '#e06c75', '#292c33', s:red, s:black ] ]
-    let s:palette.replace.right  = [ [ '#292c33', '#e06c75', s:black, s:red, 'bold' ], s:palette.normal.right[1], [ '#e06c75', '#292c33', s:red, s:black ] ]
+    " let s:palette.replace.right  = [ [ '#292c33', '#e06c75', s:black, s:red, 'bold' ], s:palette.normal.right[1], [ '#e06c75', '#292c33', s:red, s:black ] ]
+    let s:palette.replace.right  = [ [ '#292c33', '#e06c75', s:black, s:red, 'bold' ], [ '#e06c75', '#292c33', s:red, s:black ] ]
     let s:palette.replace.middle = [ s:palette.replace.left[1] ]
 
     let s:palette.tabline.left   = [ s:palette.normal.left[1] ]
@@ -90,21 +94,21 @@ hook_add = '''
              \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
     endfunction
 
-    function! LightlineFugitive()
-        if exists('*fugitive#head')
-            let branch = fugitive#head()
-            " return branch != '' ? "\ue0a0 ".branch : ''
-            return branch != '' ? " ".branch:''
-        endif
-    endfunction
-
     " function! LightlineFugitive()
-    "     if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-    "         return " ".fugitive#head()
-    "     else
-    "         return '-'
+    "     if exists('*fugitive#head')
+    "         let branch = fugitive#head()
+    "         " return branch != '' ? "\ue0a0 ".branch : ''
+    "         return branch != '' ? " ".branch:''
     "     endif
     " endfunction
+
+    function! LightlineFugitive()
+        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+            return " ".fugitive#head()
+        else
+            return ''
+        endif
+    endfunction
 
     function! LightlineFileformat()
         return winwidth(0) > 70 ? &fileformat : ''
