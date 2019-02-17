@@ -1,6 +1,6 @@
-# Polybar config
+# i3 window manager config
 # Auther      : Ryoga Miyamoto
-# Last Change : Fri 21 Dec 2018 13:32:33.
+# Last Change : Tue 22 Jan 2019 15:37:39.
 # Since       : Wed 05 Dec 2018 08:30:21.
 # Copyright (c) 2018, Ryoga Miyamoto
 
@@ -121,8 +121,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # for_window [class="Firefox"] move to workspace $ws1
 for_window [class="Slack"] move to workspace $ws10
+# for_window [class="Zathura"] move to workspace $ws1
 for_window [class="^Arandr$"] floating enable
 for_window [class="Pavucontrol$"] floating enable
+for_window [class="mpv$"] floating enable
 for_window [title="Oracle VM VirtualBox Manager"] floating enable, move to workspace $ws9
 for_window [class="Blueberry"] floating enable
 

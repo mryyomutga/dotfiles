@@ -1,9 +1,9 @@
 [options]
-#allow_bold = true
-#audible_bell = false
-#bold_is_bright = true
-#clickable_url = true
-#dynamic_title = true
+allow_bold = true
+audible_bell = false
+bold_is_bright = true
+clickable_url = true
+dynamic_title = true
 font = FontAwesome 12
 font = "Noto Sans CJK JP" 12
 font = Hack 12
@@ -24,10 +24,10 @@ scrollback_lines = 10000
 browser = xdg-open
 
 # "system", "on" or "off"
-ursor_blink = system
+cursor_blink = system
 
 # "block", "underline" or "ibeam"
-#cursor_shape = block
+cursor_shape = block
 
 # Hide links that are no longer valid in url select overlay mode
 #filter_unmatched_urls = true
@@ -77,17 +77,19 @@ cursor_foreground = #dcdccc
 # color14 = #93e0e3
 # color15 = #ffffff
 
-foreground = #eaeaea
-background = rgba(22, 24, 33, 1.0)
+# foreground = #eaeaea
+# background = rgba(22, 24, 33, 1.0)
+foreground = #ffffff
+background = rgba(0, 0, 0, 1.0)
 [hints]
-#font = Monospace 12
-#foreground = #dcdccc
-#background = #3f3f3f
-#active_foreground = #e68080
-#active_background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
+font = Hack 12
+foreground = #dcdccc
+background = #3f3f3f
+active_foreground = #e68080
+active_background = #3f3f3f
+padding = 2
+border = #3f3f3f
+border_width = 0.5
+roundness = 2.0
 
 # vim: ft=dosini cms=#%s

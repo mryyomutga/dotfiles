@@ -16,6 +16,7 @@ SETUVAR _fish_abbr_tr:trash
 SETUVAR fish_color_cwd_root:red
 SETUVAR fish_color_host:normal
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
 SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR fish_pager_color_completion:\x1d
