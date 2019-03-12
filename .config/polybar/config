@@ -57,7 +57,7 @@ font-6 = IPAexGothic:size=12:antialias=false;0
 ; modules-left = i3 mpd
 modules-left = i3 xwindow
 modules-center =
-modules-right = xbacklight volume wlan eth battery date powermenu
+modules-right = xbacklight volume wlan eth battery powermenu date
 
 tray-position = right
 tray-padding = 4
@@ -258,12 +258,12 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
 date =
-date-alt = " %Y-%m-%d"
+date-alt = " %Y/%m/%d "
 
-time = %H:%M
+time = %H:%M:%S
 time-alt = %H:%M:%S
 
 format-prefix = 
@@ -276,7 +276,7 @@ label =%date% %time%
 type = internal/alsa
 format-online = <label-song>
 icon-prev = 
-icon-stop =  
+icon-stop = 
 icon-play = 
 icon-pause = 
 icon-next = 
@@ -287,7 +287,7 @@ label-song-ellipsis = true
 
 [module/volume]
 ; type = internal/volume
-; type = internal/pulseaudio
+type = internal/pulseaudio
 ; type = internal/alsa
 ; sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 ; use-ui-max = true
@@ -380,32 +380,33 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-expand-right = true
+expand-right = false
 
 format-spacing = 1
 
-label-open = 
+label-open = "  "
 ; label-open-foreground = ${colors.secondary}
-label-open-foreground = #ffffff
-label-close = x
-label-close-foreground = ${colors.secondary}
+label-open-foreground = #7fffd4
+label-open-underline = #7fffd4
+
+label-close = "x"
+; label-close-foreground = ${colors.secondary}
+label-close-foreground = #ff00ff
+
 label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-separator-padding = 1
+; label-separator-foreground = ${colors.foreground-alt}
+label-separator-foreground = #aabbbbb
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-0-0 = "suspend "
+menu-0-0-exec = bash ~/i3lock_script.sh
+menu-0-0-foreground = #00bfff
+menu-0-1 = "reboot "
+menu-0-1-exec = reboot
+menu-0-1-foreground = #ffd722
+menu-0-2 = "power off "
+menu-0-2-exec = shutdown -h now
+menu-0-2-foreground = #dc143c
 
 [settings]
 screenchange-reload = true
