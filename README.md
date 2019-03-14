@@ -2,17 +2,8 @@
 
 my dotfiles for Arch Linux
 
-## Installation
-
-__Install:__  
-```sh
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/scripts/install.sh | sh
-```
-
-__Uninstall:__  
-```sh
-$ curl https://raw.githubusercontent.com/mryyomutga/dotfiles/master/scripts/uninstall.sh | sh
-```
+- version 1.0
+- use fish-shell (via zsh)
 
 ## file list
 
