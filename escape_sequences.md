@@ -1,6 +1,6 @@
 # escape sequences
 
-`ESC` escape sequence is `\e` or ``.
+`ESC` escape sequence is `\e[` or `[`.
 
 `Ctrl-v + Esc -> ^[` (vim)
 
@@ -71,8 +71,8 @@ for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && ec
 Bold, (0, 128, 255), underline
 
 ```bash
-echo "\e[5;38;2;0;128;255;4mHello world."    # \e
-echo "[5;38;2;0;128;255;4mHello world."    # ^[
+echo "\e[5;38;2;0;128;255;4mHello world."    # \e[
+echo "[5;38;2;0;128;255;4mHello world."    # ^[[
 ```
 
 ```c
