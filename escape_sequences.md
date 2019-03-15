@@ -1,25 +1,27 @@
 # escape sequences
 
-`ESC` escape sequence is `\e[` or `[`.
+`ESC` escape sequence is `\e` or ``.
 
 `Ctrl-v + Esc -> ^[` (vim)
 
+`\e` or `` + `[` is CSI - Control Sequence Introducer.
+
 ## Cursor
 
-|Code|Effect|
-|:---|:---|
-|\e[nA|カーソルを上にn移動させる|
-|\e[nB|カーソルを下にn移動させる|
-|\e[nC|カーソルを右にn移動させる|
-|\e[nD|カーソルを左にn移動させる|
-|\e[nE|カーソルをn行下の先頭に移動させる|
-|\e[nF|カーソルをn行上の先頭に移動させる|
-|\e[nG|カーソルを左端からn番目に移動させる|
-|\e[n;mH|カーソルを上端からn，左端からm番目に移動させる|
-|\e[nJ|画面消去．(省略,0 = カーソルより後，1 = カーソルより前，2 = 全体)|
-|\e[nK|行消去．(省略,0 = カーソルより後，1 = カーソルより前，2 = 全体)|
-|\e[nS|n行下にスクロールさせる|
-|\e[nT|n行上にスクロールさせる|
+|Code|Name|Effect|
+|:---|:---|:---|
+|\e[nA|CUU - Cursor Up|Move the cursor n(default `1`) cells in the given direction.|
+|\e[nB|CUD - Cursor Down||
+|\e[nC|CUF - Cursor Forward||
+|\e[nD|CUB - Cursor Back||
+|\e[nE|CNL - Cursor Next Line|Moves cursor to beginning of the line n(default `1`) lines down.|
+|\e[nF|CPL - Cursor Previous Line|Moves cursor to beginngin of the line n(default `1`) line up.|
+|\e[nG|CHA - Cursor Horizontal Absolute|Moves the cursor to column n(default `1`).|
+|\e[n;mH|CUP - Cursor Position|Moves the cursor to row n, column m.|
+|\e[nJ|ED - Erase in Display|Clears part of the screen. n=0,clear from cursor to end. n=1,clear from cursor to beginning. n=2,clear entire screen.|
+|\e[nK|EL - Erase in Line|erases part of the line. n=0,clear from cursor to the end. n=1,clear from cursor to beginning. n=2,clear entire line.|
+|\e[nS|SU - Scroll Up|Scroll whole page up by n(default `1`) lines.|
+|\e[nT|SD - Scroll Down|Scroll whole page down by n(default `1`) lines.|
 
 ## console color
 
@@ -68,7 +70,7 @@ for c in {000..255}; do echo -n "\e[38;5;${c}m $c" ; [ $(($c%16)) -eq 15 ] && ec
 
 ## Example
 
-Bold, (0, 128, 255), underline
+Bold, RGB(0,128,255), underline <font color="#0080FF"><u>__Hello world__</u></font>
 
 ```bash
 echo "\e[5;38;2;0;128;255;4mHello world."    # \e[
@@ -113,4 +115,4 @@ xsel -bo > test.c && gcc test.c && ./a.out
 ```
 
 - <https://www.mm2d.net/main/prog/c/console-02.html>
-- <https://www.mm2d.net/main/prog/c/console-02.html>
+- <https://en.wikipedia.org/wiki/ANSI_escape_code>
