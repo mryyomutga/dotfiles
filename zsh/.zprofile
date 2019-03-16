@@ -37,7 +37,7 @@ SAVEHIST=100000
 # export PATH=$PATH:$GOPATH/bin
 
 # execute x
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx 2>&1 > /dev/null
 
 # when is launched Alacritty, launch tmux
 # if [ "$TERM_PROGRAM" = "alacritty" ] || [ "$TERM_PROGRAM" = "termite" ]; then    

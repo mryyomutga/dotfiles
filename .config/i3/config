@@ -131,6 +131,12 @@ for_window [class="Blueberry"] floating enable
 bindsym $mod+Left workspace prev
 bindsym $mod+Right workspace next
 
+# Scratchpad
+## $mod+Shift+Space -> tiling
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+bindsym $mod+x [floating] move scratchpad
+
 ## attached monitor workspace switching config
 ### Prior=PgUp Next=PgDn
 bindsym $mod+Prior workspace prev
@@ -151,13 +157,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # audio controls
 # bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo +5%
 # bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo -5%
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +2%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -2%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 3
-bindsym XF86MonBrightnessDown exec xbacklight -dec 3
+bindsym XF86MonBrightnessUp exec xbacklight -inc 2
+bindsym XF86MonBrightnessDown exec xbacklight -dec 2
 
 # screen lock
 # bindsym $mod+Shift+x exec i3lock-fancy -- scrot -z
@@ -179,12 +185,18 @@ exec --no-startup-id fcitx
 exec --no-startup-id dunst
 exec --no-startup-id blueberry-tray
 exec --no-startup-id compton -b --config $HOME/.config/compton/compton.conf
+exec --no-startup-id bash $HOME/trackpoint_accel.sh
 
 # exec --no-startup-id $HOME/.config/i3/script/launch_slack.sh
 
 ## --------- ##
 # If laptop is attached USB-c monitor, auto expand screen
 exec --no-startup-id ~/.config/i3/script/monitor_detect.sh
+
+## first exec i3, launch alacritty title "Alacritty_scratchpad" on scratchpad
+for_window [class="Alacritty" title="Alacritty_scratchpad"] floating enable, resize set 640 480, move absolute position center
+for_window [class="Alacritty" title="Alacritty_scratchpad"] move scratchpad
+exec --no-startup-id alacritty --config-file $HOME/.config/alacritty/scratchpad.yml --title Alacritty_scratchpad
 
 ## screen lock
 exec --no-startup-id light-locker --lock-on-suspend
@@ -264,6 +276,7 @@ set $silver  #e4e4e499
 set $elegant #00263647
 
 # window color
+# class                 boader   backgr   text     indicator
 client.focused          $cyan    $cyan    $elegant $cyan
 client.unfocused        $elegant $elegant $cyan    $elegant
 client.focused_inactive $acqua   $acqua   $silver  $acqua
@@ -273,7 +286,7 @@ client.placeholder      $magenta $magenta $silver  $magenta
 # Hide title bar
 new_window pixel
 
-gaps inner 10
+gaps inner 7
 gaps outer 7
 for_window [class="^."] border pixel 1
 

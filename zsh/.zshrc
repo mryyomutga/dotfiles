@@ -69,7 +69,7 @@ ZSH_HIGHLIGHT_STYLES[arg0]='fg=027'
 ZSH_HIGHLIGHT_STYLES[default]='fg=039'
 
 # autosuggests command
-zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-autosuggestions"
 
 # additional completion
 zplug "zsh-users/zsh-completions"

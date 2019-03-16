@@ -20,8 +20,8 @@ window:
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
-    columns: 80
-    lines: 24
+    columns: 0
+    lines: 0
 
   # Window padding (changes require restart)
   #
@@ -32,7 +32,7 @@ window:
     y: 2
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: true
+  dynamic_padding: false
 
   # Window decorations
   #
@@ -108,7 +108,7 @@ font:
     # style: Italic
 
   # Point size
-  size: 7.5
+  size: 5.5
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -241,7 +241,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
+background_opacity: 0.85
 
 # Mouse bindings
 #
@@ -283,7 +283,7 @@ selection:
   # clipboard.
   save_to_clipboard: false
 
-dynamic_title: true
+dynamic_title: false
 
 # hide_cursor_when_typing: false
 
