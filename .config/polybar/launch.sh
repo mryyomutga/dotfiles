@@ -17,8 +17,9 @@ if type "xrandr"; then
     #     polybar --reload 
     # fi
     for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-        MONITOR=$m polybar --reload main &
+        MONITOR=$m polybar --reload top &
     done
+    polybar --reload bottom &
 else
     polybar --reload main &
 

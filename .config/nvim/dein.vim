@@ -1,4 +1,4 @@
-" Last Change : Sat 12 Jan 2019 01:54:31.
+" Last Change : Mon 25 Feb 2019 03:30:00.
 " <---------- dein ---------->
 set nocompatible
 
@@ -8,8 +8,10 @@ syntax off
 " Required:
 " let g:python_host_prog =  $PYENV_ROOT . '/versions/neovim2/bin/python'
 " let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
-let g:python_host_prog = '/usr/bin/python2' 
-let g:python3_host_prog ='/usr/bin/python3' 
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog ='/usr/bin/python'
+" let g:python3_host_prog ='/home/aster/anaconda3/envs/pd3/bin/python'
+let g:ruby_host_prog = '/home/aster/.gem/ruby/2.6.0/bin/neovim-ruby-host'
 
 let s:base_dir = expand($HOME . '/.config/nvim')
 let s:dein_dir = s:base_dir . '/plugins'

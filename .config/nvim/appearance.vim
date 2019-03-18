@@ -1,4 +1,4 @@
-" Last Change : Sat 15 Dec 2018 02:32:53.
+" Last Change : Thu 31 Jan 2019 15:45:28.
 " Use 256 color on terminal
 if !has('gui_running')
     set t_Co=256
@@ -54,17 +54,17 @@ set number
 
 " Show cursor line and column
 set cursorline
-set cursorcolumn
+" set cursorcolumn
 
-augroup exit_write_mode
-    autocmd!
-    " autocmd InsertEnter * hi CursorLine term=none ctermbg=none
-    " autocmd InsertEnter * hi CursorColumn term=none ctermbg=none
-    " autocmd InsertLeave * hi CursorLine term=underline ctermbg=235
-    " autocmd InsertLeave * hi CursorColumn term=underline ctermbg=235
-    autocmd InsertEnter * set nocursorcolumn
-    autocmd InsertLeave * set cursorcolumn
-augroup END
+" augroup exit_write_mode
+"     autocmd!
+"     " autocmd InsertEnter * hi CursorLine term=none ctermbg=none
+"     " autocmd InsertEnter * hi CursorColumn term=none ctermbg=none
+"     " autocmd InsertLeave * hi CursorLine term=underline ctermbg=235
+"     " autocmd InsertLeave * hi CursorColumn term=underline ctermbg=235
+"     autocmd InsertEnter * set nocursorcolumn
+"     autocmd InsertLeave * set cursorcolumn
+" augroup END
 
 " highlight CursorLine cterm=none ctermbg=none
 " highlight Normal cterm=none ctermbg=none

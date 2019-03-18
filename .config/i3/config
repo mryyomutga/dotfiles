@@ -194,9 +194,11 @@ exec --no-startup-id bash $HOME/trackpoint_accel.sh
 exec --no-startup-id ~/.config/i3/script/monitor_detect.sh
 
 ## first exec i3, launch alacritty title "Alacritty_scratchpad" on scratchpad
-for_window [class="Alacritty" title="Alacritty_scratchpad"] floating enable, resize set 640 480, move absolute position center
+for_window [title="Alacritty_scratchpad"] floating enable, resize set 640 480, move absolute position center
+for_window [class="Alacritty" title="ncmpcpp"] floating enable, resize set 640 480, move absolute position center
 for_window [class="Alacritty" title="Alacritty_scratchpad"] move scratchpad
-exec --no-startup-id alacritty --config-file $HOME/.config/alacritty/scratchpad.yml --title Alacritty_scratchpad
+exec --no-startup-id alacritty --config-file $HOME/.config/alacritty/scratchpad.yml --title Alacritty_scratchpad --command tmux
+for_window [class="cantata"] floating enable, resize set 720 600, move absolute position center
 
 ## screen lock
 exec --no-startup-id light-locker --lock-on-suspend
@@ -268,20 +270,24 @@ set $cyan0   #4ec2f7
 set $silver0 #e4e4e4
 set $orange  #ff8700
 # RGBA
-set $cyan    #4ec2f799
-set $acqua   #00708999
-set $wine    #72003e99
-set $magenta #af005f99
-set $silver  #e4e4e499
-set $elegant #00263647
+set $cyan     #4ec2f799
+set $acqua    #00708999
+set $wine     #72003e99
+set $magenta  #af005f99
+set $silver   #e4e4e499
+set $elegant  #00263647
+set $blue     #005fff99
+set $white    #ffffffff
+set $gray     #ffffff88
+set $darkblue #10182fff
 
 # window color
 # class                 boader   backgr   text     indicator
-client.focused          $cyan    $cyan    $elegant $cyan
-client.unfocused        $elegant $elegant $cyan    $elegant
-client.focused_inactive $acqua   $acqua   $silver  $acqua
-client.urgent           $magenta $magenta $silver  $magenta
-client.placeholder      $magenta $magenta $silver  $magenta
+client.focused          $blue    $blue     $white   $blue
+client.unfocused        $blue    $darkblue $cyan    $elegant
+client.focused_inactive $acqua   $acqua    $gray    $acqua
+client.urgent           $magenta $magenta  $silver  $magenta
+client.placeholder      $magenta $magenta  $silver  $magenta
 
 # Hide title bar
 new_window pixel

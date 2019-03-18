@@ -1,5 +1,5 @@
-"             _
-"      __   _(_)_ __ ___  _ __ ___
+"            _
+"      __  _(_)_ __ ___  _ __ ___
 "     \ \ / / | '_ ` _ \| '__/ __|
 "      \ V /| | | | | | | | | (__
 "       \_/ |_|_| |_| |_|_|  \___|
@@ -66,8 +66,9 @@ set smartcase
 set incsearch
 set hlsearch
 
-set background=dark
-colorscheme pablo
+colorscheme abyss
+set termguicolors
+highlight StatusLine cterm=NONE guifg=#808080 guibg=NONE
 
 let &t_SI.="\e[5 q"
 let &t_EI.="\e[2 q"

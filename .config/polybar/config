@@ -29,7 +29,7 @@ border-bottom-size = 0
 background = #202020
 foreground = ${colors.foreground}
 
-line-size = 2
+line-size = 1
 line-color = #f00
 
 border-size = 0
@@ -44,7 +44,7 @@ module-margin-right = 1
 ; font-0 = fixed:pixelsize=12;1
 font-0 = IPAexGothic:pixelsize=12;1
 font-1 = unifont:fontformat=truetype:size=12:antialias=false;0
-font-2 = Awesome:pixelsize=12;1
+font-2 = FontAwesome:pixelsize=10;2
 font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
 ; font-3 = "Noto Sans CJK JP:style=Regular:pixelsize=12;1"
 font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
@@ -52,18 +52,7 @@ font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
 font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
 ; font-5 = "Noto Sans CJK JP:pixelsize=12;1"
 ; font-6 = "SourceHanSansJP-Light:size=12:antialias=false;0"
-font-6 = IPAexGothic:size=12:antialias=false;0
-
-; modules-left = i3 mpd
-modules-left = i3 xwindow
-modules-center =
-modules-right = xbacklight volume wlan eth battery powermenu date
-
-tray-position = right
-tray-padding = 4
-tray-detach =  false
-; tray-transparent = true
-; tray-background = #0063ff
+font-6 = IPAexGothic:pixelsize=12:antialias=false;0
 
 ;wm-restack = bspwm
 wm-restack = i3
@@ -79,6 +68,72 @@ wm-restack = i3
 cursor-click = pointer
 cursor-scroll = ns-resize
 enable-ipc = true
+
+[bar/top]
+inherite = bar/main
+; monitor = eDP1
+monitor = ${env:MONITOR:eDP1}
+width = 100%
+height = 25
+; offset-x = 1%
+; offset-y = 1%
+; radius = 6.0
+fixed-center = true
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+modules-left = i3 xwindow
+modules-center =
+modules-right = xbacklight volume wlan eth battery date
+
+[bar/bottom]
+inherite = bar/main
+bottom = true
+
+; monitor = eDP1
+monitor = ${env:MONITOR:eDP1}
+width = 100%
+height = 20
+
+; offset-x = 1%
+; offset-y = 1%
+; radius = 6.0
+;
+fixed-center = true
+
+background = #202020
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-bottom-size = 0
+border-color = #00000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = IPAexGothic:pixelsize=12;3
+font-1 = FontAwesome:pixelsize=12;3
+; font-2 = Unifont:pixelsize=12;3
+
+modules-left =
+modules-center = ncmpcpp mpd
+modules-right = powermenu
+
+tray-position = right
+tray-padding = 4
+tray-detach =  true
+; tray-transparent = true
+; tray-background = #0063ff
 
 [module/xwindow]
 type = internal/xwindow
@@ -248,7 +303,7 @@ interval = 3.0
 format-connected-underline = #55aa55
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = eth %local_ip%
+label-connected =  %local_ip%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -272,17 +327,39 @@ format-underline = #0a6cf5
 
 label =%date% %time%
 
+[module/ncmpcpp]
+type = custom/text
+content = ""
+click-left = exec alacritty --config-file ~/.config/alacritty/scratchpad.yml --title ncmpcpp --command ncmpcpp &
+; click-right = exec alacritty --config-file ~/.config/alacritty/scratchpad.yml --title ncmpcpp --command ncmpcpp &
+click-right = exec cantata &
+
 [module/mpd]
-type = internal/alsa
-format-online = <label-song>
-icon-prev = 
+type = internal/mpd
+format-online = "<icon-prev>  <icon-seekb>  <icon-stop>  <toggle>  <icon-seekf>  <icon-next>   <icon-random>  <icon-repeat>  <label-time>   <label-song>"
+; format-playing = ${self.fotmat-online}
+; format-paused = ${self.fotmat-online}
+; format-stopped = ${self.fotmat-online}
+
+icon-prev = 
+icon-seekb = 
 icon-stop = 
 icon-play = 
 icon-pause = 
-icon-next = 
+icon-seekf = 
+icon-next = 
+icon-random = 
+icon-repeat = 
 
-label-song =  %title%
-label-song-maxlen = 75
+label-time = %elapsed% / %total%
+bar-progress-width = 50
+bar-progress-indicator = |
+bar-progress-fill =  ─
+bar-progress-empty =  ─
+
+width = 100%
+label-song = %title%
+label-song-maxlen = 100
 label-song-ellipsis = true
 
 [module/volume]
@@ -304,9 +381,12 @@ format-volume = <label-volume> <bar-volume>
 label-volume =  
 label-volume-foreground = ${root.foreground}
 
+format-muted = <label-muted>
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = 
+label-muted = ""
+;label-muted-foreground = ${colors.foreground-alt}
+label-muted-foreground = #999999
+;label-muted = ""
 
 bar-volume-width = 6
 bar-volume-foreground-0 = #55aa55
