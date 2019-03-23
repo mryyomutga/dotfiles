@@ -6,16 +6,24 @@
 "
 " Last Change : Fri 14 Dec 2018 02:04:47.
 " <---------- Setting ---------->
+filetype off
+filetype plugin indent off
 
-let s:base_dir = expand($HOME . '/.config/nvim')
+scriptencoding utf-8
 
-" Add runtimepath
-execute 'set runtimepath+=' . fnamemodify(s:base_dir, ':p')
+" Declare rc_vim_list and source_rc
+let s:rc_vim_list = [
+\   'plugins',
+\   'base',
+\   'apperance',
+\   'keymap'
+\ ]
 
-runtime! basic.vim
-runtime! keymaps.vim
-runtime! dein.vim
-runtime! appearance.vim
+" Source settings
+" Location: ~/.config/nvim/rc
+for s:rc_vim in s:rc_vim_list
+    call source#rc(s:rc_vim)
+endfor
 
-runtime! script/toggle_background.vim
-
+filetype plugin indent on
+syntax enable

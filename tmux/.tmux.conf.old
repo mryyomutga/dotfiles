@@ -7,7 +7,7 @@
 # Last Change : Mon 24 Dec 2018 15:41:10.
 
 # when tmux is launched, launch fish
-# set-option -g default-shell /bin/bash
+set-option -g default-shell /bin/bash
 
 # enable mouse operation
 set-window-option -g mouse on
@@ -15,14 +15,12 @@ bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft=
 
 set -sg escape-time 0
 
-set-option -g default-terminal "xterm-256color"
+set-option -g default-terminal "tmux-256color"
 set-option -ga terminal-overrides ",alacritty"
 
 set-option -ga terminal-overrides ",tmux-256color:Tc"
-set-option -ga terminal-overrides ",xterm-256color:Tc"
 set-option -ga terminal-overrides ",xterm-termite:Tc"
 set-option -ga terminal-overrides 'xterm*:smcup@:rmcup@'
-set-option -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
 
 # start window index at 1
 set -g base-index 1
@@ -92,38 +90,36 @@ set-option -g mouse on
 # setw -g window-status-current-bg default
 # setw -g window-status-current-attr bright
 
-# # setting pane border
-# set -g pane-border-fg colour235
-# set -g pane-border-bg default
-#
-# # setting active pane border
-# set -g pane-active-border-fg colour69
-# set -g pane-active-border-bg default
-#
-# # window list position is left
-# set-option -g status-justify left
-#
-# # show status line at top
-# set-option -g status-position bottom
-#
-# # reloading status line interval 1s
-# set-option -g status-interval 1
-#
-# # status line's color
-# set-option -g status-fg colour255
-# # set-option -g status-bg colour236
-# set-option -g status-bg default
+# setting pane border
+set -g pane-border-fg colour235
+set -g pane-border-bg default
 
-set-option -g message-style            'fg=#e0e0e0,bg=#000000'
-set-option -g mode-style               'fg=#e0e0e0,bg=#005FFF'
-set-option -g pane-active-border-style 'fg=#0000C0,bg=default'
-set-option -g pane-border-style        'fg=#585858,bg=default'
-set-option -g status-style             'fg=#000000,bg=#000000'
+# setting active pane border
+set -g pane-active-border-fg colour69
+set -g pane-active-border-bg default
 
-set-option -g status-left \
-  "#[fg=#0e0e0e,bg=#000099,bold]#{?client_prefix,#[fg=#0e0e0e]#[bg=#0055ff],} #S #{?client_prefix,#[fg=#0055ff]#[bg=#0e0e0e],#[fg=#000099]#[bg=#000000]}"
-# set-window-option -g window-status-format "#[fg=#000033,bg=#000000]#[fg=#585858,bg=#000033]#I #[fg=#585858,bg=#000033] #[fg=#0087FF]#[bg=#000033]#W  #[fg=#000033]#[bg=#000000]"
-set-window-option -g window-status-current-format \
-  "#[fg=#000000,bg=#0404ed]#[fg=#e0e0e0,bg=#0404ed] #I  #[fg=#e0e0e0,bg=#0404ed]#W #[fg=#0404ed,bg=#000000]"
-set-window-option -g window-status-format \
-  " #[fg=#585858,bg=#000000]#I #[fg=#585858,bg=#000000] #[fg=#0087FF]#W "
+# window list position is left
+set-option -g status-justify left
+
+# show status line at top
+set-option -g status-position bottom
+
+# reloading status line interval 1s
+set-option -g status-interval 1
+
+# status line's color
+set-option -g status-fg colour255
+# set-option -g status-bg colour236
+set-option -g status-bg default
+
+# status-left
+set-option -g status-left-length 160
+set -g status-left "#[fg=colour118,italics]#(${HOME}/.dotfiles/tmux/get_username)###[fg=colour118,italics]#H#[default] #[fg=colour255]#S #[default][#[fg=colour70]#P#[fg=colour255]]#[default]  "
+
+# status-right
+set-option -g status-right-length 160
+set-option -g status-right "#(~/.dotfiles/tmux/wifi_status) #[fg=cyan]%Y/%m/%d %H:%M#[default]"
+
+# current window status
+set-window-option -g window-status-format "#[fg=#161821,bg=colour237] #I #[fg=colour237,bg=default] #W #[default]"
+set-window-option -g window-status-current-format "#{?client_prefix,#[fg=#161821]#[bg=colour40],#[fg=#161821]#[bg=colour34]} #I #{?client_prefix,#[fg=colour40]#[bg=default],#[fg=colour34]#[bg=default]} #W #F#[default]"

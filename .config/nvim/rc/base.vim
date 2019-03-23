@@ -1,6 +1,6 @@
 " Last Change : Sat 15 Dec 2018 18:03:46.
 
-" Set charcter code UTF-8
+" set charcter code utf-8
 set encoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf-8
@@ -9,65 +9,60 @@ set fileformats=unix,dos,mac
 set binary
 set bomb
 
-" Enable modeline
+" enable modeline
 set modeline
 
-" No make backup and swap file
+" no make backup and swap file
 set nobackup
 set noswapfile
 
-" Auto reload file when while editting file
+" auto reload file when while editting file
 set autoread
 
-" Go around cursor
+" go around cursor
 set whichwrap=b,s,h,l,<,>,[,]
 
-" Move one more EOF
+" move one more eof
 " set virtualedit=onemore
 
 " set ctags
-" set tags=.tags;$HOME
+set tags+=.git/tags
 
-" Open the last cursor position
-autocmd BufReadPost *
+" open the last cursor position
+autocmd bufreadpost *
             \ if line("'\"") > 0 && line ("'\"") <= line("$") |
             \   execute "normal! g'\"" |
             \ endif
 
-" Enable auto indent
+" enable auto indent
 set autoindent
 
-" Delete Beginning of line at backspace
+" delete beginning of line at backspace
 set backspace=indent,eol,start
 
 set smartindent
 
-" Enable completion at command mode
+" enable completion at command mode
 set wildmenu wildmode=list:longest,full
 
-" Enable clipboard
+" enable clipboard
 set clipboard^=unnamedplus
 
-" <---------- Tab ---------->
-
-" Show always tabline
+" show always tabline
 set showtabline=2
 
 " appearance tab length on screen
-set tabstop=4
+set tabstop=2
+set softtabstop=2
 
 " tab to space
 set expandtab
 
 " appearance indent width
-set shiftwidth=4
+set shiftwidth=2
 
-" <---------- buffer ---------->
-
-" Switch buffer while editting
+" switch buffer while editting
  set hidden
-
-" <---------- search ---------->
 
 " Case sensitive
 set noignorecase
@@ -91,22 +86,40 @@ set hlsearch
 " endif
 
 " disable fcitx when escape insert mode
-function! ImInActivate()
-  call system('fcitx-remote -c')
-endfunction
-imap <silent> <C-[> <ESC>:call ImInActivate()<CR>
+" function! ImInActivate()
+"   call system('fcitx-remote -c')
+" endfunction
+" imap <silent> <C-[> <ESC>:call ImInActivate()<CR>
 
-set inccommand=split
+set inccommand=nosplit
 
 autocmd TermOpen * setlocal norelativenumber
 autocmd TermOpen * setlocal nonumber
 
-augroup NewBufTemplate
-    autocmd!
-    autocmd BufNewFile *.py  0r $HOME/.dotfiles/vim/snippets/template.py
-    autocmd BufNewFile *.c   0r $HOME/.dotfiles/vim/snippets/template.c
-    autocmd BufNewFile *.sh  0r $HOME/.dotfiles/vim/snippets/template.sh
-augroup END
+set undofile
+set winheight=8
+set shortmess+=i
+set completeopt=menuone
+set completeopt+=noinsert
+set ignorecase
+set wildignorecase
 
-autocmd BufNewFile,BufRead *.hs set tabstop=2
-autocmd BufNewFile,BufRead *.hs set shiftwidth=2
+set clipboard+=unnamedplus
+"if $display !=# ''
+"  set clipboard+=unnamedplus
+"endif
+
+augroup quickfix
+  autocmd!
+  autocmd quickfixcmdpost make,*grep* cwindow
+augroup end
+
+augroup im
+  autocmd!
+  autocmd insertleave * call im#fcitx()
+augroup end
+
+augroup template
+  autocmd!
+  autocmd bufnewfile *.* silent! call skel#load()
+augroup end

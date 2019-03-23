@@ -172,9 +172,9 @@ zstyle ':completion:*' list-separator '-->'
 zstyle ':completion:*' format '(%F{008}%d%f)'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:manuals' separate-sections true
-zstyle ':completion:*:messages' format '(%F{008}%d%f)'
-zstyle ':completion:*:options' auto-description '(%F{008}%d%f)'
-zstyle ':completion:*:options' description 'yes'
+# zstyle ':completion:*:messages' format '(%F{008}%d%f)'
+# zstyle ':completion:*:options' auto-description '(%F{008}%d%f)'
+# zstyle ':completion:*:options' description 'yes'
 # zstyle ':completion:*:parameters' list-colors '=*=1;38;5;142'
 # zstyle ':completion:*:builtin' list-colors '=*=1;38;5;142'
 # zstyle ':completion:*:commands' list-colors '=*=1;38;5;142'
@@ -241,17 +241,7 @@ alias cp='cp --interactive --verbose'
 alias mv='mv --interactive --verbose'
 alias rm='rm --interactive --verbose'
 
-man() {
-    LESS_TERMCAP_md=$'\e[01;31m' \
-    LESS_TERMCAP_me=$'\e[0m' \
-    LESS_TERMCAP_se=$'\e[0m' \
-    LESS_TERMCAP_so=$'\e[01;44;33m' \
-    LESS_TERMCAP_ue=$'\e[0m' \
-    LESS_TERMCAP_us=$'\e[01;32m' \
-    command man "$@"
-}
-
-export GREP_COLOR="%{[38;5;039;4"
+# export GREP_COLOR="%{[38;5;039;4"
 
 ## git
 alias git='hub'
