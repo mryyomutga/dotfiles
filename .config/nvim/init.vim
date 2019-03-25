@@ -13,10 +13,10 @@ scriptencoding utf-8
 
 " Declare rc_vim_list and source_rc
 let s:rc_vim_list = [
-\   'plugins',
 \   'base',
 \   'apperance',
-\   'keymap'
+\   'keymaps',
+\   'plugins',
 \ ]
 
 " Source settings

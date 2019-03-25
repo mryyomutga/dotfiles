@@ -9,6 +9,8 @@ set fileformats=unix,dos,mac
 set binary
 set bomb
 
+set sh=bash
+
 " enable modeline
 set modeline
 
@@ -49,17 +51,18 @@ set wildmenu wildmode=list:longest,full
 set clipboard^=unnamedplus
 
 " show always tabline
-set showtabline=2
+" set showtabline=2
 
 " appearance tab length on screen
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+" set softtabstop=2
 
 " tab to space
 set expandtab
 
 " appearance indent width
 set shiftwidth=2
+set ambiwidth=double
 
 " switch buffer while editting
  set hidden
@@ -97,14 +100,14 @@ autocmd TermOpen * setlocal norelativenumber
 autocmd TermOpen * setlocal nonumber
 
 set undofile
-set winheight=8
+" set winheight=8
 set shortmess+=i
-set completeopt=menuone
+set completeopt+=preview
 set completeopt+=noinsert
 set ignorecase
 set wildignorecase
 
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 "if $display !=# ''
 "  set clipboard+=unnamedplus
 "endif

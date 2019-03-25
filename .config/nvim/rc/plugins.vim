@@ -8,19 +8,21 @@ if exists('*minpac#init')
 
   call minpac#add('soramugi/auto-ctags.vim')
   call minpac#add('itchyny/lightline.vim')
+  call minpac#add('editorconfig/editorconfig-vim')
   call minpac#add('cohama/lexima.vim')
   call minpac#add('kana/vim-textobj-user')  "isb/asb
   call minpac#add('vimtaku/vim-textobj-sigil') "yag
   call minpac#add('fvictorio/vim-textobj-backticks')
   call minpac#add('w0rp/ale')
   call minpac#add('tyru/open-browser.vim')
-  call minpac#add('Shougo/neosnippet')
+  " call minpac#add('Shougo/neosnippet')
   call minpac#add('tyru/caw.vim')
 
   call minpac#add('prabirshrestha/async.vim')
+  call minpac#add('prabirshrestha/vim-lsp')
   call minpac#add('prabirshrestha/asyncomplete.vim')
   call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
-  call minpac#add('prabirshrestha/vim-lsp')
+  " call minpac#add('prabirshrestha/asyncomplete-neosnippet.vim')
 endif
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
 command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
@@ -35,14 +37,13 @@ let g:lightline = {
       \   'colorscheme': 'abyss',
       \   'active': {
       \     'left': [ [ 'mode', 'paste' ] ],
-      \     'right': [ ['filetype'], ['fileformat', 'fileencoding', 'syntaxcheck']],
+      \     'right': [ ['filetype'], ['fileformat', 'fileencoding', 'syntaxcheck'] ],
       \   },
       \   'tabline': {
       \     'filename': 'tabs',
       \     'right': [[]],
       \   },
       \   'component': {
-      \     'lineinfo': '%-2v',
       \     'filetype': '%{&ft!=#""?&ft:"-"}',
       \     'paste': '%{&paste?"P":""}',
       \   },
@@ -51,6 +52,13 @@ let g:lightline = {
       \   },
       \   'component_type': {
       \     'syntaxcheck': 'error',
+      \   },
+      \   'component_function': {
+      \     'lineinfo':'LightlineLineinfo',
+      \     'filetype':'LightlineFiletype',
+      \     'fileformat':'LightlineFileformat',
+      \     'fileencoding':'LightlineFileencoding',
+      \     'mode': 'LightlineMode'
       \   },
       \   'mode_map': {
       \     'n' : 'N',
@@ -74,6 +82,22 @@ let g:lightline = {
       \     'right': "\ue0b3",
       \   },
       \ }
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+" 'lineinfo': '%3l:%2v',
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
 
 " openbrowser
 let g:netrw_nogx = 1
@@ -81,32 +105,77 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
 " vim-lsp
-"" lsp async completion
 let g:lsp_async_completion = 1
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand("$HOME/.config/nvim/log/vim-lsp.log")
+let g:asyncomplete_log_file = expand("$HOME/.config/nvim/log/asyncomplete.log")
 
-" go-lsp
-if executable('gopls')
+nnoremap <silent> <Leader>d :LspDefinition<CR>
+nnoremap <silent> <Leader>p :LspHover<CR>
+nnoremap <silent> <Leader>r :LspReferences<CR>
+nnoremap <silent> <Leader>i :LspImplementation<CR>
+nnoremap <silent> <Leader>s :split \| :LspDefinition<CR>
+nnoremap <silent> <Leader>v :vsplit \| :LspDefinition<CR>
+
+" Go
+" if executable('gopls')
+"   augroup LspGo
+"     au!
+"     autocmd User lsp_setup call lsp#register_server({
+"      \ 'name':'gopls',
+"      \ 'cmd':{server_info->['gopls']},
+"      \ 'whitelist':['go'],
+"      \})
+"     autocmd FileType go setlocal omnifunc=lsp#complete
+"   augroup END
+" endif
+if executable('go-langserver')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'gopls',
-        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
         \ 'whitelist': ['go'],
         \ })
 endif
+" Python
+if executable('pyls')
+  augroup LspPython
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+      \ 'name':'pyls',
+      \ 'cmd':{server_info->['pyls']},
+      \ 'whitelist':['python'],
+      \ })
+  augroup END
+endif
+" C/C++
+if executable('clangd')
+  augroup LspClang
+  au!
+  au User lsp_setup call lsp#register_server({
+    \ 'name': 'clangd',
+    \ 'cmd': {server_info->['clangd']},
+    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+    \ })
+  autocmd FileType c setlocal omnifunc=lsp#complete
+  autocmd FileType cpp setlocal omnifunc=lsp#complete
+  autocmd FileType objc setlocal omnifunc=lsp#complete
+  autocmd FileType objcpp setlocal omnifunc=lsp#complete
+  augroup END
+endif
 
-" neosnippet
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+" asyncomplete.vim
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)"
-      \: "\<TAB>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-let g:neosnippet#disable_runtime_snippets = {'_' : 1}
-let g:neosnippet#snippets_directory = '~/.config/nvim/snippets'
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
+
+set completeopt+=preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " caw
 nmap <C-_> <Plug>(caw:hatpos:toggle)

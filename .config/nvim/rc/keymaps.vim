@@ -34,7 +34,7 @@ noremap  <Leader>x  :bprevious<CR>
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 "" Tab open file
-noremap  <Leader>te :tabe 
+noremap  <Leader>te :tabe
 "" Tab open none
 noremap  <silent> <S-t> :tabnew<CR>
 
@@ -68,6 +68,14 @@ nnoremap <silent><Esc><Esc> :nohlsearch<CR>
 
 " NERDTree
 nnoremap <silent><Leader>n :NERDTreeToggle<CR>
+
+" vim-lsp
+" nnoremap <silent> <Leader>d :LspDefinition<CR>
+" nnoremap <silent> <Leader>p :LspHover<CR>
+" nnoremap <silent> <Leader>r :LspReferences<CR>
+" nnoremap <silent> <Leader>i :LspImplementation<CR>
+" nnoremap <silent> <Leader>s :split \| :LspDefinition<CR>
+" nnoremap <silent> <Leader>v :vsplit \| :LspDefinition<CR>
 
 " launch quickrun
 " nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
