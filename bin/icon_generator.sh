@@ -1,4 +1,7 @@
 #!/bin/sh
+
+# old icon generating script
+# Use Imagemagick
 convert \
     -size 400x400 \
     xc:black -antialias \

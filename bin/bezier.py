@@ -1,5 +1,9 @@
+# -*- coding:utf-8 -*-
+# Last Change : Sun 21 Apr 2019 02:31:38.
+
+# draw Bezier Curve
+
 import os
-import pprint
 
 SIZE = 400
 IMG = "bezier.png"
@@ -33,6 +37,6 @@ for i in range(10):
     options[2] += opt
 
 
-cmd = "convert -size {0}x{0} xc:black -antialias -fill none -stroke \"{1}\" -strokewidth 2 {2} -stroke \"{3}\" -strokewidth 2 {4} -stroke \"{5}\" -strokewidth 2 {6} {7}".format(SIZE, COLOR[0], options[0], COLOR[1], options[1], COLOR[2], options[2], IMG)
+cmd = "convert -size {0}x{0} xc:black -antialias -fill none -stroke \"{1}\" -strokewidth 2 {2} -stroke \"{3}\" -strokewidth 2 {4} -stroke \"{5}\" -strokewidth 2 {6} ~/Pictures/icon/{7}".format(SIZE, COLOR[0], options[0], COLOR[1], options[1], COLOR[2], options[2], IMG)
 
 os.system(cmd)
