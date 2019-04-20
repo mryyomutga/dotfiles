@@ -1,0 +1,10 @@
+#!/bin/bash
+
+declare profile=`
+  netctl-auto list | \
+  grep -v '*' | \
+  sed 's/ //g' | \
+  dmenu-wrapper -p Netctl
+`
+
+[[ $profile  ]] && sudo netctl-auto switch-to $profile

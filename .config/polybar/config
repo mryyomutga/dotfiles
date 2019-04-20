@@ -15,18 +15,24 @@ primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
 
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; --- bar ---
 [bar/main]
 ; monitor = eDP1
 monitor = ${env:MONITOR:eDP1}
 width = 100%
-height = 25
+height = 15
 ; offset-x = 1%
 ; offset-y = 1%
 ; radius = 6.0
 fixed-center = true
 
 border-bottom-size = 0
-background = #202020
+; background = #202020
+background = #000000
 foreground = ${colors.foreground}
 
 line-size = 1
@@ -42,22 +48,22 @@ module-margin-left = 1
 module-margin-right = 1
 
 ; font-0 = fixed:pixelsize=12;1
-font-0 = IPAexGothic:pixelsize=12;1
-font-1 = unifont:fontformat=truetype:size=12:antialias=false;0
-font-2 = FontAwesome:pixelsize=10;2
-font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=8;1"
+font-0 = IPAexGothic:pixelsize=10;1
+font-1 = FontAwesome:pixelsize=10;2
+font-2 = unifont:fontformat=truetype:size=10:antialias=false;0
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=10;1"
 ; font-3 = "Noto Sans CJK JP:style=Regular:pixelsize=12;1"
-font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
 ; font-4 = "Noto Sans CJK JP:style=Solid:pixelsize=12;1"
-font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
+font-5 = "Font Awesome 5 Brands:pixelsize=10;1"
 ; font-5 = "Noto Sans CJK JP:pixelsize=12;1"
 ; font-6 = "SourceHanSansJP-Light:size=12:antialias=false;0"
-font-6 = IPAexGothic:pixelsize=12:antialias=false;0
+font-6 = IPAexGothic:pixelsize=10:antialias=false;0
 
 ;wm-restack = bspwm
 wm-restack = i3
 
-; override-redirect = true
+override-redirect = false
 
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
@@ -74,7 +80,7 @@ inherite = bar/main
 ; monitor = eDP1
 monitor = ${env:MONITOR:eDP1}
 width = 100%
-height = 25
+height = 17
 ; offset-x = 1%
 ; offset-y = 1%
 ; radius = 6.0
@@ -83,12 +89,26 @@ fixed-center = true
 padding-left = 1
 padding-right = 1
 
+font-0 = IPAexGothic:pixelsize=12;1
+font-1 = FontAwesome:pixelsize=12;2
+
+; border-bottom-size = 1
+; border-size = 0
+; border-color = #0055FF
+;
+; line-size = 0
+; line-color = #f00
+
 module-margin-left = 1
 module-margin-right = 1
 
 modules-left = i3 xwindow
-modules-center =
-modules-right = xbacklight volume wlan eth battery date
+modules-center = ncmpcpp mpd
+modules-right = xbacklight volume wlan eth powermenu battery date
+
+tray-position = right
+tray-padding = 4
+tray-detach =  true
 
 [bar/bottom]
 inherite = bar/main
@@ -97,7 +117,7 @@ bottom = true
 ; monitor = eDP1
 monitor = ${env:MONITOR:eDP1}
 width = 100%
-height = 20
+height = 25
 
 ; offset-x = 1%
 ; offset-y = 1%
@@ -108,7 +128,7 @@ fixed-center = true
 background = #202020
 foreground = ${colors.foreground}
 
-line-size = 0
+line-size = 2
 line-color = #f00
 
 border-size = 0
@@ -127,7 +147,7 @@ font-1 = FontAwesome:pixelsize=12;3
 
 modules-left =
 modules-center = ncmpcpp mpd
-modules-right = powermenu
+modules-right = powermenu battery date
 
 tray-position = right
 tray-padding = 4
@@ -279,7 +299,8 @@ interface = wlp5s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
+; format-connected-underline = #9f78e1
+format-connected-underline = #1034a6
 label-connected = %essid%
 
 format-disconnected =
@@ -300,7 +321,8 @@ type = internal/network
 interface = enp3s0
 interval = 3.0
 
-format-connected-underline = #55aa55
+; format-connected-underline = #55aa55
+format-connected-underline = #34a610
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected =  %local_ip%
@@ -378,15 +400,18 @@ mapped = true
 interval = 5
 
 format-volume = <label-volume> <bar-volume>
+format-volume-underline = #55aa55
 label-volume =  
 label-volume-foreground = ${root.foreground}
 
 format-muted = <label-muted>
 format-muted-prefix = " "
+format-muted-underline = #55aa55
 label-muted = ""
 ;label-muted-foreground = ${colors.foreground-alt}
 label-muted-foreground = #999999
 ;label-muted = ""
+
 
 bar-volume-width = 6
 bar-volume-foreground-0 = #55aa55
@@ -404,38 +429,44 @@ bar-volume-fill-font = 2
 bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
-format-volume-underline = #55aa55
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 98
+full-at = 99
 
-label-full =   %percentage%%
-label-charging =  %percentage%%
-label-discharging =  %percentage%%
+label-full =   %percentage%%
+label-charging =  %percentage%%
+label-discharging =  %percentage%%
+content = ""
 
-format-charging = <animation-charging> <label-charging>
+format-charging = %{F#dfdf00}%{F-} <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
+format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-0 = %{F#df0000}%{F-}
+ramp-capacity-1 = %{F#df6f00}%{F-}
+ramp-capacity-2 = %{F#dfdfdf}%{F-}
+ramp-capacity-3 = %{F#dfdfdf}%{F-}
+ramp-capacity-4 = %{F#6fdfa0}%{F-}
+; ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = #dfdfdf
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = #dfdfdf
+animation-charging-framerate = 220
 
 [module/temperature]
 type = internal/temperature
@@ -466,8 +497,8 @@ format-spacing = 1
 
 label-open = "  "
 ; label-open-foreground = ${colors.secondary}
-label-open-foreground = #7fffd4
-label-open-underline = #7fffd4
+label-open-foreground = #c40000
+; label-open-underline = #7fffd4
 
 label-close = "x"
 ; label-close-foreground = ${colors.secondary}
@@ -479,14 +510,15 @@ label-separator-padding = 1
 label-separator-foreground = #aabbbbb
 
 menu-0-0 = "suspend "
-menu-0-0-exec = bash ~/i3lock_script.sh
+; menu-0-0-exec = bash ~/i3lock_script.sh
+menu-0-0-exec = xautolock -locknow
 menu-0-0-foreground = #00bfff
 menu-0-1 = "reboot "
 menu-0-1-exec = reboot
 menu-0-1-foreground = #ffd722
 menu-0-2 = "power off "
 menu-0-2-exec = shutdown -h now
-menu-0-2-foreground = #dc143c
+menu-0-2-foreground = #c40000
 
 [settings]
 screenchange-reload = true
@@ -494,9 +526,5 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
 
 ; vim:ft=dosini

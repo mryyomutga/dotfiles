@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cat - | \
+  command \
+  -p dmenu \
+  -i \
+  -nf '#a9a9a9' \
+  -sf '#f5f5f5' \
+  -sb '#0018a8' \
+  -nb '#000000' \
+  -fn NotoSansCJKJP:pixelsize=13.5 "$@"
