@@ -1,0 +1,18 @@
+{
+  "shell":"bash",
+  "cwd":"/home/aster",
+  "keyboard":"en-US",
+  "theme":"abyss",
+  "termFontSize":15,
+  "audio":true,
+  "disableFeedbackAudio":true,
+  "pingAddr":"1.1.1.1",
+  "port":3000,
+  "nointro":true,
+  "nocursor":false,
+  "allowWindowed":true,
+  "excludeSelfFromToplist":false,
+  "hideDotfiles":false,
+  "experimentalGlobeFeatures":false,
+  "experimentalFeatures":false
+}

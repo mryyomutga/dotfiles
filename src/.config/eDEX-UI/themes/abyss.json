@@ -1,0 +1,30 @@
+{
+  "colors": {
+    "r": 33,
+    "g": 150,
+    "b": 243,
+    "black": "#000000",
+    "light_black": "#0d0208",
+    "gray": "#262827"
+  },
+  "cssvars": {
+    "font_main": "Hack",
+    "font_main_light": "United Sans Light"
+  },
+  "terminal": {
+    "fontFamily": "Hack",
+    "cursor": "#2196f3",
+    "cursorStyle": "block",
+    "cursorBlink": true,
+    "cursorAccent": "#2196f3",
+    "background": "#000000",
+    "foreground": "#2196f3",
+    "section": "#104b7a"
+  },
+  "globe": {
+    "base": "#2196f3",
+    "marker": "#f32196",
+    "pin": "#96f321",
+    "satellite": "#2196f3"
+  }
+}
