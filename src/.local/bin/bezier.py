@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-# Last Change : Sun 28 Apr 2019 12:02:10.
+# Last Change : Mon 29 Apr 2019 23:43:26.
 
 # draw Bezier Curve
 
@@ -37,6 +37,6 @@ for i in range(10):
     options[2] += opt
 
 
-cmd = "convert -size {0}x{0} xc:black -antialias -fill none -stroke \"{1}\" -strokewidth 2 {2} -stroke \"{3}\" -strokewidth 2 {4} -stroke \"{5}\" -strokewidth 2 {6} ~/Pictures/icons/{7}".format(SIZE, COLOR[0], options[0], COLOR[1], options[1], COLOR[2], options[2], IMG)
+cmd = "convert -size {0}x{0} xc:black -antialias -fill none -strokewidth 2 -stroke \"{1}\" -strokewidth 2 {2} -stroke \"{3}\" {4} -stroke \"{5}\" {6} ~/Pictures/icons/{7}".format(SIZE, COLOR[0], options[0], COLOR[1], options[1], COLOR[2], options[2], IMG)
 
 os.system(cmd)
