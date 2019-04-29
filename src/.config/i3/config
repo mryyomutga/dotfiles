@@ -1,7 +1,7 @@
 # i3 window manager config
 # Auther      : Ryoga Miyamoto
-# Last Change : Tue 22 Jan 2019 15:37:39.
 # Since       : Wed 05 Dec 2018 08:30:21.
+# Last Change : Tue 30 Apr 2019 00:47:31.
 # Copyright (c) 2018, Ryoga Miyamoto
 
 # mod = Win Key
@@ -129,7 +129,7 @@ bindsym $sup+Shift+0 move container to workspace $ws10
 for_window [class="^Arandr$"] floating enable
 for_window [class="Pavucontrol$"] floating enable
 for_window [class="mpv$"] floating enable
-for_window [title="Oracle VM VirtualBox Manager"] floating enable, move to workspace $ws9
+# for_window [title="Oracle VM VirtualBox Manager"] floating enable, move to workspace $ws9
 for_window [class="Blueberry"] floating enable
 
 bindsym $sup+Left workspace prev
@@ -183,13 +183,14 @@ bindsym Shift+Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f 
 
 # startup applications
 # background image
-exec --no-startup-id feh --bg-scale $HOME/Pictures/arch_pacman_invaders_by_dotvalfar-d5qxpmc2.png
+# exec --no-startup-id feh --bg-scale $HOME/Pictures/arch_pacman_invaders_by_dotvalfar-d5qxpmc2.png
+exec --no-startup-id feh --bg-scale $HOME/Pictures/background.png
 
 exec --no-startup-id fcitx
 exec --no-startup-id dunst
 exec --no-startup-id blueberry-tray
 exec --no-startup-id compton -b --config $HOME/.config/compton/compton.conf
-exec --no-startup-id bash $HOME/trackpoint_accel.sh
+exec --no-startup-id bash $HOME/.local/bin/trackpoint_accel
 
 # exec --no-startup-id $HOME/.config/i3/script/launch_slack.sh
 
