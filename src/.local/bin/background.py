@@ -1,10 +1,10 @@
 # -*- coding:utf-8 -*-
-# Last Change : Mon 29 Apr 2019 23:46:19.
+# Last Change : Wed 01 May 2019 21:03:05.
 # drawing background image
 
 import os
 
-IMG = "~/Pictures/background.png"
+IMG = "~/Pictures/wallpapers/background.png"
 
 COLOR = ["#a8af5c9b", "#43f36581", "#f321966a", "#2196f3a0"]
 

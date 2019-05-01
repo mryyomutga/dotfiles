@@ -1,0 +1,62 @@
+#!/bin/sh
+# 050510
+convert \
+  -size 1920x1080 -antialias \
+  xc:"#000000" \
+  gradient:"#000000"-"#030315" \
+  -fill none \
+\
+  -stroke '#7c22fc' -strokewidth 5 \
+  -draw "path 'M 0,300 L 400,300 L 300,250 \
+   L 1500,250 L 1525,325 L 1550,200 L 1575,250 \
+   L 1920,250'" \
+\
+  -strokewidth 3 \
+  -stroke "#e944c2" -draw "path 'M 0,950 L 50,950 L 100,900 150,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 0,900 L 50,900 L 100,950 150,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 150,950 L 200,900 L 250,900'" \
+  -stroke "#e944c2" -draw "path 'M 150,900 L 200,950 L 250,950'" \
+  -stroke "#e944c2" -draw "path 'M 250,950 L 300,900 L 350,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 250,900 L 300,950 L 350,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 350,950 L 400,900 L 450,900'" \
+  -stroke "#e944c2" -draw "path 'M 350,900 L 400,950 L 450,950'" \
+  -stroke "#e944c2" -draw "path 'M 450,950 L 500,900 L 550,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 450,900 L 500,950 L 550,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 550,950 L 600,900 L 650,900'" \
+  -stroke "#e944c2" -draw "path 'M 550,900 L 600,950 L 650,950'" \
+  -stroke "#e944c2" -draw "path 'M 650,950 L 700,900 L 750,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 650,900 L 700,950 L 750,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 750,950 L 800,900 L 850,900'" \
+  -stroke "#e944c2" -draw "path 'M 750,900 L 800,950 L 850,950'" \
+  -stroke "#e944c2" -draw "path 'M 850,950 L 900,900 L 950,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 850,900 L 900,950 L 950,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 950,950 L 1000,900 L 1050,900'" \
+  -stroke "#e944c2" -draw "path 'M 950,900 L 1000,950 L 1050,950'" \
+  -stroke "#e944c2" -draw "path 'M 1050,950 L 1100,900 L 1150,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 1050,900 L 1100,950 L 1150,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 1150,950 L 1200,900 L 1250,900'" \
+  -stroke "#e944c2" -draw "path 'M 1150,900 L 1200,950 L 1250,950'" \
+  -stroke "#e944c2" -draw "path 'M 1250,950 L 1300,900 L 1350,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 1250,900 L 1300,950 L 1350,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 1350,950 L 1400,900 L 1450,900'" \
+  -stroke "#e944c2" -draw "path 'M 1350,900 L 1400,950 L 1450,950'" \
+  -stroke "#e944c2" -draw "path 'M 1450,950 L 1500,900 L 1550,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 1450,900 L 1500,950 L 1550,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 1550,950 L 1600,900 L 1650,900'" \
+  -stroke "#e944c2" -draw "path 'M 1550,900 L 1600,950 L 1650,950'" \
+  -stroke "#e944c2" -draw "path 'M 1650,950 L 1700,900 L 1750,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 1650,900 L 1700,950 L 1750,950'" \
+  -stroke "#3ac1f8" -draw "path 'M 1750,950 L 1800,900 L 1850,900'" \
+  -stroke "#e944c2" -draw "path 'M 1750,900 L 1800,950 L 1850,950'" \
+  -stroke "#e944c2" -draw "path 'M 1850,950 L 1900,900 L 1920,900'" \
+  -stroke "#3ac1f8" -draw "path 'M 1850,900 L 1900,950 L 1920,950'" \
+\
+  -stroke '#2196f3' -strokewidth 5 \
+  -draw "path 'M 0,440 L 225,440 \
+   L 300,800 L 350,650 L 500,650 L 550,500 \
+   L 600,750 L 650,650 L 1200,650 L 1250,750 \
+   L 1300,550 L 1350,700 L 1375,625 L 1400,675 \
+   L 1413,650 L 1800,650 L 1775,675 L 1920,675'" \
+  ~/Pictures/wallpapers/background2.png
+
+# vim:ft=sh
