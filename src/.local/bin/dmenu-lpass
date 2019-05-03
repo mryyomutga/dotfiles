@@ -1,0 +1,15 @@
+#!/bin/bash
+
+lpass status -q || alacritty --command "lpass login $LPASS_USERNAME"
+
+declare name=`
+  lpass ls | \
+  sed -E 's/ \[id: ([0-9]+)\]//' | \
+  sed -E 's/\([a-z|A-Z|0-9]+\)\///' | \
+  dmenu-wrapper -p Lastpass
+`
+
+echo $name
+[[ $name ]] && lpass show --password -c $name
+
+# vim ft:=bash

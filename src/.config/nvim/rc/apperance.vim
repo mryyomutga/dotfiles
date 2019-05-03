@@ -29,4 +29,4 @@ augroup doublebyte_space
   autocmd VimEnter,WinEnter * match DoubleByteSpace /　/
 augroup END
 
-colorscheme abyss
+colorscheme deepocean

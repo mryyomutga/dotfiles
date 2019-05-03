@@ -1,7 +1,7 @@
 # i3 window manager config
 # Auther      : Ryoga Miyamoto
 # Since       : Wed 05 Dec 2018 08:30:21.
-# Last Change : Tue 30 Apr 2019 00:47:31.
+# Last Change : Fri 03 May 2019 03:01:41.
 # Copyright (c) 2018, Ryoga Miyamoto
 
 # mod = Win Key
@@ -14,80 +14,88 @@ font pango:Hack 10
 
 # font pango:DejaVu Sans Mono 8
 
-# Use Mouse+$sup to drag floating windows to their wanted position
+# ----- Key binding -----
+
+## Use Mouse+$sup to drag floating windows to their wanted position
 floating_modifier $sup
 
-# start a terminal
+## start a terminal
 bindsym $sup+Return exec i3-sensible-terminal
 
-# kill focused window
+## kill focused window
 bindsym $sup+Shift+q kill
+
+## Browser
+bindsym $sup+b exec brave
+
+## Application Launcher
+bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-wrapper"
+## Network switcher
+bindsym $sup+n exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-netctl"
 
 # bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -nb '#000000' -sf 7#DDDDDD' -sb '#000088' -nf '#808080' -fn 'Hack:pixelsize=14'"
 # bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu_run -i -l 20 -w 800 -nb '#000000' -sf '#DDDDDD' -sb '#000088' -nf '#808080' -fn 'NotoSansCJKJP:size=10'"
-bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-wrapper"
-bindsym $sup+n exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-netctl"
 # bindsym $sup+d exec --no-startup-id i3-dmenu-desktop
 # bindsym $sup+d exec --no-startup-id rofi -show drun -theme /usr/share/rofi/themes/glue_pro_blue.rasi
 # bindsym $sup+d exec --no-startup-id rofi -show combi
 
-# change focus
+## change focus
 bindsym $sup+j focus left
 bindsym $sup+k focus down
 bindsym $sup+l focus up
 bindsym $sup+semicolon focus right
 
-# no mouse focus
+## no mouse focus
 focus_follows_mouse no
 
-# alternatively, you can use the cursor keys:
+## alternatively, you can use the cursor keys:
 # bindsym $sup+Left focus left
 # bindsym $sup+Down focus down
 # bindsym $sup+Up focus up
 # bindsym $sup+Right focus right
 
-# move focused window
+## move focused window
 bindsym $sup+Shift+j move left
 bindsym $sup+Shift+k move down
 bindsym $sup+Shift+l move up
 bindsym $sup+Shift+semicolon move right
 
-# alternatively, you can use the cursor keys:
+## alternatively, you can use the cursor keys:
 bindsym $sup+Shift+Left move left
 bindsym $sup+Shift+Down move down
 bindsym $sup+Shift+Up move up
 bindsym $sup+Shift+Right move right
 
-# split in horizontal orientation
+## split in horizontal orientation
 bindsym $sup+h split horizontal
 
-# split in vertical orientation
+## split in vertical orientation
 bindsym $sup+v split vertical
 
-# toggle split orientation
+## toggle split orientation
 bindsym $sup+t split toggle
 
-# enter fullscreen mode for the focused container
+## enter fullscreen mode for the focused container
 bindsym $sup+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+## change container layout (stacked, tabbed, toggle split)
 bindsym $sup+s layout stacking
 bindsym $sup+w layout tabbed
 bindsym $sup+e layout toggle split
 
-# toggle tiling / floating
+## toggle tiling / floating
 bindsym $sup+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+## change focus between tiling / floating windows
 bindsym $sup+space focus mode_toggle
 
-# focus the parent container
+## focus the parent container
 bindsym $sup+a focus parent
 
-# focus the child container
+## focus the child container
 #bindsym $sup+d focus child
 
-# workspace
+## workspace
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -99,7 +107,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# switch to workspace
+## switch to workspace
 bindsym $sup+1 workspace $ws1
 bindsym $sup+2 workspace $ws2
 bindsym $sup+3 workspace $ws3
@@ -111,7 +119,7 @@ bindsym $sup+8 workspace $ws8
 bindsym $sup+9 workspace $ws9
 bindsym $sup+0 workspace $ws10
 
-# move focused container to workspace
+## move focused container to workspace
 bindsym $sup+Shift+1 move container to workspace $ws1
 bindsym $sup+Shift+2 move container to workspace $ws2
 bindsym $sup+Shift+3 move container to workspace $ws3
@@ -123,7 +131,7 @@ bindsym $sup+Shift+8 move container to workspace $ws8
 bindsym $sup+Shift+9 move container to workspace $ws9
 bindsym $sup+Shift+0 move container to workspace $ws10
 
-# for_window [class="Firefox"] move to workspace $ws1
+### for_window [class="Firefox"] move to workspace $ws1
 # for_window [class="Slack"] move to workspace $ws10
 # for_window [class="Zathura"] move to workspace $ws1
 for_window [class="^Arandr$"] floating enable
@@ -171,7 +179,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 2
 
 # screen lock
 # bindsym $sup+Shift+x exec i3lock-fancy -- scrot -z
-bindsym $sup+Shift+x exec ~/i3lock_script.sh
+bindsym $sup+Shift+x exec lock
 
 # bindsym $sup+Ctrl+p exec --no-startup-id $HOME/.config/i3/scrip/toggle_composite.sh
 
@@ -184,7 +192,7 @@ bindsym Shift+Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f 
 # startup applications
 # background image
 # exec --no-startup-id feh --bg-scale $HOME/Pictures/arch_pacman_invaders_by_dotvalfar-d5qxpmc2.png
-exec --no-startup-id feh --bg-scale $HOME/Pictures/background.png
+exec --no-startup-id feh --bg-scale $HOME/Pictures/wallpapers/background2-0.png
 
 exec --no-startup-id fcitx
 exec --no-startup-id dunst

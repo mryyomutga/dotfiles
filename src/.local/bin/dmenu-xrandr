@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [[ -z $MAIN_DISPLAY || -z $SUB_DISPLAY ]]; then
+  notify-send dmenu-xrandr 'Not set `$MAIN_DISPLAY` or `$SUB_DISPLAY`'
+  exit 1
+fi
+
+declare -a displays
+displays=('PC screen only' Duplicate Extend 'Second screen only')
+
+declare display=`printf '%s\n' "${displays[@]}" | dmenu-wrapper -p Display`
+
+if [[ -n $display ]]; then
+  case "$display" in
+    'PC screen only' )
+      xrandr --output $MAIN_DISPLAY --auto --output $SUB_DISPLAY --off
+      ;;
+    Duplicate )
+      xrandr-mirror
+      ;;
+    'Second screen only' )
+      xrandr --output $MAIN_DISPLAY --off --output $SUB_DISPLAY --auto
+      ;;
+    Extend )
+      xrandr --output $MAIN_DISPLAY --auto --primary \
+        --output $SUB_DISPLAY --auto --left-of $MAIN_DISPLAY
+      ;;
+  esac
+fi

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+list=(
+  "Lock"
+  "Suspend"
+  "Reboot"
+  "Shutdown"
+)
+
+_IFS="$IFS"
+IFS=$'\n'
+
+declare profile=`
+  echo "${list[*]}" | \
+  dmenu-wrapper -p Powermenu
+`
+IFS="$_IFS"
+
+if [ $profile = "Lock" ]; then
+  lock
+elif [ $profile = "Suspend" ]; then
+  systemctl suspend
+elif [ $profile = "Reboot" ]; then
+  systemctl reboot
+elif [ $profile = "Shutdown" ]; then
+  systemctl poweroff
+fi
+
+# vim:ft=sh

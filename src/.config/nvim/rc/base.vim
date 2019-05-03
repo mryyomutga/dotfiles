@@ -54,7 +54,7 @@ set clipboard^=unnamedplus
 " set showtabline=2
 
 " appearance tab length on screen
-set tabstop=4
+set tabstop=2
 " set softtabstop=2
 
 " tab to space
@@ -102,7 +102,7 @@ autocmd TermOpen * setlocal nonumber
 set undofile
 " set winheight=8
 set shortmess+=i
-set completeopt+=preview
+set completeopt=menuone
 set completeopt+=noinsert
 set ignorecase
 set wildignorecase

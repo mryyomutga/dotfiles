@@ -4,14 +4,14 @@
 #  / /\__ \ | | | | | (__
 # /___|___/_| |_|_|  \___|
 #
-# Last Change : Sat 15 Dec 2018 17:53:19.
+# Last Change : Sat 20 Apr 2019 20:04:24.
 
 # get vcs infomation
 autoload -Uz vcs_info
 setopt prompt_subst
 
 # ZPLUG
-export ZPLUG_HOME="$ZDOTDIR/.zplug"
+export ZPLUG_HOME="$HOME/.zplug"
 if [ ! -d $ZPLUG_HOME ]; then
     git clone https://github.com/zplug/zplug $ZPLUG_HOME
     source $ZPLUG_HOME/init.zsh && zplug update --self

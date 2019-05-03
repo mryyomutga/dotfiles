@@ -1,18 +1,20 @@
-# Last Change : Mon 17 Dec 2018 15:24:37.
+# Last Change : Fri 03 May 2019 03:02:35.
 
 # Input Method
 setxkbmap -layout jp
 setxkbmap -option ctrl:nocaps
+setxkbmap -option terminate:ctrl_alt_bksp
+
 # xrdb ~/.Xresources
 xsetroot -cursor_name left_ptr
 
-# Screen locker
+# Screen locker (i3lock-color)
 xautolock \
-    -locker ~/i3lock_script.sh \
+    -locker lock \
     -notify 30                 \
     -time 30                   \
     -notifier "notify-send -t 10000 xautolock 'Locking screen in 30 seconds.'" &
-xss-lock -- ~/i3lock_script.sh &
+xss-lock -- lock &
 
 # Window Manager
 exec i3

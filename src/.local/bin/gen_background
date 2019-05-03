@@ -3,7 +3,7 @@
 convert \
   -size 1920x1080 -antialias \
   xc:"#000000" \
-  gradient:"#000000"-"#030315" \
+  gradient:"#000000"-"#000020" \
   -fill none \
 \
   -stroke '#7c22fc' -strokewidth 5 \

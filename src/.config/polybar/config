@@ -1,6 +1,6 @@
 ; Polybar config
 ; Auther      : Ryoga Miyamoto
-; Last Change : Thu 20 Dec 2018 00:44:57.
+; Last Change : Thu 02 May 2019 12:19:49.
 ; Since       : Wed 05 Dec 2018 01:58:03.
 ; Copyright (c) 2018, Ryoga Miyamoto
 
@@ -455,7 +455,7 @@ ramp-capacity-0 = %{F#df0000}%{F-}
 ramp-capacity-1 = %{F#df6f00}%{F-}
 ramp-capacity-2 = %{F#dfdfdf}%{F-}
 ramp-capacity-3 = %{F#dfdfdf}%{F-}
-ramp-capacity-4 = %{F#6fdfa0}%{F-}
+ramp-capacity-4 = %{F#dfdfdf}%{F-}
 ; ramp-capacity-foreground = ${colors.foreground-alt}
 ramp-capacity-foreground = #dfdfdf
 
@@ -511,7 +511,7 @@ label-separator-foreground = #aabbbbb
 
 menu-0-0 = "suspend "
 ; menu-0-0-exec = bash ~/i3lock_script.sh
-menu-0-0-exec = xautolock -locknow
+menu-0-0-exec = systemctl suspend
 menu-0-0-foreground = #00bfff
 menu-0-1 = "reboot "
 menu-0-1-exec = reboot

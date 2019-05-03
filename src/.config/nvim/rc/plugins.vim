@@ -10,18 +10,21 @@ if exists('*minpac#init')
   call minpac#add('itchyny/lightline.vim')
   call minpac#add('editorconfig/editorconfig-vim')
   call minpac#add('cohama/lexima.vim')
+  call minpac#add('scrooloose/nerdtree')
   call minpac#add('kana/vim-textobj-user')  "isb/asb
   call minpac#add('vimtaku/vim-textobj-sigil') "yag
   call minpac#add('fvictorio/vim-textobj-backticks')
-  call minpac#add('w0rp/ale')
+  " call minpac#add('w0rp/ale')
   call minpac#add('tyru/open-browser.vim')
-  " call minpac#add('Shougo/neosnippet')
   call minpac#add('tyru/caw.vim')
+  call minpac#add('simeji/winresizer')
+  call minpac#add('vim-scripts/autodate.vim')
 
   call minpac#add('prabirshrestha/async.vim')
   call minpac#add('prabirshrestha/vim-lsp')
-  call minpac#add('prabirshrestha/asyncomplete.vim')
-  call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
+  " call minpac#add('prabirshrestha/asyncomplete.vim')
+  " call minpac#add('prabirshrestha/asyncomplete-lsp.vim')
+  call minpac#add('ryanolsonx/vim-lsp-python')
   " call minpac#add('prabirshrestha/asyncomplete-neosnippet.vim')
 endif
 command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update()
@@ -34,10 +37,10 @@ let g:auto_ctags_directory_list = ['.git']
 
 " lightline
 let g:lightline = {
-      \   'colorscheme': 'abyss',
+      \   'colorscheme': 'deepocean',
       \   'active': {
       \     'left': [ [ 'mode', 'paste' ] ],
-      \     'right': [ ['filetype'], ['fileformat', 'fileencoding', 'syntaxcheck'] ],
+      \     'right': [ ['filetype'], ['fileformat'], ['fileencoding', 'syntaxcheck'] ],
       \   },
       \   'tabline': {
       \     'filename': 'tabs',
@@ -54,11 +57,10 @@ let g:lightline = {
       \     'syntaxcheck': 'error',
       \   },
       \   'component_function': {
-      \     'lineinfo':'LightlineLineinfo',
       \     'filetype':'LightlineFiletype',
       \     'fileformat':'LightlineFileformat',
       \     'fileencoding':'LightlineFileencoding',
-      \     'mode': 'LightlineMode'
+      \     'mode': 'LightlineMode',
       \   },
       \   'mode_map': {
       \     'n' : 'N',
@@ -82,6 +84,7 @@ let g:lightline = {
       \     'right': "\ue0b3",
       \   },
       \ }
+
 function! LightlineFiletype()
   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
@@ -105,37 +108,34 @@ nmap gx <Plug>(openbrowser-smart-search)
 vmap gx <Plug>(openbrowser-smart-search)
 
 " vim-lsp
-let g:lsp_async_completion = 1
+" let g:lsp_async_completion = 1
 let g:lsp_diagnostics_enabled = 0
 let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand("$HOME/.config/nvim/log/vim-lsp.log")
 let g:asyncomplete_log_file = expand("$HOME/.config/nvim/log/asyncomplete.log")
-
-nnoremap <silent> <Leader>d :LspDefinition<CR>
-nnoremap <silent> <Leader>p :LspHover<CR>
-nnoremap <silent> <Leader>r :LspReferences<CR>
-nnoremap <silent> <Leader>i :LspImplementation<CR>
-nnoremap <silent> <Leader>s :split \| :LspDefinition<CR>
-nnoremap <silent> <Leader>v :vsplit \| :LspDefinition<CR>
 
 " Go
 " if executable('gopls')
 "   augroup LspGo
 "     au!
 "     autocmd User lsp_setup call lsp#register_server({
-"      \ 'name':'gopls',
-"      \ 'cmd':{server_info->['gopls']},
-"      \ 'whitelist':['go'],
-"      \})
+"     \ 'name':'gopls',
+"     \ 'cmd':{server_info->['gopls', '-mode', 'stdio']},
+"     \ 'whitelist':['go'],
+"     \})
 "     autocmd FileType go setlocal omnifunc=lsp#complete
 "   augroup END
 " endif
 if executable('go-langserver')
+  augroup LspGo
+    au!
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-        \ 'whitelist': ['go'],
-        \ })
+       \ 'name': 'go-langserver',
+       \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+       \ 'whitelist': ['go'],
+       \ })
+    autocmd FileType go setlocal omnifunc=lsp#complete
+  augroup END
 endif
 " Python
 if executable('pyls')
@@ -146,6 +146,7 @@ if executable('pyls')
       \ 'cmd':{server_info->['pyls']},
       \ 'whitelist':['python'],
       \ })
+    autocmd FileType python setlocal omnifunc=lsp#complete
   augroup END
 endif
 " C/C++
@@ -164,55 +165,69 @@ if executable('clangd')
   augroup END
 endif
 
+" vim-lsp keymaps
+nnoremap <silent> <Leader>d :LspDefinition<CR>
+nnoremap <silent> <Leader>p :LspHover<CR>
+nnoremap <silent> <Leader>r :LspReferences<CR>
+nnoremap <silent> <Leader>i :LspImplementation<CR>
+nnoremap <silent> <Leader>s :split \| :LspDefinition<CR>
+nnoremap <silent> <Leader>v :vsplit \| :LspDefinition<CR>
+
 " asyncomplete.vim
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" let g:asyncomplete_remove_duplicates = 1
+" let g:asyncomplete_smart_completion = 1
+" let g:asyncomplete_auto_popup = 1
 
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
-
-set completeopt+=preview
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+" imap <c-space> <Plug>(asyncomplete_force_refresh)
+" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " caw
 nmap <C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_> <Plug>(caw:hatpos:toggle)
 
 " ale
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier', 'eslint']
-let g:ale_fixers['json'] = ['prettier']
-let g:ale_fixers['yaml'] = ['prettier']
-let g:ale_fixers['vue'] = ['prettier', 'eslint', 'stylelint']
-let g:ale_fixers['css'] = ['prettier', 'stylelint']
-let g:ale_fixers['go'] = ['goimports']
-let g:ale_fixers['hcl'] = [
-      \   {buffer, lines -> {'command': 'hclfmt -w %t', 'read_temporary_file': 1}}
-      \   ]
-let g:ale_fixers['terraform'] = [
-      \   {buffer, lines -> {'command': 'terraform fmt %t', 'read_temporary_file': 1}}
-      \   ]
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 0
-let g:ale_markdown_mdl_options = '--ignore-front-matter'
-let g:ale_set_highlights = 0
-let g:ale_sign_error = '•'
-let g:ale_sign_warning = '•'
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_linters = {}
+" let g:ale_linters['go'] = ['gofmt', 'golint']
+" let g:ale_fixers = {}
+" let g:ale_fixers['javascript'] = ['prettier', 'eslint']
+" let g:ale_fixers['json'] = ['prettier']
+" let g:ale_fixers['yaml'] = ['prettier']
+" let g:ale_fixers['vue'] = ['prettier', 'eslint', 'stylelint']
+" let g:ale_fixers['css'] = ['prettier', 'stylelint']
+" let g:ale_fixers['go'] = ['goimports']
+" let g:ale_fixers['hcl'] = [
+"      \   {buffer, lines -> {'command': 'hclfmt -w %t', 'read_temporary_file': 1}}
+"      \   ]
+" let g:ale_fixers['terraform'] = [
+"      \   {buffer, lines -> {'command': 'terraform fmt %t', 'read_temporary_file': 1}}
+"      \   ]
+" let g:ale_fix_on_save = 1
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_markdown_mdl_options = '--ignore-front-matter'
+" let g:ale_set_highlights = 0
+" let g:ale_sign_error = '•'
+" let g:ale_sign_warning = '•'
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"
+" nmap <silent> <Space><C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <Space><C-j> <Plug>(ale_next_wrap)
+"
+" augroup ale
+"   autocmd!
+"   autocmd User ALELint call lightline#update()
+"   autocmd FileType zsh let g:ale_sh_shell_default_shell = 'zsh'
+" augroup END
 
-nmap <silent> <Space><C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <Space><C-j> <Plug>(ale_next_wrap)
+" autodate.vim
+let g:autodate_lines = 20
+let g:autodate_keyword_pre = 'Last Change :'
+let g:autodate_format = '%a %d %b %Y %H:%M:%S'
 
-augroup ale
-  autocmd!
-  autocmd User ALELint call lightline#update()
-  autocmd FileType zsh let g:ale_sh_shell_default_shell = 'zsh'
-augroup END
-
-
-
+" winresizer
+let g:winresizer_vert_resize = 1
+let g:winresizer_horiz_resize = 1

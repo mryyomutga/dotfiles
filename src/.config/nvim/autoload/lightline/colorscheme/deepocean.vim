@@ -40,4 +40,4 @@ let s:p.tabline.right = [[s:white, s:black], [s:darkblue, s:none]]
 " let s:p.tabline.right = [[s:white, s:darkblue], [s:darkblue, s:none]]
 let s:p.tabline.left = [[s:white, s:black]]
 let s:p.tabline.tabsel = [[s:white, s:darkblue]]
-let g:lightline#colorscheme#abyss#palette = lightline#colorscheme#flatten(s:p)
+let g:lightline#colorscheme#deepocean#palette = lightline#colorscheme#flatten(s:p)

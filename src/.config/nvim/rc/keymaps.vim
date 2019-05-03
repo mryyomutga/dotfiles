@@ -1,4 +1,4 @@
-" Last Change : Thu 13 Dec 2018 16:49:18.
+" Last Change : Sun 31 Mar 2019 00:59:49.
 
 " Leader <Space>
 let mapleader="\<Space>"
@@ -69,14 +69,6 @@ nnoremap <silent><Esc><Esc> :nohlsearch<CR>
 " NERDTree
 nnoremap <silent><Leader>n :NERDTreeToggle<CR>
 
-" vim-lsp
-" nnoremap <silent> <Leader>d :LspDefinition<CR>
-" nnoremap <silent> <Leader>p :LspHover<CR>
-" nnoremap <silent> <Leader>r :LspReferences<CR>
-" nnoremap <silent> <Leader>i :LspImplementation<CR>
-" nnoremap <silent> <Leader>s :split \| :LspDefinition<CR>
-" nnoremap <silent> <Leader>v :vsplit \| :LspDefinition<CR>
-
 " launch quickrun
 " nmap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
 
@@ -90,6 +82,9 @@ inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
 inoremap <Left> <Nop>
+" lexima
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
 vnoremap <Up> <Nop>
 vnoremap <Down> <Nop>

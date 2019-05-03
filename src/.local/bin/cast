@@ -1,0 +1,33 @@
+#!/bin/bash
+
+case $1 in
+  start )
+    declare size screennumber displayname
+
+    case $2 in
+      --select )
+        read -r size screennumber < <(slop -b 1 -c 0,0,255,1 -f "%wx%h 0+%x,%y")
+        displayname="$DISPLAY.$screennumber"
+        ;;
+      * )
+        size="`xrandr | fgrep '*' | awk '{print $1}'`"
+        displayname="$DISPLAY"
+        ;;
+    esac
+
+    ffmpeg -f x11grab \
+      -s "$size" \
+      -i "$displayname" \
+      -f alsa \
+      -i default \
+      -c:v libx264 \
+      -c:a aac \
+      -qp 0 \
+      "$HOME/Videos/screencasts/`date +'%y-%m-%d_%02k%M%S'`.mp4"
+    ;;
+
+  stop )
+    killall ffmpeg ;;
+esac
+
+# vim:ft=sh
