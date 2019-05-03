@@ -2,7 +2,7 @@
   "shell":"bash",
   "cwd":"/home/aster",
   "keyboard":"en-US",
-  "theme":"abyss",
+  "theme":"deepocean",
   "termFontSize":15,
   "audio":true,
   "disableFeedbackAudio":true,

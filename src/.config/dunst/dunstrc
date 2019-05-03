@@ -1,8 +1,8 @@
-# Polybar config
-# Auther      : Ryoga Miyamoto
-# Last Change : Thu 06 Dec 2018 02:06:03.
+# dunst configuration
+# Auther      : mryyomutga
+# Last Change : Fri 03 May 2019 11:31:30.
 # Since       : Wed 05 Dec 2018 01:58:03.
-# Copyright (c) 2018, Ryoga Miyamoto
+# Copyright (c) 2019, mryyoutga
 
 [global]
     font = Noto Sans CJK JP 9
