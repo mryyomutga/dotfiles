@@ -19,9 +19,9 @@ window:
   #
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
-  dimensions:
-    columns: 90
-    lines: 24
+  # dimensions:
+  #   columns: 90
+  #   lines: 24
 
   # Window padding (changes require restart)
   #
@@ -164,7 +164,7 @@ colors:
   #
   # These will only be used when the `custom_cursor_colors` field is set to `true`.
   cursor:
-    text:   '0x000000'
+    text:   '0xffffff'
     cursor: '0x005fff'
 
   # Normal colors
@@ -241,7 +241,7 @@ visual_bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
+background_opacity: 0.80
 
 # Mouse bindings
 #
