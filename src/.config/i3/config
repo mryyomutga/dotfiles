@@ -1,8 +1,8 @@
 # i3 window manager config
-# Auther      : mryyomutga
+# Auther      : Ryoga Miyamoto
 # Since       : Wed 05 Dec 2018 08:30:21.
-# Last Change : Fri 03 May 2019 11:36:15.
-# Copyright (c) 2019, mryyomutga
+# Last Change : Fri 03 May 2019 12:02:38.
+# Copyright (c) 2018, Ryoga Miyamoto
 
 # mod = Win Key
 set $sup Mod4
@@ -29,9 +29,13 @@ bindsym $sup+Shift+q kill
 bindsym $sup+b exec brave
 
 ## Application Launcher
-bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-wrapper"
+bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-wrapper -p Launcher"
 ## Network switcher
 bindsym $sup+n exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-netctl"
+## Password Manager
+bindsym $sup+Ctrl+p exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-lpass"
+## Power Manager
+bindsym $sup+p exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-powermenu"
 
 # bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -nb '#000000' -sf 7#DDDDDD' -sb '#000088' -nf '#808080' -fn 'Hack:pixelsize=14'"
 # bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu_run -i -l 20 -w 800 -nb '#000000' -sf '#DDDDDD' -sb '#000088' -nf '#808080' -fn 'NotoSansCJKJP:size=10'"
