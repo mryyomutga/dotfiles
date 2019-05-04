@@ -4,7 +4,14 @@
 #  / /\__ \ | | | | | (__
 # /___|___/_| |_|_|  \___|
 #
-# Last Change : Sat 20 Apr 2019 20:04:24.
+# Last Change : Sat 04 May 2019 11:08:13.
+
+() {
+  local src
+  for src in $@; do
+    ([[ ! -e $src.zwc ]] || [ ${src:A} -nt $src ]) && zcompile $src
+  done
+} ~/.zshrc ~/.zshenv ~/.zprofile
 
 # get vcs infomation
 autoload -Uz vcs_info

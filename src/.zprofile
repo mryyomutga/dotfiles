@@ -1,8 +1,8 @@
 #!/usr/bin/zsh
-# Last Change : Fri 03 May 2019 02:10:39.
+# Last Change : Fri 03 May 2019 11:48:41.
 
 # execute x
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx 2&>1 > /dev/null
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx > /dev/null 2>&1
 
 # when is launched Alacritty, launch tmux
 # if [ "$TERM_PROGRAM" = "alacritty" ] || [ "$TERM_PROGRAM" = "termite" ]; then    
