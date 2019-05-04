@@ -4,7 +4,7 @@
 "      \ V /| | | | | | | | | (__
 "       \_/ |_|_| |_| |_|_|  \___|
 "
-" Last Change : Wed 12 Dec 2018 13:46:00.
+" Last Change : Sat 04 May 2019 13:05:05.
 
 set nocompatible
 filetype plugin indent on
@@ -66,7 +66,6 @@ set smartcase
 set incsearch
 set hlsearch
 
-colorscheme abyss
 set termguicolors
 highlight StatusLine cterm=NONE guifg=#808080 guibg=NONE
 
