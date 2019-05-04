@@ -1,8 +1,8 @@
 # i3 window manager config
-# Auther      : Ryoga Miyamoto
+# Auther      : mryyomutga
 # Since       : Wed 05 Dec 2018 08:30:21.
-# Last Change : Fri 03 May 2019 12:02:38.
-# Copyright (c) 2018, Ryoga Miyamoto
+# Last Change : Sat 04 May 2019 12:59:49.
+# Copyright (c) 2019, mryyomutga
 
 # mod = Win Key
 set $sup Mod4
@@ -25,17 +25,25 @@ bindsym $sup+Return exec i3-sensible-terminal
 ## kill focused window
 bindsym $sup+Shift+q kill
 
+## System Activity
+bindsym $sup+m exec alacritty -e vtop -t deepocean --update-interval 50s
+## File Manager
+bindsym $sup+f exec alacritty -e ranger
+
 ## Browser
 bindsym $sup+b exec brave
 
+## Instant Messenger
+bindsym $sup+i exec slack
+
 ## Application Launcher
-bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-wrapper -p Launcher"
+bindsym $sup+space exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-wrapper -p Launcher"
 ## Network switcher
-bindsym $sup+n exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-netctl"
+bindsym $sup+Shift+n exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-netctl"
 ## Password Manager
-bindsym $sup+Ctrl+p exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-lpass"
+bindsym $sup+p exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-lpass"
 ## Power Manager
-bindsym $sup+p exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-powermenu"
+bindsym $sup+Ctrl+p exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-powermenu"
 
 # bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -nb '#000000' -sf 7#DDDDDD' -sb '#000088' -nf '#808080' -fn 'Hack:pixelsize=14'"
 # bindsym $sup+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu_run -i -l 20 -w 800 -nb '#000000' -sf '#DDDDDD' -sb '#000088' -nf '#808080' -fn 'NotoSansCJKJP:size=10'"
@@ -80,7 +88,7 @@ bindsym $sup+v split vertical
 bindsym $sup+t split toggle
 
 ## enter fullscreen mode for the focused container
-bindsym $sup+f fullscreen toggle
+bindsym F11 fullscreen toggle
 
 ## change container layout (stacked, tabbed, toggle split)
 bindsym $sup+s layout stacking
@@ -88,10 +96,10 @@ bindsym $sup+w layout tabbed
 bindsym $sup+e layout toggle split
 
 ## toggle tiling / floating
-bindsym $sup+Shift+space floating toggle
+bindsym $sup+Shift+t floating toggle
 
 ## change focus between tiling / floating windows
-bindsym $sup+space focus mode_toggle
+bindsym $sup+Ctrl+t focus mode_toggle
 
 ## focus the parent container
 bindsym $sup+a focus parent
@@ -189,9 +197,13 @@ bindsym $sup+Shift+x exec lock
 
 # screenshot
 ## window capture
-bindsym Print exec --no-startup-id scrot '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Pictures/screenshots/'
+bindsym Print exec --no-startup-id maim -u "$HOME/Pictures/screenshots/`date +'%y-%m-%d_%02k%M%S'`.png"
+# bindsym Print exec --no-startup-id scrot '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Pictures/screenshots/'
+
 ## Active window capture
-bindsym Shift+Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Pictures/screenshots/'
+bindsym Shift+Print exec --no-startup-id maim -c 0,0,1 --hidecursor -s "$HOME/Pictures/screenshots/`date +'%y-%m-%d_%02k%M%S'`.png"
+
+# bindsym Shift+Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Pictures/screenshots/'
 
 # startup applications
 # background image
@@ -306,6 +318,7 @@ client.unfocused        $blue    $darkblue $cyan    $elegant
 client.focused_inactive $acqua   $acqua    $gray    $acqua
 client.urgent           $magenta $magenta  $silver  $magenta
 client.placeholder      $magenta $magenta  $silver  $magenta
+
 
 # Hide title bar
 new_window pixel
