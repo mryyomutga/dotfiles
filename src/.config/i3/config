@@ -1,7 +1,7 @@
 # i3 window manager config
 # Auther      : mryyomutga
 # Since       : Wed 05 Dec 2018 08:30:21.
-# Last Change : Sat 04 May 2019 12:59:49.
+# Last Change : Sun 05 May 2019 00:08:50.
 # Copyright (c) 2019, mryyomutga
 
 # mod = Win Key
@@ -201,7 +201,7 @@ bindsym Print exec --no-startup-id maim -u "$HOME/Pictures/screenshots/`date +'%
 # bindsym Print exec --no-startup-id scrot '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Pictures/screenshots/'
 
 ## Active window capture
-bindsym Shift+Print exec --no-startup-id maim -c 0,0,1 --hidecursor -s "$HOME/Pictures/screenshots/`date +'%y-%m-%d_%02k%M%S'`.png"
+bindsym Shift+Print exec --no-startup-id active-shot
 
 # bindsym Shift+Print exec --no-startup-id scrot -u '%Y%m%d_%H%M%S.png' -e 'mv $f ~/Pictures/screenshots/'
 
@@ -212,11 +212,10 @@ exec --no-startup-id feh --bg-scale $HOME/Pictures/wallpapers/background2-0.png
 
 exec --no-startup-id fcitx
 exec --no-startup-id dunst
+exec slack --startup
 exec --no-startup-id blueberry-tray
 exec --no-startup-id compton -b --config $HOME/.config/compton/compton.conf
-exec --no-startup-id bash $HOME/.local/bin/trackpoint_accel
-
-# exec --no-startup-id $HOME/.config/i3/script/launch_slack.sh
+exec --no-startup-id bash -c $HOME/.local/bin/trackpoint_accel
 
 ## --------- ##
 # If laptop is attached USB-c monitor, auto expand screen
